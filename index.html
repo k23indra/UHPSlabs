@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         /* [기본 스타일] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
@@ -17,69 +19,61 @@
             padding: 0 50px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
         }
-        .logo { font-size: 24px; font-weight: bold; color: #004094; } 
+        
+        /* 로고 스타일 수정 (요청하신 파란색 반영) */
+        .logo { 
+            font-size: 32px; /* 글자 크기 키움 */
+            font-weight: 800; /* 두께 아주 두껍게 */
+            color: #4169E1; /* Royal Blue (UHPS 로고색과 유사) */
+            letter-spacing: -1px;
+        } 
         
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
         nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
         nav a:hover { color: #004094; }
 
-        /* [드롭다운 메뉴 - 끊김 방지 & 넓은 크기] */
-        .dropdown-content {
-            display: none; 
-            position: absolute; 
-            top: 100%; 
-            left: 50%; 
-            transform: translateX(-50%);
-            background-color: #fff; 
-            min-width: 260px; /* 넓은 너비 */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
-            border: 1px solid #ddd; 
-            border-top: 4px solid #004094; 
-            padding: 15px 0; 
-            z-index: 2000;
-            border-radius: 0 0 8px 8px;
-        }
-        
-        /* 투명 다리 (마우스 끊김 방지) */
-        .dropdown-content::before {
-            content: "";
-            position: absolute;
-            top: -20px;
-            left: 0;
-            width: 100%;
-            height: 20px;
-            background: transparent;
-        }
-
+        /* [드롭다운 메뉴] */
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 2000; border-radius: 0 0 8px 8px; }
+        .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { 
-            padding: 15px 0; 
-            color: #444; 
-            font-size: 16px; 
-            font-weight: 500;
-            width: 100%; 
-            display: block; 
-        }
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        
-        /* 호버 시 메뉴 보이기 */
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* [메인 배너] */
+        /* [메인 배너 - 이미지로 교체] */
         .main-banner {
-            width: 100%; height: 500px; background-color: #f4f4f4; 
+            width: 100%; height: 500px; background-color: #f8f9fa; 
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        .main-banner h1 { font-size: 48px; margin-bottom: 20px; color: #222; }
-        .main-banner h1 span { color: #004094; }
+        /* 중앙 로고 이미지 스타일 */
+        .main-logo-img {
+            max-width: 400px; /* 이미지 크기 조절 */
+            width: 80%;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); /* 살짝 그림자 */
+        }
+        .main-banner p { font-size: 18px; color: #666; font-weight: 500; }
 
-        /* [Notice 섹션] */
-        .notice-section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
-        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; }
-        .notice-list { width: 100%; border-top: 1px solid #ddd; }
-        .notice-item { display: flex; justify-content: space-between; padding: 15px 10px; border-bottom: 1px solid #eee; }
-        .notice-item:hover { background-color: #f9f9f9; cursor: pointer; }
+        /* [What we do 섹션 (새로 추가됨)] */
+        .what-we-do { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
+        .section-header { margin-bottom: 60px; text-align: left; border-bottom: none; }
+        .section-header h2 { font-size: 32px; color: #222; margin: 0; display: flex; align-items: center; gap: 10px; }
+        .section-header h2::before { content: "●"; font-size: 20px; color: #000; } /* 제목 앞 점 */
+
+        .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .icon-box { display: flex; flex-direction: column; align-items: center; padding: 20px; }
+        
+        /* 아이콘 스타일 */
+        .icon-circle {
+            font-size: 60px;
+            color: #00a0e9; /* 아이콘 하늘색 */
+            margin-bottom: 30px;
+        }
+
+        .icon-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000; }
+        .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
 
         /* [푸터] */
         footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
@@ -88,52 +82,60 @@
 <body>
 
     <header>
-        <div class="logo"><a href="index.html">KENTECH UHPS</a></div>
+        <div class="logo"><a href="index.html">UHPS</a></div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                
-                <li class="dropdown">
-                    <a href="#">Members ▾</a>
+                <li class="dropdown"><a href="#">Members ▾</a>
                     <ul class="dropdown-content">
                         <li><a href="members.html#supervisor">Supervisor</a></li>
                         <li><a href="members.html#researcher">Researcher</a></li>
                         <li><a href="members.html#alumni">Alumni</a></li>
                     </ul>
                 </li>
-
                 <li><a href="research.html">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
-
-                <li class="dropdown">
-                    <a href="#">Facilities ▾</a>
+                <li class="dropdown"><a href="#">Facilities ▾</a>
                     <ul class="dropdown-content">
                         <li><a href="facilities.html#office">Office</a></li>
                         <li><a href="facilities.html#equipment">Equipment</a></li>
                     </ul>
                 </li>
-
                 <li><a href="education.html">Education</a></li>
                 <li><a href="gallery.html">Gallery</a></li>
-                
                 <li><a href="#">Notice</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="main-banner">
-        <h1>KENTECH <span>UHPS</span></h1>
+        <img src="uhps_main.png" alt="UHPS Logo" class="main-logo-img">
         <p>Ultra-High Power Semiconductor Lab</p>
     </section>
 
-    <section class="notice-section">
+    <section class="what-we-do">
         <div class="section-header">
-            <h2 style="color:#004094;">NOTICE</h2>
-            <a href="#" style="font-size:14px; color:#888;">View All +</a>
+            <h2>What we do</h2>
         </div>
-        <div class="notice-list">
-            <div class="notice-item"><span>[공지] UHPS 홈페이지 리뉴얼 안내</span><span style="color:#999;">2025.02.11</span></div>
-            <div class="notice-item"><span>[채용] 2025년도 신입 연구원 모집</span><span style="color:#999;">2025.01.20</span></div>
+        
+        <div class="icon-grid">
+            <div class="icon-box">
+                <i class="fa-solid fa-power-off icon-circle"></i>
+                <h3>8 Types of Semiconductor</h3>
+                <p>IGBT/HEMT/SiC/SJ etc</p>
+            </div>
+
+            <div class="icon-box">
+                <i class="fa-solid fa-robot icon-circle"></i>
+                <h3>Industrial Power Device</h3>
+                <p>IGBT/HEMT/SiC/SJ etc</p>
+            </div>
+
+            <div class="icon-box">
+                <i class="fa-solid fa-microchip icon-circle"></i>
+                <h3>Device/Circuit Mixed Mode Simulation</h3>
+                <p>IGBT/HEMT/SiC/SJ etc</p>
+            </div>
         </div>
     </section>
 
