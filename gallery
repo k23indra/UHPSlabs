@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery - UHPS Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        /* 공통 스타일 동일 */
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        header { display: flex; justify-content: space-between; align-items: center; padding: 0 50px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; }
+        .logo { font-size: 24px; font-weight: bold; color: #004094; } 
+        nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
+        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav a:hover { color: #004094; }
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 2000; border-radius: 0 0 8px 8px; }
+        .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
+        .dropdown-content li { display: block; text-align: center; }
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; }
+        .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
+        .dropdown:hover .dropdown-content { display: block; }
+        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
+
+        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; min-height: 500px; }
+        h2.section-title { font-size: 32px; color: #004094; margin-bottom: 20px; border-bottom: 2px solid #004094; padding-bottom: 10px; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .gallery-item { width: 100%; height: 250px; background: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #aaa; }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="index.html">KENTECH UHPS</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown"><a href="#">Members ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="members.html#supervisor">Supervisor</a></li>
+                        <li><a href="members.html#researcher">Researcher</a></li>
+                        <li><a href="members.html#alumni">Alumni</a></li>
+                    </ul>
+                </li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
+                <li class="dropdown"><a href="#">Facilities ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="facilities.html#office">Office</a></li>
+                        <li><a href="facilities.html#equipment">Equipment</a></li>
+                    </ul>
+                </li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="gallery.html" style="color:#004094;">Gallery</a></li>
+                <li><a href="#">Notice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section>
+        <h2 class="section-title">Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">학회 사진 1</div>
+            <div class="gallery-item">워크샵 사진 2</div>
+            <div class="gallery-item">졸업식 사진 3</div>
+        </div>
+    </section>
+
+    <footer><p>Copyright ⓒ UHPS Lab. All rights reserved.</p></footer>
+</body>
+</html>
