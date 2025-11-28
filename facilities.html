@@ -6,7 +6,6 @@
     <title>Facilities - UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* 공통 스타일 */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; scroll-behavior: smooth; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
@@ -14,15 +13,18 @@
         .logo { font-size: 24px; font-weight: bold; color: #004094; } 
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: block; }
+        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
         nav a:hover { color: #004094; }
-        .dropdown-content { display: none; position: absolute; top: 80px; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.1); border: 1px solid #eee; border-top: 3px solid #004094; }
+        
+        /* 드롭다운 스타일 (크고 넓게) */
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 2000; border-radius: 0 0 8px 8px; }
+        .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 12px 16px; color: #555; font-size: 14px; width: 100%; box-sizing: border-box;}
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; }
+        .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
-        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
 
-        /* Facilities 전용 스타일 */
+        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
         section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #eee; }
         h2.section-title { font-size: 32px; color: #004094; margin-bottom: 30px; text-align: center; }
         .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
@@ -30,49 +32,5 @@
     </style>
 </head>
 <body>
-    
     <header>
-        <div class="logo"><a href="index.html">KENTECH UHPS</a></div>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li class="dropdown"><a href="#">Members ▾</a>
-                    <ul class="dropdown-content">
-                        <li><a href="members.html#supervisor">Supervisor</a></li>
-                        <li><a href="members.html#researcher">Researcher</a></li>
-                        <li><a href="members.html#alumni">Alumni</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Research</a></li>
-                <li><a href="#">Publication</a></li>
-                <li class="dropdown"><a href="#">Facilities ▾</a>
-                    <ul class="dropdown-content">
-                        <li><a href="facilities.html#office">Office</a></li>
-                        <li><a href="facilities.html#equipment">Equipment</a></li>
-                    </ul>
-                </li>
-                <li><a href="#">Education</a></li>
-                <li><a href="#">Gallery</a></li>
-                <li><a href="#">Notice</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="office">
-        <h2 class="section-title">Office</h2>
-        <div class="gallery-grid">
-            <img src="office1.jpg" class="gallery-item" alt="Office 1">
-            <img src="office2.jpg" class="gallery-item" alt="Office 2">
-        </div>
-    </section>
-
-    <section id="equipment">
-        <h2 class="section-title">Equipment</h2>
-        <div class="gallery-grid">
-            <img src="equip1.jpg" class="gallery-item" alt="Equipment 1">
-        </div>
-    </section>
-
-    <footer><p>Copyright ⓒ UHPS Lab. All rights reserved.</p></footer>
-</body>
-</html>
+        <div class="
