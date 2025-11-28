@@ -19,12 +19,7 @@
             position: sticky; top: 0; z-index: 1000;
         }
         
-        /* 좌측 상단 로고 이미지 스타일 */
-        .header-logo-img {
-            height: 40px; 
-            width: auto; 
-            display: block;
-        }
+        .header-logo-img { height: 40px; width: auto; display: block; }
         
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
@@ -39,20 +34,34 @@
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* [메인 배너] */
+        /* [메인 배너 - Full Width 디자인] */
         .main-banner {
-            width: 100%; height: 500px; background-color: #fff; 
-            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            width: 100%; 
+            height: 600px; /* 배너 높이 크게 설정 */
+            position: relative; /* 텍스트를 이미지 위에 올리기 위함 */
+            overflow: hidden;
         }
         
-        /* 메인 중앙 이미지 스타일 */
+        /* 배경 이미지 (가로 꽉 차게) */
         .main-logo-img {
-            max-width: 500px; 
-            width: 80%; 
-            height: auto;
-            margin-bottom: 20px;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* 비율 유지하면서 꽉 채우기 (잘림 허용) */
+            object-position: center;
         }
-        .main-banner p { font-size: 18px; color: #666; font-weight: 500; }
+        
+        /* 이미지 위 텍스트 오버레이 */
+        .banner-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7); /* 글자 잘 보이게 그림자 */
+            width: 90%;
+        }
+        .banner-text h2 { font-size: 60px; margin: 0; font-weight: 800; letter-spacing: -2px; }
+        .banner-text p { font-size: 24px; font-weight: 400; margin-top: 10px; opacity: 0.9; }
 
         /* [What we do 섹션] */
         .what-we-do { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
@@ -63,7 +72,7 @@
         .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .icon-box { display: flex; flex-direction: column; align-items: center; padding: 20px; }
         
-        /* 하단 아이콘 이미지 스타일 */
+        /* 하단 아이콘 이미지 */
         .icon-img {
             height: 100px; 
             width: auto;
@@ -74,8 +83,38 @@
         .icon-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000; }
         .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
 
-        /* [푸터] */
-        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
+        /* [푸터 - 디자인 전면 수정] */
+        footer { 
+            background: #fff; /* 흰색 배경 */
+            color: #333; 
+            padding: 60px 20px; 
+            border-top: 1px solid #eee;
+            font-size: 14px;
+        }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
+        
+        /* 연락처 라인 (CONTACT NUMBER) */
+        .footer-contact { 
+            display: flex; gap: 30px; align-items: center; 
+            font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px;
+        }
+        .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
+        
+        /* 구분선 */
+        .footer-line {
+            height: 1px;
+            background-color: #ddd; /* 연한 회색 */
+            border: none;
+            margin: 20px 0;
+        }
+
+        /* 주소 정보 */
+        .footer-info {
+            line-height: 1.8;
+            color: #555;
+            font-weight: 500;
+        }
+        .footer-info span { margin-right: 15px; }
     </style>
 </head>
 <body>
@@ -110,8 +149,12 @@
     </header>
 
     <section class="main-banner">
-        <img src="Main_Body1.png" alt="UHPS Main Image" class="main-logo-img">
-        <p>Ultra-High Power Semiconductor Lab</p>
+        <img src="Main_Body1.png" alt="Main Banner" class="main-logo-img">
+        
+        <div class="banner-text">
+            <h2>UHPS</h2>
+            <p>Ultra-High Power Semiconductor Lab</p>
+        </div>
     </section>
 
     <section class="what-we-do">
@@ -140,6 +183,26 @@
         </div>
     </section>
 
-    <footer><p>Copyright ⓒ UHPS Lab. All rights reserved.</p></footer>
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <span class="contact-label">CONTACT NUMBER</span> 
+                <span>|</span> 
+                <span>TEL. +82-61-330-9650</span> <span>|</span>
+                <span>FAX. +82-61-333-9626</span>
+            </div>
+
+            <hr class="footer-line">
+
+            <div class="footer-info">
+                <span>UHPS</span> <span>|</span>
+                <span>Prof : Hyemin Kang</span> <span>|</span>
+                <span>Address : Kentech-gil 21, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
+                <br>
+                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
