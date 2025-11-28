@@ -16,26 +16,26 @@
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 0 70px; 
-            height: 130px; /* 로고가 100px이므로 여유 있게 130px로 설정 */
+            height: 100px; 
             border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
         }
         
-        /* ★ [중요] 로고 컨테이너 설정 ★ */
+        /* ★ 로고 컨테이너 수정 ★ */
         .logo {
             display: flex;
-            align-items: center; /* 세로 중앙 정렬 */
-            gap: 30px; /* 로고 사이 간격 */
-            height: 100%; /* 헤더 높이 채우기 */
+            align-items: center;
+            height: 100%; 
+            gap: 20px; /* 로고 사이 간격 */
         }
 
-        /* ★ [핵심] 로고 이미지 비율 고정 설정 ★ */
-        /* 이 클래스를 두 이미지에 공통으로 적용합니다 */
+        /* ★ [핵심] 로고 이미지 강제 고정 스타일 ★ */
+        /* 두 로고 모두 이 클래스를 사용해서 높이를 억지로 맞춥니다 */
         .logo-img-fixed {
-            height: 100px;  /* 높이는 무조건 100px 고정 */
-            width: auto;    /* 너비는 비율에 맞춰 자동 조절 (찌그러짐 방지) */
-            object-fit: contain; /* 혹시라도 공간이 부족하면 잘리지 않고 다 보여주기 */
-            display: block; /* 이미지 하단 여백 제거 */
+            height: 100px;   /* 높이를 60px로 강제 고정 (원하는 크기로 숫자 조절 가능) */
+            width: auto;    /* 너비는 비율에 맞춰 알아서 변함 */
+            object-fit: contain; /* 찌그러짐 방지 */
+            display: block;
         }
 
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
@@ -180,7 +180,7 @@
     </header>
 
     <section class="main-banner">
-        <img src="Main_Body1.jpg" alt="Main Banner" class="main-logo-img">
+        <img src="Main_Body1.png" alt="Main Banner" class="main-logo-img">
         
         <div class="banner-text">
             <h2>UHPS</h2>
