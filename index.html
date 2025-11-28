@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* [기본 스타일] */
@@ -20,13 +19,12 @@
             position: sticky; top: 0; z-index: 1000;
         }
         
-        /* 로고 스타일 수정 (요청하신 파란색 반영) */
-        .logo { 
-            font-size: 32px; /* 글자 크기 키움 */
-            font-weight: 800; /* 두께 아주 두껍게 */
-            color: #4169E1; /* Royal Blue (UHPS 로고색과 유사) */
-            letter-spacing: -1px;
-        } 
+        /* 좌측 상단 로고 이미지 스타일 */
+        .header-logo-img {
+            height: 40px; /* 헤더 높이에 맞춰 크기 조절 */
+            width: auto; /* 비율 유지 */
+            display: block;
+        }
         
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
@@ -41,35 +39,36 @@
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* [메인 배너 - 이미지로 교체] */
+        /* [메인 배너] */
         .main-banner {
-            width: 100%; height: 500px; background-color: #f8f9fa; 
+            width: 100%; height: 500px; background-color: #fff; /* 배경 흰색으로 변경 */
             display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
         }
-        /* 중앙 로고 이미지 스타일 */
+        
+        /* 메인 중앙 이미지 스타일 */
         .main-logo-img {
-            max-width: 400px; /* 이미지 크기 조절 */
-            width: 80%;
+            max-width: 500px; /* 이미지 최대 너비 */
+            width: 80%; /* 모바일 대응 */
             height: auto;
             margin-bottom: 20px;
-            filter: drop-shadow(0 5px 5px rgba(0,0,0,0.1)); /* 살짝 그림자 */
         }
         .main-banner p { font-size: 18px; color: #666; font-weight: 500; }
 
-        /* [What we do 섹션 (새로 추가됨)] */
+        /* [What we do 섹션] */
         .what-we-do { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
         .section-header { margin-bottom: 60px; text-align: left; border-bottom: none; }
         .section-header h2 { font-size: 32px; color: #222; margin: 0; display: flex; align-items: center; gap: 10px; }
-        .section-header h2::before { content: "●"; font-size: 20px; color: #000; } /* 제목 앞 점 */
+        .section-header h2::before { content: "●"; font-size: 20px; color: #000; } 
 
         .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .icon-box { display: flex; flex-direction: column; align-items: center; padding: 20px; }
         
-        /* 아이콘 스타일 */
-        .icon-circle {
-            font-size: 60px;
-            color: #00a0e9; /* 아이콘 하늘색 */
-            margin-bottom: 30px;
+        /* 하단 아이콘 이미지 스타일 */
+        .icon-img {
+            height: 100px; /* 아이콘 높이 고정 (필요시 수정) */
+            width: auto;
+            margin-bottom: 20px;
+            object-fit: contain; /* 비율 유지하며 칸 안에 맞춤 */
         }
 
         .icon-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000; }
@@ -82,7 +81,9 @@
 <body>
 
     <header>
-        <div class="logo"><a href="index.html">UHPS</a></div>
+        <div class="logo">
+            <a href="index.html"><img src="UHPS_Logo.png" alt="UHPS Logo" class="header-logo-img"></a>
+        </div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -109,7 +110,7 @@
     </header>
 
     <section class="main-banner">
-        <img src="uhps_main.png" alt="UHPS Logo" class="main-logo-img">
+        <img src="uhps_main.png" alt="UHPS Main Image" class="main-logo-img">
         <p>Ultra-High Power Semiconductor Lab</p>
     </section>
 
@@ -120,19 +121,19 @@
         
         <div class="icon-grid">
             <div class="icon-box">
-                <i class="fa-solid fa-power-off icon-circle"></i>
+                <img src="Main_under_Logo1.png" alt="Icon 1" class="icon-img">
                 <h3>8 Types of Semiconductor</h3>
                 <p>IGBT/HEMT/SiC/SJ etc</p>
             </div>
 
             <div class="icon-box">
-                <i class="fa-solid fa-robot icon-circle"></i>
+                <img src="Main_under_Logo2.png" alt="Icon 2" class="icon-img">
                 <h3>Industrial Power Device</h3>
                 <p>IGBT/HEMT/SiC/SJ etc</p>
             </div>
 
             <div class="icon-box">
-                <i class="fa-solid fa-microchip icon-circle"></i>
+                <img src="Main_under_Logo3.png" alt="Icon 3" class="icon-img">
                 <h3>Device/Circuit Mixed Mode Simulation</h3>
                 <p>IGBT/HEMT/SiC/SJ etc</p>
             </div>
