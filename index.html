@@ -6,160 +6,106 @@
     <title>KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
-        /* [1] 기본 스타일 설정 */
-        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+        /* 기본 스타일 */
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
-        /* [2] 헤더 및 드롭다운 메뉴 스타일 (중요!) */
+        /* 헤더 스타일 */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 0 50px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; 
-            position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 1000;
         }
         .logo { font-size: 24px; font-weight: bold; color: #004094; } 
         
-        nav ul { display: flex; gap: 30px; height: 100%; align-items: center; }
-        nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; }
+        nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
         nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: block; }
         nav a:hover { color: #004094; }
 
-        /* 드롭다운 메뉴 숨기기/보이기 설정 */
+        /* 드롭다운 메뉴 (마우스 올리면 나옴) */
         .dropdown-content {
-            display: none; /* 평소엔 안 보임 */
-            position: absolute;
-            top: 80px; /* 헤더 높이만큼 아래에 위치 */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #fff;
-            min-width: 160px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-            border: 1px solid #eee;
-            border-top: 3px solid #004094;
+            display: none; position: absolute; top: 80px; left: 50%; transform: translateX(-50%);
+            background-color: #fff; min-width: 160px; box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border: 1px solid #eee; border-top: 3px solid #004094;
         }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 12px 16px; color: #555; font-size: 14px; }
+        .dropdown-content a { padding: 12px 16px; color: #555; font-size: 14px; width: 100%; box-sizing: border-box;}
         .dropdown-content a:hover { background-color: #f9f9f9; color: #004094; }
-        
-        /* 마우스 올렸을 때 드롭다운 보이기 */
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* [3] 각 섹션 공통 스타일 */
-        section { padding: 80px 20px; max-width: 1200px; margin: 0 auto; border-bottom: 1px solid #eee; }
-        .section-title { text-align: center; font-size: 32px; margin-bottom: 40px; color: #004094; font-weight: 700; }
-        
-        /* 메인 히어로 섹션 */
-        .hero { background-color: #f4f4f4; text-align: center; max-width: 100%; padding: 120px 20px; border-bottom: none; }
-        .hero h1 { font-size: 48px; margin-bottom: 10px; color: #222; }
-        .hero h1 span { color: #004094; }
-        
-        /* 프로필/사진 그리드 스타일 */
-        .grid-profile { display: flex; gap: 40px; align-items: flex-start; justify-content: center; flex-wrap: wrap; }
-        .profile-img { width: 200px; height: 250px; background-color: #ddd; display: flex; align-items: center; justify-content: center; border-radius: 10px; color: #777; }
-        .profile-info { max-width: 600px; text-align: left; }
-        .profile-info h3 { margin-top: 0; color: #004094; font-size: 24px; }
-        
-        /* 사진 갤러리 그리드 */
-        .grid-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .gallery-item { height: 250px; background-color: #eee; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #aaa; border: 2px dashed #ccc; }
+        /* 메인 배너 */
+        .main-banner {
+            width: 100%; height: 500px; background-color: #f4f4f4; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .main-banner h1 { font-size: 48px; margin-bottom: 20px; color: #222; }
+        .main-banner h1 span { color: #004094; }
+
+        /* Notice 섹션 */
+        .notice-section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        .notice-list { width: 100%; border-top: 1px solid #ddd; }
+        .notice-item { display: flex; justify-content: space-between; padding: 15px 10px; border-bottom: 1px solid #eee; }
 
         /* 푸터 */
         footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
-        .contact-info p { margin: 5px 0; color: #ccc; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">KENTECH UHPS</div>
+        <div class="logo"><a href="index.html">KENTECH UHPS</a></div>
         <nav>
             <ul>
-                <li><a href="#home">Home</a></li>
+                <li><a href="index.html">Home</a></li>
                 
                 <li class="dropdown">
-                    <a href="#members">Members ▾</a>
+                    <a href="#">Members ▾</a>
                     <ul class="dropdown-content">
-                        <li><a href="#supervisor">Supervisor</a></li>
-                        <li><a href="#researcher">Researcher</a></li>
-                        <li><a href="#alumni">Alumni</a></li>
+                        <li><a href="members.html#supervisor">Supervisor</a></li>
+                        <li><a href="members.html#researcher">Researcher</a></li>
+                        <li><a href="members.html#alumni">Alumni</a></li>
                     </ul>
                 </li>
+
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Publication</a></li>
 
                 <li class="dropdown">
-                    <a href="#facilities">Facilities ▾</a>
+                    <a href="#">Facilities ▾</a>
                     <ul class="dropdown-content">
-                        <li><a href="#office">Office</a></li>
-                        <li><a href="#equipment">Equipment</a></li>
+                        <li><a href="facilities.html#office">Office</a></li>
+                        <li><a href="facilities.html#equipment">Equipment</a></li>
                     </ul>
                 </li>
 
-                <li><a href="#research">Research</a></li>
-                <li><a href="#publication">Publication</a></li>
-                <li><a href="#notice">Notice</a></li>
+                <li><a href="#">Education</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Notice</a></li>
             </ul>
         </nav>
     </header>
 
-    <section id="home" class="hero">
+    <section class="main-banner">
         <h1>KENTECH <span>UHPS</span></h1>
         <p>Ultra-High Power Semiconductor Lab</p>
     </section>
 
-    <section id="supervisor">
-        <h2 class="section-title">Supervisor</h2>
-        <div class="grid-profile">
-            <div class="profile-img">사진 준비중</div>
-            <div class="profile-info">
-                <h3>Prof. Hye Min Kang</h3>
-                <p><strong>Email:</strong> h.kang@kentech.ac.kr</p>
-                <p><strong>Affiliation:</strong> KENTECH Energy Engineering</p>
-                <p><strong>Research Interest:</strong> SiC, GaN, Si Power Devices, Simulation, Fabrication</p>
-                <p style="margin-top: 15px; color: #555;">
-                    (이곳에 교수님 인사말이나 약력을 적어주세요. 아카이브에서 복사한 텍스트를 붙여넣으시면 됩니다.)
-                </p>
-            </div>
+    <section class="notice-section">
+        <div class="section-header">
+            <h2 style="color:#004094;">NOTICE</h2>
+            <a href="#" style="font-size:14px; color:#888;">View All +</a>
         </div>
-    </section>
-
-    <section id="researcher">
-        <h2 class="section-title">Researcher</h2>
-        <div style="text-align: center; color: #666;">
-            <p>현재 연구원 목록을 준비 중입니다.</p>
-            </div>
-    </section>
-
-    <section id="alumni">
-        <h2 class="section-title">Alumni</h2>
-        <div style="text-align: center; color: #666;">
-            <p>졸업생 정보를 준비 중입니다.</p>
-        </div>
-    </section>
-
-    <section id="office">
-        <h2 class="section-title">Office</h2>
-        <div class="grid-gallery">
-            <div class="gallery-item">Office Photo 1</div>
-            <div class="gallery-item">Office Photo 2</div>
-            <div class="gallery-item">Office Photo 3</div>
-        </div>
-    </section>
-
-    <section id="equipment">
-        <h2 class="section-title">Equipment</h2>
-        <div class="grid-gallery">
-            <div class="gallery-item">Lab Equipment 1</div>
-            <div class="gallery-item">Lab Equipment 2</div>
-            <div class="gallery-item">Lab Equipment 3</div>
+        <div class="notice-list">
+            <div class="notice-item"><span>[공지] UHPS 홈페이지 리뉴얼 안내</span><span style="color:#999;">2025.02.11</span></div>
+            <div class="notice-item"><span>[채용] 2025년도 신입 연구원 모집</span><span style="color:#999;">2025.01.20</span></div>
         </div>
     </section>
 
     <footer>
-        <div class="contact-info">
-            <h3>Contact</h3>
-            <p><strong>Email:</strong> h.kang@kentech.ac.kr</p>
-            <p><strong>Address:</strong> 200, Hyeoksin-ro, Naju-si, Jeollanam-do, Republic of Korea (58330)</p>
-        </div>
-        <p style="margin-top: 20px; font-size: 14px; color: #888;">Copyright ⓒ UHPS Lab. All rights reserved.</p>
+        <p>Copyright ⓒ UHPS Lab. All rights reserved.</p>
     </footer>
 
 </body>
