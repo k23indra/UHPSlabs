@@ -24,28 +24,28 @@
         nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
         nav a:hover { color: #004094; }
 
-        /* [드롭다운 메뉴 - 대대적 수정] */
+        /* [드롭다운 메뉴 - 끊김 방지 & 넓은 크기] */
         .dropdown-content {
             display: none; 
             position: absolute; 
-            top: 100%; /* 메뉴 바로 아래 */
+            top: 100%; 
             left: 50%; 
             transform: translateX(-50%);
             background-color: #fff; 
-            min-width: 260px; /* ★너비를 260px로 훨씬 넓게 설정★ */
-            box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* 그림자도 진하게 */
+            min-width: 260px; /* 넓은 너비 */
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
             border: 1px solid #ddd; 
-            border-top: 4px solid #004094; /* 상단 파란줄 강조 */
+            border-top: 4px solid #004094; 
             padding: 15px 0; 
             z-index: 2000;
-            border-radius: 0 0 8px 8px; /* 아래쪽 둥글게 */
+            border-radius: 0 0 8px 8px;
         }
         
-        /* 투명 다리 만들기 (마우스 끊김 방지 핵심) */
+        /* 투명 다리 (마우스 끊김 방지) */
         .dropdown-content::before {
             content: "";
             position: absolute;
-            top: -20px; /* 메뉴와 박스 사이 빈공간을 메워줌 */
+            top: -20px;
             left: 0;
             width: 100%;
             height: 20px;
@@ -54,9 +54,9 @@
 
         .dropdown-content li { display: block; text-align: center; }
         .dropdown-content a { 
-            padding: 15px 0; /* 위아래 여백을 넉넉하게 */
+            padding: 15px 0; 
             color: #444; 
-            font-size: 16px; /* ★글자 크기 확대★ */
+            font-size: 16px; 
             font-weight: 500;
             width: 100%; 
             display: block; 
@@ -92,6 +92,7 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
+                
                 <li class="dropdown">
                     <a href="#">Members ▾</a>
                     <ul class="dropdown-content">
@@ -100,8 +101,10 @@
                         <li><a href="members.html#alumni">Alumni</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Research</a></li>
-                <li><a href="#">Publication</a></li>
+
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
+
                 <li class="dropdown">
                     <a href="#">Facilities ▾</a>
                     <ul class="dropdown-content">
@@ -109,8 +112,10 @@
                         <li><a href="facilities.html#equipment">Equipment</a></li>
                     </ul>
                 </li>
-                <li><a href="#">Education</a></li>
-                <li><a href="#">Gallery</a></li>
+
+                <li><a href="education.html">Education</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                
                 <li><a href="#">Notice</a></li>
             </ul>
         </nav>
