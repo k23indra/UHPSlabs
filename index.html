@@ -34,4 +34,104 @@
             background-color: #fff; 
             min-width: 260px; /* ★너비를 260px로 훨씬 넓게 설정★ */
             box-shadow: 0 10px 20px rgba(0,0,0,0.15); /* 그림자도 진하게 */
-            border: 1px solid #ddd
+            border: 1px solid #ddd; 
+            border-top: 4px solid #004094; /* 상단 파란줄 강조 */
+            padding: 15px 0; 
+            z-index: 2000;
+            border-radius: 0 0 8px 8px; /* 아래쪽 둥글게 */
+        }
+        
+        /* 투명 다리 만들기 (마우스 끊김 방지 핵심) */
+        .dropdown-content::before {
+            content: "";
+            position: absolute;
+            top: -20px; /* 메뉴와 박스 사이 빈공간을 메워줌 */
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background: transparent;
+        }
+
+        .dropdown-content li { display: block; text-align: center; }
+        .dropdown-content a { 
+            padding: 15px 0; /* 위아래 여백을 넉넉하게 */
+            color: #444; 
+            font-size: 16px; /* ★글자 크기 확대★ */
+            font-weight: 500;
+            width: 100%; 
+            display: block; 
+        }
+        .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
+        
+        /* 호버 시 메뉴 보이기 */
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* [메인 배너] */
+        .main-banner {
+            width: 100%; height: 500px; background-color: #f4f4f4; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+        }
+        .main-banner h1 { font-size: 48px; margin-bottom: 20px; color: #222; }
+        .main-banner h1 span { color: #004094; }
+
+        /* [Notice 섹션] */
+        .notice-section { padding: 60px 20px; max-width: 1200px; margin: 0 auto; }
+        .section-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 20px; border-bottom: 2px solid #222; padding-bottom: 10px; }
+        .notice-list { width: 100%; border-top: 1px solid #ddd; }
+        .notice-item { display: flex; justify-content: space-between; padding: 15px 10px; border-bottom: 1px solid #eee; }
+        .notice-item:hover { background-color: #f9f9f9; cursor: pointer; }
+
+        /* [푸터] */
+        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo"><a href="index.html">KENTECH UHPS</a></div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Members ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="members.html#supervisor">Supervisor</a></li>
+                        <li><a href="members.html#researcher">Researcher</a></li>
+                        <li><a href="members.html#alumni">Alumni</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Research</a></li>
+                <li><a href="#">Publication</a></li>
+                <li class="dropdown">
+                    <a href="#">Facilities ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="facilities.html#office">Office</a></li>
+                        <li><a href="facilities.html#equipment">Equipment</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Education</a></li>
+                <li><a href="#">Gallery</a></li>
+                <li><a href="#">Notice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="main-banner">
+        <h1>KENTECH <span>UHPS</span></h1>
+        <p>Ultra-High Power Semiconductor Lab</p>
+    </section>
+
+    <section class="notice-section">
+        <div class="section-header">
+            <h2 style="color:#004094;">NOTICE</h2>
+            <a href="#" style="font-size:14px; color:#888;">View All +</a>
+        </div>
+        <div class="notice-list">
+            <div class="notice-item"><span>[공지] UHPS 홈페이지 리뉴얼 안내</span><span style="color:#999;">2025.02.11</span></div>
+            <div class="notice-item"><span>[채용] 2025년도 신입 연구원 모집</span><span style="color:#999;">2025.01.20</span></div>
+        </div>
+    </section>
+
+    <footer><p>Copyright ⓒ UHPS Lab. All rights reserved.</p></footer>
+</body>
+</html>
