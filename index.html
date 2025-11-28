@@ -15,11 +15,11 @@
         /* [헤더] */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
-            padding: 0 70px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; 
+            padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
         }
         
-        .header-logo-img { height: 100px; width: auto; display: block; }
+        .header-logo-img { height: 75px; width: auto; display: block; }
         
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
@@ -34,20 +34,24 @@
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        /* [메인 배너 - Full Width 디자인] */
+        /* [메인 배너 - 수정됨] */
         .main-banner {
             width: 100%; 
-            height: auto; /* 배너 높이 크게 설정 */
-            position: relative; /* 텍스트를 이미지 위에 올리기 위함 */
+            height: 600px;  /* ★높이를 600px로 다시 고정 (액자 역할)★ */
+            position: relative; 
             overflow: hidden;
+            display: block;
         }
         
-        /* 배경 이미지 (가로 꽉 차게) */
+        /* 배경 이미지 스타일 수정 */
         .main-logo-img {
             width: 100%;
-            height: auto;
-            object-fit: cover; /* 비율 유지하면서 꽉 채우기 (잘림 허용) */
-            object-position: center;
+            height: 100%; /* 배너 높이에 꽉 차게 설정 */
+            object-fit: cover; /* 비율 유지하며 빈 공간 없이 채우기 */
+            
+            /* ★ 핵심: 이미지 위치 조정 ★ */
+            /* center(가로중앙) 35%(세로위치) -> 건물 부분이 보이도록 위로 올림 */
+            object-position: center 35%; 
         }
         
         /* 이미지 위 텍스트 오버레이 */
@@ -57,7 +61,7 @@
             transform: translate(-50%, -50%);
             text-align: center;
             color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.7); /* 글자 잘 보이게 그림자 */
+            text-shadow: 0 2px 10px rgba(0,0,0,0.7); 
             width: 90%;
         }
         .banner-text h2 { font-size: 60px; margin: 0; font-weight: 800; letter-spacing: -2px; }
@@ -72,7 +76,6 @@
         .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .icon-box { display: flex; flex-direction: column; align-items: center; padding: 20px; }
         
-        /* 하단 아이콘 이미지 */
         .icon-img {
             height: 100px; 
             width: auto;
@@ -80,12 +83,22 @@
             object-fit: contain; 
         }
 
-        .icon-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000; }
+        .icon-box h3 { 
+            font-size: 18px; 
+            font-weight: 700; 
+            margin-bottom: 15px; 
+            color: #000;
+            height: 60px; 
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+        }
+        
         .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
 
-        /* [푸터 - 디자인 전면 수정] */
+        /* [푸터] */
         footer { 
-            background: #fff; /* 흰색 배경 */
+            background: #fff; 
             color: #333; 
             padding: 60px 20px; 
             border-top: 1px solid #eee;
@@ -93,22 +106,19 @@
         }
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
         
-        /* 연락처 라인 (CONTACT NUMBER) */
         .footer-contact { 
             display: flex; gap: 30px; align-items: center; 
             font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px;
         }
         .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
         
-        /* 구분선 */
         .footer-line {
             height: 1px;
-            background-color: #ddd; /* 연한 회색 */
+            background-color: #ddd; 
             border: none;
             margin: 20px 0;
         }
 
-        /* 주소 정보 */
         .footer-info {
             line-height: 1.8;
             color: #555;
@@ -149,7 +159,7 @@
     </header>
 
     <section class="main-banner">
-        <img src="Main_Body1.png" alt="Main Banner" class="main-logo-img">
+        <img src="Main_Body1.jpg" alt="Main Banner" class="main-logo-img">
         
         <div class="banner-text">
             <h2>UHPS</h2>
@@ -164,19 +174,19 @@
         
         <div class="icon-grid">
             <div class="icon-box">
-                <img src="Main_Under1.png" alt="Icon 1" class="icon-img">
+                <img src="Main_Under_1.png" alt="Icon 1" class="icon-img">
                 <h3>8 Types of Semiconductor</h3>
                 <p>IGBT/HEMT/SiC/SJ etc</p>
             </div>
 
             <div class="icon-box">
-                <img src="Main_Under2.png" alt="Icon 2" class="icon-img">
+                <img src="Main_Under_2.png" alt="Icon 2" class="icon-img">
                 <h3>Industrial Power Device</h3>
                 <p>IGBT/HEMT/SiC/SJ etc</p>
             </div>
 
             <div class="icon-box">
-                <img src="Main_Under3.png" alt="Icon 3" class="icon-img">
+                <img src="Main_Under_3.png" alt="Icon 3" class="icon-img">
                 <h3>Device/Circuit Mixed Mode Simulation</h3>
                 <p>IGBT/HEMT/SiC/SJ etc</p>
             </div>
@@ -189,20 +199,4 @@
                 <span class="contact-label">CONTACT NUMBER</span> 
                 <span>|</span> 
                 <span>TEL. +82-61-330-9650</span> <span>|</span>
-                <span>FAX. +82-61-333-9626</span>
-            </div>
-
-            <hr class="footer-line">
-
-            <div class="footer-info">
-                <span>UHPS</span> <span>|</span>
-                <span>Prof : Hyemin Kang</span> <span>|</span>
-                <span>Address : Kentech-gil 21, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
-                <br>
-                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+                <span>FAX
