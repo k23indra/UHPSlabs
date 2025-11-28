@@ -21,18 +21,25 @@
             position: sticky; top: 0; z-index: 1000;
         }
         
-        /* ★ 수정됨: 로고들을 감싸는 컨테이너 스타일 추가 ★ */
+        /* 로고 컨테이너: 높이를 100px로 고정하고 중앙 정렬 */
         .logo {
             display: flex;
             align-items: center;
-            gap: 20px; /* 두 로고 사이의 간격 */
+            height: 100px; /* ★ 로고 영역 높이 고정 ★ */
         }
 
-        /* 로고 이미지 높이 100px */
-        .header-logo-img { 
-            height: 100px; 
-            width: auto; 
-            display: block; 
+        /* UHPS 로고 이미지 */
+        .uhps-logo {
+            height: 100%; /* 부모(.logo) 높이(100px)에 맞춤 */
+            width: auto;  /* 비율 유지 */
+            margin-right: 20px; /* 오른쪽 간격 */
+        }
+
+        /* KENTECH 로고 이미지 (가로 비율 유지) */
+        .kentech-logo {
+            height: 100%; /* 부모(.logo) 높이(100px)에 맞춤 */
+            width: auto;  /* ★ 비율 유지하면서 높이만 100px로 맞춤 ★ */
+            display: block;
         }
         
         nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
@@ -142,10 +149,10 @@
 
     <header>
         <div class="logo">
-            <a href="index.html"><img src="UHPS_Logo.png" alt="UHPS Logo" class="header-logo-img"></a>
+            <a href="index.html"><img src="UHPS_Logo.png" alt="UHPS Logo" class="uhps-logo"></a>
             
             <a href="https://www.kentech.ac.kr/main.do" target="_blank">
-                <img src="KENTECH_Logo.png" alt="KENTECH Logo" class="header-logo-img">
+                <img src="KENTECH_Logo.png" alt="KENTECH Logo" class="kentech-logo">
             </a>
         </div>
         <nav>
