@@ -12,7 +12,7 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
-        /* [헤더] - 100px 유지 */
+        /* [헤더] */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 0 70px; 
@@ -29,7 +29,6 @@
             gap: 20px;
         }
 
-        /* 로고 크기 40px 유지 */
         .logo-img-fixed {
             height: 40px;   
             width: auto;    
@@ -37,7 +36,6 @@
             display: block;
         }
 
-        /* 상단 메뉴바 */
         nav > ul { 
             display: flex; 
             gap: 25px; 
@@ -46,7 +44,6 @@
         }
         
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        
         nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
@@ -128,47 +125,28 @@
             object-fit: contain; 
         }
 
+        /* ★ [핵심 수정] 제목 세로 중앙 정렬 ★ */
         .icon-box h3 { 
             font-size: 18px; 
             font-weight: 700; 
             margin-bottom: 15px; 
             color: #000;
-            height: 60px; 
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
+            
+            height: 60px; /* 제목 영역 높이 고정 */
+            display: flex; 
+            align-items: center; /* 세로 중앙 정렬 (이게 핵심!) */
+            justify-content: center; /* 가로 중앙 정렬 */
         }
         
         .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
 
         /* [푸터] */
-        footer { 
-            background: #fff; 
-            color: #333; 
-            padding: 60px 20px; 
-            border-top: 1px solid #eee;
-            font-size: 14px;
-        }
+        footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
-        
-        .footer-contact { 
-            display: flex; gap: 30px; align-items: center; 
-            font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px;
-        }
+        .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
         .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
-        
-        .footer-line {
-            height: 1px;
-            background-color: #ddd; 
-            border: none;
-            margin: 20px 0;
-        }
-
-        .footer-info {
-            line-height: 1.8;
-            color: #555;
-            font-weight: 500;
-        }
+        .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
+        .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
     </style>
 </head>
@@ -176,14 +154,9 @@
 
     <header>
         <div class="logo">
-            <a href="index.html">
-                <img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed">
-            </a>
-            <a href="https://www.kentech.ac.kr/main.do" target="_blank">
-                <img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed">
-            </a>
+            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
         </div>
-        
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -211,7 +184,6 @@
 
     <section class="main-banner">
         <img src="images/main/Main_Body1.png" alt="Main Banner" class="main-logo-img">
-        
         <div class="banner-text">
             <h2>UHPS</h2>
             <p>Ultra-High Power Semiconductor Lab</p>
@@ -252,9 +224,7 @@
                 <span>TEL. +82-61-330-9650</span> <span>|</span>
                 <span>FAX. +82-61-333-9626</span>
             </div>
-
             <hr class="footer-line">
-
             <div class="footer-info">
                 <span>UHPS</span> <span>|</span>
                 <span>Prof : Hyemin Kang</span> <span>|</span>
