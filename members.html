@@ -7,7 +7,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [공통 스타일 - index.html과 동일 유지] */
+        /* [공통 스타일 - index.html과 동일] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
@@ -30,39 +30,81 @@
         .dropdown:hover .dropdown-content { display: block; }
 
         /* [Members 페이지 전용 스타일] */
-        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
-        .member-section { margin-bottom: 100px; scroll-margin-top: 120px; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
+        
+        /* 섹션 기본 숨김 처리 (자바스크립트로 제어) */
+        .member-section { 
+            display: none; /* 기본적으로 안 보이게 설정 */
+            margin-bottom: 100px; 
+            animation: fadeIn 0.5s ease-in-out; /* 부드럽게 나타나는 효과 */
+        }
+        
+        /* 활성화된 섹션만 보이게 하는 클래스 */
+        .member-section.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .section-header { font-size: 32px; font-weight: 700; color: #000; margin-bottom: 40px; border-bottom: 2px solid #000; padding-bottom: 15px; }
         
-        /* Supervisor */
+        /* Supervisor Layout */
         .supervisor-layout { display: flex; gap: 40px; margin-bottom: 40px; }
         .sup-left { width: 300px; flex-shrink: 0; }
         .sup-right { flex-grow: 1; }
-        .prof-img-box { width: 100%; height: 350px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 20px; }
-        .prof-img { width: 100%; height: 100%; object-fit: cover; }
-        .prof-contact-box { border: 1px solid #000; padding: 15px; font-size: 14px; }
-        .prof-bio-box { border: 1px solid #000; padding: 30px; height: 100%; box-sizing: border-box; font-size: 15px; line-height: 1.8; text-align: justify; white-space: pre-line; /* 줄바꿈 반영 */ }
         
-        .info-box { border: 1px solid #000; padding: 30px; margin-bottom: 20px; }
-        .info-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
-        .info-title::before { content: "◆"; color: #000; font-size: 16px; }
-        .career-list li { list-style: none; margin-bottom: 8px; font-size: 15px; }
-        .pub-list li { list-style: none; margin-bottom: 15px; font-size: 14px; padding-left: 20px; position: relative; }
-        .pub-year { font-weight: bold; display: inline-block; width: 50px; vertical-align: top; }
+        /* ★ 테두리 제거됨 ★ */
+        .prof-img-box { 
+            width: 100%; height: 350px; 
+            background-color: #f9f9f9; /* 사진 없을 때 회색 배경 */
+            display: flex; align-items: center; justify-content: center; 
+            overflow: hidden; 
+            margin-bottom: 20px;
+            border-radius: 5px; /* 모서리 살짝 둥글게 */
+        }
+        .prof-img { width: 100%; height: 100%; object-fit: cover; }
+        
+        /* ★ 테두리 제거됨 ★ */
+        .prof-contact-box { padding: 10px 0; font-size: 15px; color: #444; }
+        
+        /* ★ 테두리 제거됨 ★ */
+        .prof-bio-box { padding: 0; font-size: 16px; line-height: 1.8; text-align: justify; white-space: pre-line; color: #333; }
+
+        /* ★ 테두리 제거됨 ★ */
+        .info-box { padding: 20px 0; margin-bottom: 20px; border-bottom: 1px solid #eee; }
+        .info-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: #004094; }
+        .info-title::before { content: "■"; color: #004094; font-size: 12px; }
+        
+        .career-list li { list-style: none; margin-bottom: 10px; font-size: 16px; color: #444; }
+        .pub-list li { list-style: none; margin-bottom: 15px; font-size: 15px; padding-left: 20px; position: relative; color: #444; }
+        .pub-year { font-weight: bold; display: inline-block; width: 50px; vertical-align: top; color: #000; }
 
         /* Researcher */
-        .research-category { margin-bottom: 50px; }
-        .category-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
-        .category-title::before { content: "◆"; color: #000; font-size: 16px; }
-        .researcher-card { display: flex; gap: 30px; margin-bottom: 30px; align-items: flex-start; }
-        .res-img-box { width: 150px; height: 180px; border: 1px solid #000; flex-shrink: 0; overflow: hidden; }
+        .research-category { margin-bottom: 60px; }
+        .category-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px solid #ddd; color: #000; }
+        
+        .researcher-card { display: flex; gap: 30px; margin-bottom: 40px; align-items: flex-start; }
+        
+        /* ★ 테두리 제거됨 ★ */
+        .res-img-box { 
+            width: 150px; height: 190px; 
+            background-color: #f5f5f5; 
+            flex-shrink: 0; 
+            overflow: hidden; 
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 살짝 그림자 */
+        }
         .res-img { width: 100%; height: 100%; object-fit: cover; }
-        .res-info { flex-grow: 1; padding-top: 10px; }
-        .res-name { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
-        .res-detail p { margin: 5px 0; color: #444; font-size: 15px; }
+        
+        .res-info { flex-grow: 1; padding-top: 5px; }
+        .res-name { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #004094; }
+        .res-detail p { margin: 5px 0; color: #555; font-size: 15px; line-height: 1.6; }
 
         /* Alumni */
-        .alumni-list li { list-style: none; padding: 15px 0; border-bottom: 1px solid #eee; font-size: 16px; }
+        .alumni-list { padding: 0; }
+        .alumni-list li { list-style: none; padding: 15px 0; border-bottom: 1px solid #eee; font-size: 16px; color: #444; }
+        .alumni-list li::before { content: "•"; color: #004094; margin-right: 10px; font-weight: bold; }
 
         /* 푸터 */
         footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
@@ -86,9 +128,9 @@
                 <li><a href="index.html">Home</a></li>
                 <li class="dropdown"><a href="#">Members ▾</a>
                     <ul class="dropdown-content">
-                        <li><a href="#supervisor">Supervisor</a></li>
-                        <li><a href="#researcher">Researcher</a></li>
-                        <li><a href="#alumni">Alumni</a></li>
+                        <li><a href="#supervisor" onclick="showSection('supervisor')">Supervisor</a></li>
+                        <li><a href="#researcher" onclick="showSection('researcher')">Researcher</a></li>
+                        <li><a href="#alumni" onclick="showSection('alumni')">Alumni</a></li>
                     </ul>
                 </li>
                 <li><a href="research.html">Research</a></li>
@@ -109,7 +151,7 @@
     <div class="container">
         
         <section id="supervisor" class="member-section">
-            <div class="section-header">[Members/Supervisor]</div>
+            <div class="section-header">Supervisor</div>
             
             <div class="supervisor-layout">
                 <div class="sup-left">
@@ -117,12 +159,11 @@
                         <img src="images/members/supervisor/Prof1.png" alt="Professor" class="prof-img">
                     </div>
                     <div class="prof-contact-box">
-                        <strong>Contact</strong><br><br>
+                        <strong style="color:#004094; font-size:18px;">Contact</strong><br><br>
                         Number: 010-1111-1111<br>
                         E-mail: h.kang@kentech.ac.kr
                     </div>
                 </div>
-                
                 <div class="sup-right">
                     <div class="prof-bio-box">
 Thank you for visiting the website of the Power Semiconductor Research Lab at the Korea Institute of Energy Technology (KENTECH).
@@ -169,17 +210,17 @@ We look forward to your continued interest and support.
 
 
         <section id="researcher" class="member-section">
-            <div class="section-header">[Members/Researcher]</div>
+            <div class="section-header">Researcher</div>
 
             <div class="research-category">
                 <div class="category-title">Integrated Ph.D. Course</div>
                 
                 <div class="researcher-card">
                     <div class="res-img-box">
-                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 1" class="res-img">
+                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee" class="res-img">
                     </div>
                     <div class="res-info">
-                        <div class="res-name">Name: Yeonju Lee 1</div>
+                        <div class="res-name">Name: Yeonju Lee</div>
                         <div class="res-detail">
                             <p>Email: k23indra@kentech.ac.kr</p>
                             <p>Number: 010-1111-1111</p>
@@ -190,10 +231,10 @@ We look forward to your continued interest and support.
 
                 <div class="researcher-card">
                     <div class="res-img-box">
-                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 2" class="res-img">
+                        <img src="images/members/researcher/KYJ.png" alt="Yeonjun Kim" class="res-img">
                     </div>
                     <div class="res-info">
-                        <div class="res-name">Name: Yeonju Lee 2</div>
+                        <div class="res-name">Name: Yeonjun Kim</div>
                         <div class="res-detail">
                             <p>Email: k23indra@kentech.ac.kr</p>
                             <p>Number: 010-1111-1111</p>
@@ -208,10 +249,10 @@ We look forward to your continued interest and support.
                 
                 <div class="researcher-card">
                     <div class="res-img-box">
-                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 3" class="res-img">
+                        <img src="images/members/researcher/LHC.png" alt="Heechang Lee" class="res-img">
                     </div>
                     <div class="res-info">
-                        <div class="res-name">Name: Yeonju Lee 3</div>
+                        <div class="res-name">Name: Heechang Lee</div>
                         <div class="res-detail">
                             <p>Email: k23indra@kentech.ac.kr</p>
                             <p>Number: 010-1111-1111</p>
@@ -226,10 +267,10 @@ We look forward to your continued interest and support.
                 
                 <div class="researcher-card">
                     <div class="res-img-box">
-                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 4" class="res-img">
+                        <img src="images/members/researcher/KKK.png" alt="Keeyong Kim" class="res-img">
                     </div>
                     <div class="res-info">
-                        <div class="res-name">Name: Yeonju Lee 4</div>
+                        <div class="res-name">Name: Keeyong Kim</div>
                         <div class="res-detail">
                             <p>Email: k23indra@kentech.ac.kr</p>
                             <p>Number: 010-1111-1111</p>
@@ -242,7 +283,7 @@ We look forward to your continued interest and support.
 
 
         <section id="alumni" class="member-section">
-            <div class="section-header">[Members/Alumni]</div>
+            <div class="section-header">Alumni</div>
             <div class="category-title">Alumni</div>
             
             <ul class="alumni-list">
@@ -271,6 +312,40 @@ We look forward to your continued interest and support.
             </div>
         </div>
     </footer>
+
+    <script>
+        function showSection(id) {
+            // 모든 섹션 숨기기
+            document.querySelectorAll('.member-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            
+            // 선택한 섹션만 보이기
+            const target = document.getElementById(id);
+            if (target) {
+                target.classList.add('active');
+                // 화면 상단으로 부드럽게 이동
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // 페이지 로드 시 URL 해시 확인 (예: members.html#researcher)
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash && document.getElementById(hash)) {
+                showSection(hash);
+            } else {
+                // 해시가 없으면 기본값: Supervisor
+                showSection('supervisor');
+            }
+        });
+
+        // 뒤로가기/앞으로가기 등 URL 변경 감지
+        window.addEventListener('hashchange', () => {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) showSection(hash);
+        });
+    </script>
 
 </body>
 </html>
