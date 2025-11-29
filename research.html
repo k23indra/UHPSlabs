@@ -3,35 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Research - UHPS Lab</title>
+    <title>Research - KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        /* 공통 스타일 (메뉴 수정 완벽 적용) */
+        /* [공통 스타일 - Master Code 유지] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 50px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: #004094; } 
-        nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        
+        /* 헤더 */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
+        .logo-img-fixed { height: 40px; width: auto; object-fit: contain; display: block; }
+        nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
-        nav a:hover { color: #004094; }
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 2000; border-radius: 0 0 8px 8px; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a:hover { color: #004094; }
+
+        /* 드롭다운 */
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; }
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
-        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
+
+        /* [Research 페이지 전용 스타일] */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
         
-        /* 페이지 전용 스타일 */
-        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; min-height: 500px; }
-        h2.section-title { font-size: 32px; color: #004094; margin-bottom: 20px; border-bottom: 2px solid #004094; padding-bottom: 10px; }
+        /* 섹션 공통 */
+        .research-section { margin-bottom: 100px; }
+        
+        /* 섹션 헤더 (Members와 동일한 디자인) */
+        .section-header { 
+            font-size: 32px; 
+            font-weight: 700; 
+            color: #000; 
+            margin-bottom: 40px; 
+            padding-bottom: 15px; 
+            position: relative;
+            width: fit-content; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-header::before { content: "◆"; font-size: 24px; color: #000; } /* 다이아몬드 아이콘 추가 */
+        .section-header::after { content: ""; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background-color: #000; }
+
+        /* 레이아웃 박스 (이미지 + 텍스트) */
+        .res-layout { display: flex; gap: 40px; margin-bottom: 30px; align-items: flex-start; }
+        
+        /* 이미지 영역 */
+        .res-img-box { flex-shrink: 0; background-color: #fff; display: flex; align-items: flex-start; justify-content: center; }
+        
+        /* 세로로 긴 이미지 (TCAD용) */
+        .res-img-box.large { width: 350px; height: 500px; border: 1px solid #eee; } 
+        /* 일반 이미지 (Characterization용) */
+        .res-img-box.standard { width: 350px; height: 300px; border: 1px solid #eee; }
+
+        .res-img { width: 100%; height: 100%; object-fit: contain; /* 이미지가 잘리지 않고 다 보이게 */ }
+
+        /* 텍스트 영역 */
+        .res-text-group { flex-grow: 1; }
+        
+        /* 소제목 스타일 (- Process simulation 등) */
+        .sub-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; margin-top: 20px; color: #000; }
+        .sub-title:first-child { margin-top: 0; } /* 첫 번째 제목은 위 여백 제거 */
+        
+        /* 본문 텍스트 */
+        .desc-text { font-size: 16px; color: #444; line-height: 1.7; margin-bottom: 20px; text-align: justify; }
+        
+        /* 하단 긴 텍스트 (이미지 아래로 흐르는 텍스트) */
+        .full-width-text { margin-top: 20px; font-size: 16px; color: #444; line-height: 1.7; text-align: justify; }
+
+        /* 푸터 */
+        footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
+        .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
+        .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
+        .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
+        .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
+        .footer-info span { margin-right: 15px; }
     </style>
 </head>
 <body>
+
     <header>
-        <div class="logo"><a href="index.html">KENTECH UHPS</a></div>
+        <div class="logo">
+            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+        </div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
@@ -42,7 +104,8 @@
                         <li><a href="members.html#alumni">Alumni</a></li>
                     </ul>
                 </li>
-                <li><a href="research.html" style="color:#004094;">Research</a></li> <li><a href="publication.html">Publication</a></li>
+                <li><a href="research.html" style="color:#004094;">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
                 <li class="dropdown"><a href="#">Facilities ▾</a>
                     <ul class="dropdown-content">
                         <li><a href="facilities.html#office">Office</a></li>
@@ -56,16 +119,88 @@
         </nav>
     </header>
 
-    <section>
-        <h2 class="section-title">Research Areas</h2>
-        <p>연구 분야 내용을 정리 중입니다.</p>
-        <ul>
-            <li>8 types of power devices</li>
-            <li>Industrial power devices</li>
-            <li>Device/Circuit mixed mode simulation</li>
-        </ul>
-    </section>
+    <div class="container">
+        
+        <section class="research-section">
+            <div class="section-header">TCAD Simulation</div>
+            
+            <div class="res-layout">
+                <div class="res-img-box large">
+                    <img src="images/research/Research1.png" alt="TCAD Simulation" class="res-img">
+                </div>
+                
+                <div class="res-text-group">
+                    <div class="sub-title">- Process simulation</div>
+                    <p class="desc-text">
+                        We simulate actual semiconductor fabrication steps—such as ion implantation, diffusion, etching, and deposition—to generate accurate doping profiles and device structures. Key structural features, including pillar ripple formation and junction depth, are determined at this stage.
+                    </p>
 
-    <footer><p>Copyright ⓒ UHPS Lab. All rights reserved.</p></footer>
+                    <div class="sub-title">- Device simulation</div>
+                    <p class="desc-text">
+                        Based on the fabricated structure, we apply external bias conditions and solve the Poisson equation together with the carrier continuity equations. This enables a physics-based analysis of I–V characteristics, electric-field distribution, and impact ionization behavior. Beyond observing simple trends, our focus is on calibrating physical models—including mobility degradation, Shockley–Read–Hall recombination, and other advanced mechanisms—to ensure close agreement with real device behavior.
+                    </p>
+
+                    <div class="sub-title">- Mixed mode simulation</div>
+                    <p class="desc-text">
+                        Single-device characteristics alone cannot explain the transient behavior observed during high-speed switching.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="full-width-text">
+                This approach enables detailed analysis of gate ringing caused by the interaction between parasitic gate inductance, parasitic source inductance, and the device's input capacitance. It also allows extraction of dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance under realistic high-dV/dt switching conditions—phenomena that conventional LCR meters cannot observe due to depletion-region modulation. Furthermore, by simultaneously monitoring circuit-level waveforms and internal carrier distributions, this method provides deep insight into failure mechanisms such as shoot-through events and avalanche behavior that occur during inductive switching.
+            </div>
+        </section>
+
+
+        <section class="research-section">
+            <div class="section-header">Characterization</div>
+            
+            <div class="res-layout">
+                <div class="res-img-box standard">
+                    <img src="images/research/Research2.png" alt="Static Characterization" class="res-img">
+                </div>
+                <div class="res-text-group">
+                    <div class="sub-title">- Static Characterization</div>
+                    <p class="desc-text">
+                        Many studies rely solely on measuring I–V curves to check breakdown voltage and on-state resistance. Our work goes further by uncovering the physical origins that fundamentally determine device efficiency. We analyze not only the intrinsic material properties of silicon and wide-bandgap semiconductors such as SiC and GaN, but also structural effects including parasitic JFET behavior and depletion-width modulation. Through this limit analysis, we identify the true lower bound of the specific on-state resistance — the true material limit that governs ultimate device performance. In addition, our research demonstrates that simply shrinking the cell pitch does not guarantee improved performance. For superjunction devices, we determine the optimal balance between charge compensation and pillar width, enabling designs that maximize the figure of merit and push the theoretical boundaries of device efficiency.
+                    </p>
+                </div>
+            </div>
+
+            <div class="res-layout">
+                <div class="res-img-box standard">
+                    <img src="images/research/Research3.png" alt="Dynamic Characterization" class="res-img">
+                </div>
+                <div class="res-text-group">
+                    <div class="sub-title">- Dynamic Characterization</div>
+                    <p class="desc-text">
+                        In real power-electronics systems, device failure almost always occurs during switching transients. Our studies reveal that manufacturer-provided small-signal capacitance curves do not represent actual behavior under high-dV/dt and high-di/dt switching conditions. Using our mixed-mode simulation framework and a custom five-terminal measurement method, we separate and extract dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance as they vary during real switching events — information fundamentally inaccessible to conventional LCR meters. Furthermore, we show that gate ringing and voltage overshoot are not caused solely by parasitic inductances in the circuit. These phenomena also arise.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <span class="contact-label">CONTACT NUMBER</span> 
+                <span>|</span> 
+                <span>TEL. +82-61-330-9650</span> <span>|</span>
+                <span>FAX. +82-61-333-9626</span>
+            </div>
+            <hr class="footer-line">
+            <div class="footer-info">
+                <span>UHPS</span> <span>|</span>
+                <span>Prof : Hyemin Kang</span> <span>|</span>
+                <span>Address : Kentech-gil 21, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
+                <br>
+                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
 </body>
 </html>
