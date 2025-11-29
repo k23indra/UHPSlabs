@@ -32,49 +32,53 @@
         /* [Members 페이지 전용 스타일] */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
         
-        /* 섹션 기본 숨김 처리 (자바스크립트로 제어) */
-        .member-section { 
-            display: none; /* 기본적으로 안 보이게 설정 */
-            margin-bottom: 100px; 
-            animation: fadeIn 0.5s ease-in-out; /* 부드럽게 나타나는 효과 */
-        }
-        
-        /* 활성화된 섹션만 보이게 하는 클래스 */
+        /* 섹션 기본 숨김 처리 */
+        .member-section { display: none; margin-bottom: 100px; animation: fadeIn 0.5s ease-in-out; }
         .member-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ★ [수정됨] 섹션 헤더 스타일 (짧고 왼쪽 정렬된 선) ★ */
+        .section-header { 
+            font-size: 32px; 
+            font-weight: 700; 
+            color: #000; 
+            margin-bottom: 40px; 
+            padding-bottom: 15px; 
+            position: relative;
+            width: fit-content; /* 내용만큼만 너비 차지 */
         }
-
-        .section-header { font-size: 32px; font-weight: 700; color: #000; margin-bottom: 40px; border-bottom: 2px solid #000; padding-bottom: 15px; }
+        .section-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px; /* 짧은 선 길이 */
+            height: 3px; /* 선 두께 */
+            background-color: #000;
+        }
         
         /* Supervisor Layout */
         .supervisor-layout { display: flex; gap: 40px; margin-bottom: 40px; }
         .sup-left { width: 300px; flex-shrink: 0; }
         .sup-right { flex-grow: 1; }
         
-        /* ★ 테두리 제거됨 ★ */
-        .prof-img-box { 
-            width: 100%; height: 350px; 
-            background-color: #f9f9f9; /* 사진 없을 때 회색 배경 */
-            display: flex; align-items: center; justify-content: center; 
-            overflow: hidden; 
-            margin-bottom: 20px;
-            border-radius: 5px; /* 모서리 살짝 둥글게 */
-        }
+        .prof-img-box { width: 100%; height: 350px; background-color: #f9f9f9; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 20px; border-radius: 5px; }
         .prof-img { width: 100%; height: 100%; object-fit: cover; }
-        
-        /* ★ 테두리 제거됨 ★ */
         .prof-contact-box { padding: 10px 0; font-size: 15px; color: #444; }
-        
-        /* ★ 테두리 제거됨 ★ */
         .prof-bio-box { padding: 0; font-size: 16px; line-height: 1.8; text-align: justify; white-space: pre-line; color: #333; }
 
-        /* ★ 테두리 제거됨 ★ */
+        /* ★ [수정됨] 아이콘(■) 제거 ★ */
         .info-box { padding: 20px 0; margin-bottom: 20px; border-bottom: 1px solid #eee; }
-        .info-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; color: #004094; }
-        .info-title::before { content: "■"; color: #004094; font-size: 12px; }
+        .info-title { 
+            font-size: 22px; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            display: flex; 
+            align-items: center; 
+            gap: 10px; 
+            color: #004094; 
+        }
+        /* .info-title::before { content: "■"; ... }  <- 이 부분이 삭제됨 */
         
         .career-list li { list-style: none; margin-bottom: 10px; font-size: 16px; color: #444; }
         .pub-list li { list-style: none; margin-bottom: 15px; font-size: 15px; padding-left: 20px; position: relative; color: #444; }
@@ -85,18 +89,8 @@
         .category-title { font-size: 24px; font-weight: 700; margin-bottom: 30px; padding-bottom: 10px; border-bottom: 1px solid #ddd; color: #000; }
         
         .researcher-card { display: flex; gap: 30px; margin-bottom: 40px; align-items: flex-start; }
-        
-        /* ★ 테두리 제거됨 ★ */
-        .res-img-box { 
-            width: 150px; height: 190px; 
-            background-color: #f5f5f5; 
-            flex-shrink: 0; 
-            overflow: hidden; 
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* 살짝 그림자 */
-        }
+        .res-img-box { width: 150px; height: 190px; background-color: #f5f5f5; flex-shrink: 0; overflow: hidden; border-radius: 5px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .res-img { width: 100%; height: 100%; object-fit: cover; }
-        
         .res-info { flex-grow: 1; padding-top: 5px; }
         .res-name { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #004094; }
         .res-detail p { margin: 5px 0; color: #555; font-size: 15px; line-height: 1.6; }
@@ -315,32 +309,23 @@ We look forward to your continued interest and support.
 
     <script>
         function showSection(id) {
-            // 모든 섹션 숨기기
             document.querySelectorAll('.member-section').forEach(sec => {
                 sec.classList.remove('active');
             });
-            
-            // 선택한 섹션만 보이기
             const target = document.getElementById(id);
             if (target) {
                 target.classList.add('active');
-                // 화면 상단으로 부드럽게 이동
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
-
-        // 페이지 로드 시 URL 해시 확인 (예: members.html#researcher)
         window.addEventListener('load', () => {
             const hash = window.location.hash.replace('#', '');
             if (hash && document.getElementById(hash)) {
                 showSection(hash);
             } else {
-                // 해시가 없으면 기본값: Supervisor
                 showSection('supervisor');
             }
         });
-
-        // 뒤로가기/앞으로가기 등 URL 변경 감지
         window.addEventListener('hashchange', () => {
             const hash = window.location.hash.replace('#', '');
             if (hash) showSection(hash);
