@@ -158,19 +158,19 @@
                 padding: 0 30px; /* 좌우 여백 70px -> 30px 축소 */
             }
             .logo { gap: 15px; }
-            .logo-img-fixed { height: 38px; } /* 로고 살짝 축소 */
+            .logo-img-fixed { height: 32px; } /* 로고 살짝 축소 */
             
             nav > ul { gap: 15px; } /* 메뉴 간격 축소 */
-            nav > ul > li > a { font-size: 14px; } /* 글자 크기 축소 */
+            nav > ul > li > a { font-size: 12px; } /* 글자 크기 축소 */
         }
 
         /* 2단계: 화면이 900px 이하로 줄어들 때 (태블릿 세로) */
         /* -> 더 빡빡하므로 더 줄임 */
         @media screen and (max-width: 900px) {
             header { padding: 0 15px; }
-            .logo-img-fixed { height: 32px; } /* 로고 더 축소 */
+            .logo-img-fixed { height: 25px; } /* 로고 더 축소 */
             nav > ul { gap: 10px; }
-            nav > ul > li > a { font-size: 13px; } /* 글자 더 축소 */
+            nav > ul > li > a { font-size: 10px; } /* 글자 더 축소 */
         }
 
         /* 3단계: 화면이 768px 이하 (모바일) */
@@ -185,7 +185,7 @@
             .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
             
             /* 모바일에서는 로고를 다시 적당히 키워도 됨 (위아래 배치니까) */
-            .logo-img-fixed { height: 40px; } 
+            .logo-img-fixed { height: 30px; } 
             
             nav > ul { 
                 flex-wrap: wrap; 
