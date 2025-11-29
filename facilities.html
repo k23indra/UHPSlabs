@@ -3,34 +3,401 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Facilities - UHPS Lab</title>
+    <title>Facilities - KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+        /* [공통 스타일 - index.html과 동일] */
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 50px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: #004094; } 
-        nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
-        nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
-        nav a:hover { color: #004094; }
         
-        /* 드롭다운 스타일 (크고 넓게) */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 2000; border-radius: 0 0 8px 8px; }
+        /* 헤더 */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
+        .logo-img-fixed { height: 40px; width: auto; object-fit: contain; display: block; }
+        nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a:hover { color: #004094; }
+
+        /* 드롭다운 */
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; }
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
 
-        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
-        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #eee; }
-        h2.section-title { font-size: 32px; color: #004094; margin-bottom: 30px; text-align: center; }
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
-        .gallery-item { width: 100%; height: 250px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        /* [Facilities 전용 스타일] */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
+        
+        /* 탭 섹션 */
+        .fac-section { display: none; animation: fadeIn 0.5s ease-in-out; }
+        .fac-section.active { display: block; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* 섹션 헤더 */
+        .category-header { 
+            font-size: 28px; font-weight: 700; color: #000; 
+            margin-bottom: 30px; margin-top: 60px;
+            display: flex; align-items: center; gap: 10px;
+            border-bottom: 2px solid #000; padding-bottom: 10px; width: fit-content;
+        }
+        .category-header::before { content: "◆"; font-size: 20px; color: #000; }
+        .fac-section > .category-header:first-child { margin-top: 0; }
+
+        /* 갤러리 그리드 */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 30px; 
+            margin-bottom: 50px; 
+        }
+
+        /* 갤러리 아이템 */
+        .gallery-item { cursor: pointer; transition: transform 0.3s; }
+        .gallery-item:hover { transform: translateY(-5px); }
+        
+        .thumb-box {
+            width: 100%; height: 220px; 
+            border: 1px solid #ddd; 
+            background-color: #f9f9f9;
+            display: flex; align-items: center; justify-content: center;
+            overflow: hidden;
+            margin-bottom: 15px;
+        }
+        .thumb-img { width: 100%; height: 100%; object-fit: contain; }
+        .thumb-title { text-align: center; font-size: 18px; font-weight: 700; color: #000; }
+
+        /* 모달창 */
+        .modal {
+            display: none; position: fixed; z-index: 99999; 
+            left: 0; top: 0; width: 100%; height: 100%; 
+            background-color: rgba(0, 0, 0, 0.9); 
+            align-items: center; justify-content: center; flex-direction: column;
+        }
+        .modal-content-wrapper {
+            position: relative; max-width: 90%; max-height: 80%;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .modal-img { max-width: 100%; max-height: 80vh; object-fit: contain; border: 2px solid #fff; }
+        .modal-caption { color: #fff; font-size: 20px; margin-top: 20px; font-weight: 500; }
+        .close-btn {
+            position: absolute; top: 30px; right: 40px;
+            color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 100001;
+        }
+        .nav-btn {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            color: #fff; font-size: 50px; cursor: pointer; padding: 20px;
+            user-select: none; z-index: 100001; transition: color 0.3s;
+        }
+        .nav-btn:hover { color: #004094; }
+        .prev-btn { left: 50px; }
+        .next-btn { right: 50px; }
+
+        /* 푸터 */
+        footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
+        .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
+        .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
+        .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
+        .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
+        .footer-info span { margin-right: 15px; }
     </style>
 </head>
 <body>
+
     <header>
-        <div class="
+        <div class="logo">
+            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown"><a href="#">Members ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="members.html#supervisor">Supervisor</a></li>
+                        <li><a href="members.html#researcher">Researcher</a></li>
+                        <li><a href="members.html#alumni">Alumni</a></li>
+                    </ul>
+                </li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
+                <li class="dropdown"><a href="#">Facilities ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#office" onclick="showTab('office')">Office</a></li>
+                        <li><a href="#equipment" onclick="showTab('equipment')">Equipment</a></li>
+                    </ul>
+                </li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="#">Notice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <section id="office" class="fac-section">
+            <div class="category-header">Office</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('student_office')">
+                    <div class="thumb-box">
+                        <img src="images/facilities/Office/StudentOffice1_1.png" alt="Student Office" class="thumb-img">
+                    </div>
+                    <div class="thumb-title">Student Office</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('prof_office')">
+                    <div class="thumb-box">
+                        <img src="images/facilities/Office/ProfessorOffice1_1.png" alt="Professor Office" class="thumb-img">
+                    </div>
+                    <div class="thumb-title">Professor Office</div>
+                </div>
+            </div>
+
+            <div class="category-header">University</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('kentech_univ')">
+                    <div class="thumb-box">
+                        <img src="images/facilities/Office/KENTECH1_1.png" alt="KENTECH" class="thumb-img">
+                    </div>
+                    <div class="thumb-title">KENTECH</div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="equipment" class="fac-section">
+            
+            <div class="category-header">Steady-State Characterization</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('b1505')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/B1505_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">B1505</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('b1506')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/B1506_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">B1506</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('b1500')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/B1500_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">B1500</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('iptest')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/IPtest_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">IP test</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('basic_probestation')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/BasicProbestation_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Probestation</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('10kv_probestation')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/10kVProbestation_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">10kV Probestation</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('auto_probestation')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/AutoProbestation_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Auto Probestation</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('371a')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/371A_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">371A</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('370b')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/370B_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">370B</div>
+                </div>
+            </div>
+
+            <div class="category-header">Analysis</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('e4980')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/E4980_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">E4980</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('e4990')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/E4990_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">E4990</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('e4991')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/E4991_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">E4991</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('vhxx1')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/VHXX1_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">VHX-X1</div>
+                </div>
+            </div>
+            
+            <div class="category-header">Switching Characterization</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('oscilloscope')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/Oscilloscope_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Oscilloscope</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('function_generator')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/FunctionGenerator_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Function Generator</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('power_supply')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/PowerSupply_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">High Voltage Power Supply</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('ticp')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/TICP_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">TICP</div>
+                </div>
+            </div>
+
+            <div class="category-header">Reliability Test</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('ni_equip')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/ReliabilityTester1_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">NI EQUIP</div>
+                </div>
+            </div>
+
+            <div class="category-header">Software</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('tcad')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/TCAD_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">TCAD</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('pspice')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/PSPICE_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">PSPICE</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('origin')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/Origin_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Origin</div>
+                </div>
+            </div>
+
+        </section>
+
+    </div>
+
+    <div id="imageModal" class="modal">
+        <span class="close-btn" onclick="closeModal()">&times;</span>
+        <a class="nav-btn prev-btn" onclick="changeImage(-1)">&#10094;</a>
+        <div class="modal-content-wrapper">
+            <img id="modalImg" class="modal-img" src="" alt="Full Image">
+        </div>
+        <div id="modalCaption" class="modal-caption">Caption Text</div>
+        <a class="nav-btn next-btn" onclick="changeImage(1)">&#10095;</a>
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <span class="contact-label">CONTACT NUMBER</span> 
+                <span>|</span> 
+                <span>TEL. +82-61-330-9650</span> <span>|</span>
+                <span>FAX. +82-61-333-9626</span>
+            </div>
+            <hr class="footer-line">
+            <div class="footer-info">
+                <span>UHPS</span> <span>|</span>
+                <span>Prof : Hyemin Kang</span> <span>|</span>
+                <span>Address : Kentech-gil 21, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
+                <br>
+                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // =========================================================
+        // [1] 이미지 데이터 설정 (모두 5장씩 자동 할당)
+        // =========================================================
+        function generateItems(basePath, titleBase, count) {
+            let items = [];
+            for (let i = 1; i <= count; i++) {
+                items.push({ src: basePath + '_' + i + '.png', title: titleBase + ' ' + i });
+            }
+            return items;
+        }
+
+        // ★ 테스트 모드: 모든 장비에 대해 5장의 이미지(_1 ~ _5)를 찾도록 설정 ★
+        // 나중에 실제 사진 개수가 달라지면 숫자 '5'를 '3' 등으로 바꾸면 됩니다.
+        const galleryData = {
+            // --- OFFICE ---
+            'student_office': generateItems('images/facilities/Office/StudentOffice1', 'Student Office', 5),
+            'prof_office': generateItems('images/facilities/Office/ProfessorOffice1', 'Professor Office', 5),
+            'kentech_univ': generateItems('images/facilities/Office/KENTECH1', 'KENTECH', 5),
+
+            // --- EQUIPMENT ---
+            'b1505': generateItems('images/facilities/Equipment/B1505', 'B1505', 5),
+            'b1506': generateItems('images/facilities/Equipment/B1506', 'B1506', 5),
+            'b1500': generateItems('images/facilities/Equipment/B1500', 'B1500', 5),
+            'iptest': generateItems('images/facilities/Equipment/IPtest', 'IP test', 5),
+            'basic_probestation': generateItems('images/facilities/Equipment/BasicProbestation', 'Probestation', 5),
+            '10kv_probestation': generateItems('images/facilities/Equipment/10kVProbestation', '10kV Probestation', 5),
+            'auto_probestation': generateItems('images/facilities/Equipment/AutoProbestation', 'Auto Probestation', 5),
+            '371a': generateItems('images/facilities/Equipment/371A', '371A', 5),
+            '370b': generateItems('images/facilities/Equipment/370B', '370B', 5),
+            'e4980': generateItems('images/facilities/Equipment/E4980', 'E4980', 5),
+            'e4990': generateItems('images/facilities/Equipment/E4990', 'E4990', 5),
+            'e4991': generateItems('images/facilities/Equipment/E4991', 'E4991', 5),
+            'vhxx1': generateItems('images/facilities/Equipment/VHXX1', 'VHX-X1', 5),
+            'oscilloscope': generateItems('images/facilities/Equipment/Oscilloscope', 'Oscilloscope', 5),
+            'function_generator': generateItems('images/facilities/Equipment/FunctionGenerator', 'Function Generator', 5),
+            'power_supply': generateItems('images/facilities/Equipment/PowerSupply', 'High Voltage Power Supply', 5),
+            'ticp': generateItems('images/facilities/Equipment/TICP', 'TICP', 5),
+            'ni_equip': generateItems('images/facilities/Equipment/ReliabilityTester1', 'NI EQUIP', 5),
+            'tcad': generateItems('images/facilities/Equipment/TCAD', 'TCAD', 5),
+            'pspice': generateItems('images/facilities/Equipment/PSPICE', 'PSPICE', 5),
+            'origin': generateItems('images/facilities/Equipment/Origin', 'Origin', 5)
+        };
+
+        // 탭 기능
+        function showTab(tabId) {
+            document.querySelectorAll('.fac-section').forEach(sec => sec.classList.remove('active'));
+            const target = document.getElementById(tabId);
+            if(target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.replace('#', '');
+            if(hash && document.getElementById(hash)) showTab(hash);
+            else showTab('office');
+        });
+
+        // 모달 기능
+        let currentGroupKey = '';
+        let currentIndex = 0;
+
+        function openModal(groupKey) {
+            if(!galleryData[groupKey]) return;
+            currentGroupKey = groupKey;
+            currentIndex = 0;
+            updateModalContent();
+            document.getElementById('imageModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('imageModal').style.display = 'none';
+        }
+        function changeImage(dir) {
+            const images = galleryData[currentGroupKey];
+            currentIndex += dir;
+            if(currentIndex >= images.length) currentIndex = 0;
+            else if(currentIndex < 0) currentIndex = images.length - 1;
+            updateModalContent();
+        }
+        function updateModalContent() {
+            const item = galleryData[currentGroupKey][currentIndex];
+            document.getElementById('modalImg').src = item.src;
+            document.getElementById('modalCaption').innerText = item.title;
+        }
+        window.onclick = function(e) {
+            if(e.target == document.getElementById('imageModal')) closeModal();
+        }
+    </script>
+
+</body>
+</html>
