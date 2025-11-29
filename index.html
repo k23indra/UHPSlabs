@@ -20,6 +20,7 @@
             border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
             overflow: visible; 
+            white-space: nowrap; /* 줄바꿈 방지 */
         }
         
         .logo {
@@ -29,12 +30,13 @@
             gap: 20px;
         }
 
-        /* 로고 기본 크기 45px */
+        /* PC 기본 로고 크기 */
         .logo-img-fixed {
             height: 45px;   
             width: auto;    
             object-fit: contain; 
             display: block;
+            transition: height 0.3s; /* 크기 변할 때 부드럽게 */
         }
 
         nav > ul { 
@@ -46,7 +48,12 @@
         
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
         
-        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a { 
+            font-weight: 500; 
+            font-size: 16px; 
+            transition: all 0.3s; /* 크기/색상 변화 부드럽게 */
+            display: flex; align-items: center; height: 100%; 
+        }
         nav > ul > li > a:hover { color: #004094; }
 
         /* [드롭다운 메뉴] */
@@ -57,7 +64,7 @@
             left: 50%; 
             transform: translateX(-50%); 
             background-color: #fff; 
-            min-width: 260px; 
+            min-width: 200px; /* 최소 너비 살짝 줄임 (유연하게) */
             height: auto !important; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
             border: 1px solid #ddd; 
@@ -71,13 +78,14 @@
         .dropdown-content li { display: block; text-align: center; }
         
         .dropdown-content a { 
-            padding: 15px 0; 
+            padding: 15px 10px; /* 패딩 살짝 조정 */
             color: #444; 
-            font-size: 16px; 
+            font-size: 15px; /* 드롭다운 글자도 살짝 줄임 */
             font-weight: 500; 
             width: 100%; 
             display: block; 
             height: auto; 
+            box-sizing: border-box;
         }
         
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
@@ -123,22 +131,11 @@
         .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .icon-box { display: flex; flex-direction: column; align-items: center; padding: 20px; }
         
-        .icon-img {
-            height: 100px; 
-            width: auto;
-            margin-bottom: 20px;
-            object-fit: contain; 
-        }
+        .icon-img { height: 100px; width: auto; margin-bottom: 20px; object-fit: contain; }
 
         .icon-box h3 { 
-            font-size: 18px; 
-            font-weight: 700; 
-            margin-bottom: 15px; 
-            color: #000;
-            height: 60px; 
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
+            font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000;
+            height: 60px; display: flex; align-items: center; justify-content: center; 
         }
         
         .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
@@ -152,21 +149,51 @@
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
 
-        /* ★★★ [반응형 스타일 추가됨] ★★★ */
-        @media screen and (max-width: 1024px) {
-            header { padding: 0 30px; }
-            nav > ul { gap: 15px; }
-            nav > ul > li > a { font-size: 14px; }
+        /* ★★★ [반응형 스타일: 여기가 핵심입니다!] ★★★ */
+        
+        /* 1단계: 화면이 1200px 이하로 줄어들 때 (노트북, 태블릿 가로) */
+        /* -> 여백을 줄이고 글자와 로고 크기를 살짝 줄여서 겹치지 않게 함 */
+        @media screen and (max-width: 1200px) {
+            header { 
+                padding: 0 30px; /* 좌우 여백 70px -> 30px 축소 */
+            }
+            .logo { gap: 15px; }
+            .logo-img-fixed { height: 38px; } /* 로고 살짝 축소 */
+            
+            nav > ul { gap: 15px; } /* 메뉴 간격 축소 */
+            nav > ul > li > a { font-size: 14px; } /* 글자 크기 축소 */
         }
 
+        /* 2단계: 화면이 900px 이하로 줄어들 때 (태블릿 세로) */
+        /* -> 더 빡빡하므로 더 줄임 */
+        @media screen and (max-width: 900px) {
+            header { padding: 0 15px; }
+            .logo-img-fixed { height: 32px; } /* 로고 더 축소 */
+            nav > ul { gap: 10px; }
+            nav > ul > li > a { font-size: 13px; } /* 글자 더 축소 */
+        }
+
+        /* 3단계: 화면이 768px 이하 (모바일) */
+        /* -> 아예 위아래로 배치 변경 (기존 모바일 코드 유지) */
         @media screen and (max-width: 768px) {
-            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
-            .logo { height: auto; margin-bottom: 10px; }
+            header { 
+                height: auto; 
+                flex-direction: column; 
+                padding: 20px; 
+                gap: 20px; 
+            }
+            .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
             
-            /* 모바일 로고 25px로 축소 */
-            .logo-img-fixed { height: 25px; }
+            /* 모바일에서는 로고를 다시 적당히 키워도 됨 (위아래 배치니까) */
+            .logo-img-fixed { height: 40px; } 
             
-            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; }
+            nav > ul { 
+                flex-wrap: wrap; 
+                justify-content: center; 
+                gap: 10px 20px; 
+                width: 100%;
+            }
+            nav > ul > li > a { font-size: 14px; } /* 모바일에서 터치하기 좋게 글자 키움 */
             
             .main-banner { height: 400px; }
             .banner-text { width: 95%; }
@@ -186,8 +213,12 @@
 
     <header>
         <div class="logo">
-            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
-            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+            <a href="index.html">
+                <img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed">
+            </a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank">
+                <img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed">
+            </a>
         </div>
         <nav>
             <ul>
