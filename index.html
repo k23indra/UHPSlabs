@@ -16,40 +16,78 @@
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 0 70px; 
-            height: 100px; 
+            height: 120px; 
             border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
-            overflow: visible;
+            overflow: visible; /* 드롭다운이 잘리지 않게 함 */
         }
         
-        /* ★ 로고 컨테이너 수정 ★ */
         .logo {
             display: flex;
             align-items: center;
-            height: 100%; 
-            gap: 20px; /* 로고 사이 간격 */
+            height: 100px;
+            gap: 20px;
         }
 
-        /* ★ [핵심] 로고 이미지 강제 고정 스타일 ★ */
-        /* 두 로고 모두 이 클래스를 사용해서 높이를 억지로 맞춥니다 */
         .logo-img-fixed {
-            height: 40px;   /* 높이를 60px로 강제 고정 (원하는 크기로 숫자 조절 가능) */
-            width: auto;    /* 너비는 비율에 맞춰 알아서 변함 */
-            object-fit: contain; /* 찌그러짐 방지 */
+            height: 60px;   
+            width: auto;    
+            object-fit: contain; 
             display: block;
         }
 
-        nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        /* ★ [수정됨] 상단 메뉴바 스타일 수정 ★ */
+        /* 'nav ul' 대신 'nav > ul'을 써서 드롭다운에는 영향이 안 가게 함 */
+        nav > ul { 
+            display: flex; 
+            gap: 25px; 
+            height: 100%; 
+            align-items: center; 
+        }
+        
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
-        nav a:hover { color: #004094; }
+        
+        /* 상단 링크 */
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a:hover { color: #004094; }
 
-        /* [드롭다운 메뉴] */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
+        /* [드롭다운 메뉴 - 길이 제한 해제] */
+        .dropdown-content { 
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 50%; 
+            transform: translateX(-50%); 
+            background-color: #fff; 
+            min-width: 260px; 
+            /* ★ 높이 자동 설정 추가 (중요) ★ */
+            height: auto !important; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            border: 1px solid #ddd; 
+            border-top: 4px solid #004094; 
+            padding: 15px 0; 
+            z-index: 9999; 
+            border-radius: 0 0 8px 8px; 
+        }
+        
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
+        
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto;}
+        
+        /* 드롭다운 링크 */
+        .dropdown-content a { 
+            padding: 15px 0; 
+            color: #444; 
+            font-size: 16px; 
+            font-weight: 500; 
+            width: 100%; 
+            display: block; 
+            height: auto; /* 내용만큼 늘어나게 */
+        }
+        
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
+        
+        /* 호버 시 표시 */
         .dropdown:hover .dropdown-content { display: block; }
 
         /* [메인 배너] */
@@ -61,7 +99,6 @@
             display: block;
         }
         
-        /* 배경 이미지 스타일 */
         .main-logo-img {
             width: 100%;
             height: 100%; 
@@ -69,7 +106,6 @@
             object-position: center 35%; 
         }
         
-        /* 이미지 위 텍스트 오버레이 */
         .banner-text {
             position: absolute;
             top: 50%; left: 50%;
@@ -149,7 +185,6 @@
             <a href="index.html">
                 <img src="UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed">
             </a>
-            
             <a href="https://www.kentech.ac.kr/main.do" target="_blank">
                 <img src="KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed">
             </a>
@@ -182,7 +217,6 @@
 
     <section class="main-banner">
         <img src="Main_Body1.png" alt="Main Banner" class="main-logo-img">
-        
         <div class="banner-text">
             <h2>UHPS</h2>
             <p>Ultra-High Power Semiconductor Lab</p>
