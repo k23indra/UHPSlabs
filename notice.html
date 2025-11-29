@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice - KENTECH UHPS Lab</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* [공통 스타일 - Master Code 유지] */
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; margin: 0; }
+        
+        /* 헤더 */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
+        .logo-img-fixed { height: 40px; width: auto; object-fit: contain; display: block; }
+        nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a:hover { color: #004094; }
+
+        /* 드롭다운 */
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
+        .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
+        .dropdown-content li { display: block; text-align: center; }
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
+        .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
+        .dropdown:hover .dropdown-content { display: block; }
+
+        /* [Notice 페이지 전용 스타일] */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
+        
+        .page-title { 
+            text-align: center; font-size: 40px; font-weight: 500; margin-bottom: 60px; 
+        }
+
+        /* --- [1] 상세 보기 화면 (Detail View) --- */
+        #notice-detail {
+            display: none; 
+            margin-bottom: 80px;
+            border: 1px solid #ddd;
+            padding: 40px;
+            background-color: #fff;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .detail-header {
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        .detail-title { font-size: 24px; font-weight: 700; margin-bottom: 15px; }
+        .detail-info { font-size: 14px; color: #666; display: flex; gap: 20px; }
+        
+        .detail-content { 
+            font-size: 16px; line-height: 1.8; color: #333; 
+            white-space: pre-line; 
+            min-height: 200px;
+        }
+        .detail-close-btn {
+            display: inline-block; margin-top: 30px; padding: 10px 20px; background: #333; color: #fff; font-size: 14px; cursor: pointer; transition: background 0.3s;
+        }
+        .detail-close-btn:hover { background: #555; }
+
+        /* --- [2] 목록 화면 (List View) --- */
+        .list-header-info {
+            font-size: 14px; color: #666; margin-bottom: 10px;
+        }
+        
+        .notice-table {
+            width: 100%; border-collapse: collapse; border-top: 2px solid #333;
+        }
+        .notice-table th {
+            background-color: #f9f9f9; font-weight: 700; padding: 15px 0; border-bottom: 1px solid #ddd; color: #333;
+        }
+        .notice-table td {
+            padding: 15px 0; border-bottom: 1px solid #eee; text-align: center; color: #555; font-size: 15px;
+        }
+        
+        .notice-table td.subject { text-align: left; padding-left: 20px; color: #333; cursor: pointer; transition: color 0.2s; }
+        .notice-table td.subject:hover { color: #004094; font-weight: 500; text-decoration: underline; }
+
+        /* ★ [수정됨] 선택된 행 스타일 (Bold 처리) ★ */
+        .notice-table tr.selected-row td {
+            font-weight: 800; /* 굵게 */
+            color: #004094;   /* 파란색 강조 */
+            background-color: #f4f8fb; /* 아주 연한 배경색 */
+        }
+
+        /* 페이지네이션 */
+        .pagination { margin-top: 40px; text-align: center; font-size: 16px; }
+        .pagination span { margin: 0 5px; cursor: pointer; color: #888; }
+        .pagination span.active { color: #000; font-weight: bold; }
+        .pagination span:hover { text-decoration: underline; }
+
+        /* 푸터 */
+        footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
+        .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
+        .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
+        .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
+        .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
+        .footer-info span { margin-right: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown"><a href="#">Members ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="members.html#supervisor">Supervisor</a></li>
+                        <li><a href="members.html#researcher">Researcher</a></li>
+                        <li><a href="members.html#alumni">Alumni</a></li>
+                    </ul>
+                </li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
+                <li class="dropdown"><a href="#">Facilities ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="facilities.html#office">Office</a></li>
+                        <li><a href="facilities.html#equipment">Equipment</a></li>
+                    </ul>
+                </li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="notice.html" style="color:#004094;">Notice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <h2 class="page-title">Notice</h2>
+
+        <div id="notice-detail">
+            <div class="detail-header">
+                <div class="detail-title" id="view-title">제목</div>
+                <div class="detail-info">
+                    <span>작성자 : <span id="view-writer">관리자</span></span>
+                    <span>작성일 : <span id="view-date">2025-00-00</span></span>
+                </div>
+            </div>
+            <div class="detail-content" id="view-content">
+                내용
+            </div>
+            <div style="text-align: center;">
+                <div class="detail-close-btn" onclick="closeDetail()">목록으로 접기</div>
+            </div>
+        </div>
+
+        <div id="notice-list-container">
+            <div class="list-header-info">
+                Total <span id="total-count">0</span> 건 <span id="page-info">1 페이지</span>
+            </div>
+
+            <table class="notice-table">
+                <colgroup>
+                    <col style="width: 10%">
+                    <col style="width: 60%">
+                    <col style="width: 15%">
+                    <col style="width: 15%">
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>번호</th>
+                        <th>공지사항</th>
+                        <th>글쓴이</th>
+                        <th>날짜</th>
+                    </tr>
+                </thead>
+                <tbody id="notice-list-body">
+                    </tbody>
+            </table>
+
+            <div class="pagination" id="pagination"></div>
+        </div>
+
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <span class="contact-label">CONTACT NUMBER</span> 
+                <span>|</span> 
+                <span>TEL. +82-61-330-9650</span> <span>|</span>
+                <span>FAX. +82-61-333-9626</span>
+            </div>
+            <hr class="footer-line">
+            <div class="footer-info">
+                <span>UHPS</span> <span>|</span>
+                <span>Prof : Hyemin Kang</span> <span>|</span>
+                <span>Address : Kentech-gil 21, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
+                <br>
+                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ==========================================================
+        // [1] 공지사항 데이터 (수기 관리)
+        // ==========================================================
+        const noticeData = [
+            {
+                id: 2,
+                title: "대학원생 모집",
+                writer: "교수님",
+                date: "2025-12-31",
+                content: `- 한국에너지공과대학 (KENTECH)
+
+- 연구 분야:
+1) SiC, GaN, Si 전력 반도체 전주기 연구 (설계 시뮬레이션, 공정, 측정 및 분석)
+2) 전력 반도체 산업체 프로젝트 (한전 및 전력반도체 회사)
+3) 해외 대학과의 공동 연구 (영국 캠브리지, 미국 노스캐롤라이나, 버지니아텍 등)
+
+- 졸업 후 진로:
+1) 국가 연구소 (한전 전력연구원, 전기연구원, 세라믹 기술원 등),
+2) 국내 전력 반도체 전문 기업 (삼성전자, 현대 모비스, SK 실트론 등),
+3) 국외 전력반도체 전문 기업 (온세미컨덕터, 인피니언, 크리, 롬 등),
+4) 해외 연구소 및 대학 포스트 닥터 과정 (영국 캠브리지, 미국 노스캐롤라이나, 독일 프라운호퍼 연구소 등)
+
+- 대학원생 처우:
+1)등록금: 전액 지원 (한국에너지공과대학의 모든 대학원생의 등록금은 학교에서 지원합니다.)
+2)인건비: 국내 최고 수준 (석사: 160만원, 박사(통합과정은 2년차부터): 225만원)
+3)근무 시간: 없음. 출퇴근 내 맘대로, 재택 근무 내 맘대로, 본인 일만 책임감 있게
+4) 해외 학회 참석 및 해외 대학들과 협동 연구 기회
+5) 자유롭고 수평적인 연구 분위기
+
+- 지원 자격
+1) 반도체 및 전력 반도체 분야 관심이 있는 모든 공학 및 이학 계열
+2) 토익 750 이상
+3) 학점 우수자
+
+- 컨택 방법
+1) H.KANG@kentech.ac.kr 강혜민 교수에게 문의`
+            },
+            {
+                id: 1,
+                title: "2025 대학원생 모집",
+                writer: "관리자",
+                date: "2025-11-28",
+                content: `홈페이지 개선 중`
+            }
+        ];
+
+        // ==========================================================
+        // [2] 기능 로직
+        // ==========================================================
+        const itemsPerPage = 6;
+        let currentPage = 1;
+        let selectedId = null; // ★ 현재 선택된 글 번호 저장
+
+        function renderList(page) {
+            const tbody = document.getElementById('notice-list-body');
+            tbody.innerHTML = '';
+
+            const startIdx = (page - 1) * itemsPerPage;
+            const endIdx = startIdx + itemsPerPage;
+            const currentItems = noticeData.slice(startIdx, endIdx);
+
+            if (currentItems.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="padding: 30px;">등록된 공지사항이 없습니다.</td></tr>';
+                return;
+            }
+
+            currentItems.forEach(item => {
+                const tr = document.createElement('tr');
+                
+                // ★ 선택된 글이면 selected-row 클래스 추가 ★
+                if (item.id === selectedId) {
+                    tr.classList.add('selected-row');
+                }
+
+                tr.innerHTML = `
+                    <td>${item.id}</td>
+                    <td class="subject" onclick="showDetail(${item.id})">${item.title}</td>
+                    <td>${item.writer}</td>
+                    <td>${item.date}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            renderPagination();
+            document.getElementById('total-count').innerText = noticeData.length;
+            document.getElementById('page-info').innerText = currentPage + " 페이지";
+        }
+
+        function renderPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = '';
+            const totalPages = Math.ceil(noticeData.length / itemsPerPage);
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const span = document.createElement('span');
+                span.innerText = `-[${i}]-`;
+                if (i === currentPage) span.classList.add('active');
+                span.onclick = () => {
+                    currentPage = i;
+                    renderList(i);
+                };
+                pagination.appendChild(span);
+            }
+        }
+
+        function showDetail(id) {
+            const item = noticeData.find(d => d.id === id);
+            if (!item) return;
+
+            // ★ 선택된 ID 저장 및 리스트 갱신 (Bold 처리) ★
+            selectedId = id;
+            renderList(currentPage); // 리스트를 다시 그려서 스타일 적용
+
+            document.getElementById('view-title').innerText = item.title;
+            document.getElementById('view-writer').innerText = item.writer;
+            document.getElementById('view-date').innerText = item.date;
+            document.getElementById('view-content').innerText = item.content;
+
+            const detailSection = document.getElementById('notice-detail');
+            detailSection.style.display = 'block';
+            
+            // 상세 화면으로 스크롤 이동
+            window.scrollTo({ top: 100, behavior: 'smooth' });
+        }
+
+        function closeDetail() {
+            // ★ 닫을 때 선택 해제 ★
+            selectedId = null;
+            renderList(currentPage);
+
+            document.getElementById('notice-detail').style.display = 'none';
+        }
+
+        // 초기 실행
+        renderList(currentPage);
+
+    </script>
+
+</body>
+</html>
