@@ -38,13 +38,33 @@
         .fac-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* 섹션 헤더 */
+        /* ★ [수정됨] 섹션 헤더 (짧은 밑줄 적용) ★ */
         .category-header { 
-            font-size: 28px; font-weight: 700; color: #000; 
-            margin-bottom: 30px; margin-top: 60px;
-            display: flex; align-items: center; gap: 10px;
-            border-bottom: 2px solid #000; padding-bottom: 10px; width: fit-content;
+            font-size: 28px; 
+            font-weight: 700; 
+            color: #000; 
+            margin-bottom: 30px; 
+            margin-top: 60px;
+            display: flex; 
+            align-items: center; 
+            gap: 10px;
+            padding-bottom: 15px; /* 선과 글자 사이 간격 */
+            position: relative; /* 가상요소 기준점 */
+            width: fit-content;
+            /* border-bottom: 2px solid #000;  <-- 기존의 긴 줄 제거 */
         }
+        
+        /* 짧은 밑줄 생성 */
+        .category-header::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 50px; /* ★길이 고정 (파란색 부분만큼)★ */
+            height: 3px; /* 선 두께 */
+            background-color: #000;
+        }
+
         .category-header::before { content: "◆"; font-size: 20px; color: #000; }
         .fac-section > .category-header:first-child { margin-top: 0; }
 
@@ -145,15 +165,11 @@
             <div class="category-header">Office</div>
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openModal('student_office')">
-                    <div class="thumb-box">
-                        <img src="images/facilities/Office/StudentOffice1_1.png" alt="Student Office" class="thumb-img">
-                    </div>
+                    <div class="thumb-box"><img src="images/facilities/Office/StudentOffice1_1.png" alt="Student Office" class="thumb-img"></div>
                     <div class="thumb-title">Student Office</div>
                 </div>
                 <div class="gallery-item" onclick="openModal('prof_office')">
-                    <div class="thumb-box">
-                        <img src="images/facilities/Office/ProfessorOffice1_1.png" alt="Professor Office" class="thumb-img">
-                    </div>
+                    <div class="thumb-box"><img src="images/facilities/Office/ProfessorOffice1_1.png" alt="Professor Office" class="thumb-img"></div>
                     <div class="thumb-title">Professor Office</div>
                 </div>
             </div>
@@ -161,9 +177,7 @@
             <div class="category-header">University</div>
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openModal('kentech_univ')">
-                    <div class="thumb-box">
-                        <img src="images/facilities/Office/KENTECH1_1.png" alt="KENTECH" class="thumb-img">
-                    </div>
+                    <div class="thumb-box"><img src="images/facilities/Office/KENTECH1_1.png" alt="KENTECH" class="thumb-img"></div>
                     <div class="thumb-title">KENTECH</div>
                 </div>
             </div>
@@ -310,9 +324,7 @@
     </footer>
 
     <script>
-        // =========================================================
-        // [1] 이미지 데이터 설정 (모두 5장씩 자동 할당)
-        // =========================================================
+        // 5장씩 자동 생성 함수
         function generateItems(basePath, titleBase, count) {
             let items = [];
             for (let i = 1; i <= count; i++) {
@@ -321,8 +333,6 @@
             return items;
         }
 
-        // ★ 테스트 모드: 모든 장비에 대해 5장의 이미지(_1 ~ _5)를 찾도록 설정 ★
-        // 나중에 실제 사진 개수가 달라지면 숫자 '5'를 '3' 등으로 바꾸면 됩니다.
         const galleryData = {
             // --- OFFICE ---
             'student_office': generateItems('images/facilities/Office/StudentOffice1', 'Student Office', 5),
@@ -373,7 +383,7 @@
         let currentIndex = 0;
 
         function openModal(groupKey) {
-            if(!galleryData[groupKey]) return;
+            if(!galleryData[groupKey] || galleryData[groupKey].length === 0) return;
             currentGroupKey = groupKey;
             currentIndex = 0;
             updateModalContent();
