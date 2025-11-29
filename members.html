@@ -3,29 +3,274 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Members - UHPS Lab</title>
+    <title>Members - KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
-        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; scroll-behavior: smooth; }
+        /* [공통 스타일 - index.html과 동일 유지] */
+        body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 50px; height: 80px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; }
-        .logo { font-size: 24px; font-weight: bold; color: #004094; } 
-        nav ul { display: flex; gap: 25px; height: 100%; align-items: center; }
+        
+        /* 헤더 */
+        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
+        .logo-img-fixed { height: 40px; width: auto; object-fit: contain; display: block; }
+        nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
-        nav a:hover { color: #004094; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a:hover { color: #004094; }
 
-        /* 드롭다운 스타일 (크고 넓게) */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 2000; border-radius: 0 0 8px 8px; }
+        /* 드롭다운 */
+        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; }
+        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content { display: block; }
+
+        /* [Members 페이지 전용 스타일] */
+        .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; }
+        .member-section { margin-bottom: 100px; scroll-margin-top: 120px; }
+        .section-header { font-size: 32px; font-weight: 700; color: #000; margin-bottom: 40px; border-bottom: 2px solid #000; padding-bottom: 15px; }
         
-        footer { background: #333; color: #fff; padding: 40px 20px; text-align: center; margin-top: 50px; }
-        section { padding: 80px 20px; max-width: 1000px; margin: 0 auto; border-bottom: 1px solid #eee; }
-        h2.section-title { font-size: 32px; color: #004094; margin-bottom: 30px; border-left: 5px solid #004094; padding-left: 15px; }
-        .profile-card { display: flex; gap: 30px; margin-bottom: 30px; }
-        .profile-img { width: 150px; height: 200px;
+        /* Supervisor */
+        .supervisor-layout { display: flex; gap: 40px; margin-bottom: 40px; }
+        .sup-left { width: 300px; flex-shrink: 0; }
+        .sup-right { flex-grow: 1; }
+        .prof-img-box { width: 100%; height: 350px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 20px; }
+        .prof-img { width: 100%; height: 100%; object-fit: cover; }
+        .prof-contact-box { border: 1px solid #000; padding: 15px; font-size: 14px; }
+        .prof-bio-box { border: 1px solid #000; padding: 30px; height: 100%; box-sizing: border-box; font-size: 15px; line-height: 1.8; text-align: justify; white-space: pre-line; /* 줄바꿈 반영 */ }
+        
+        .info-box { border: 1px solid #000; padding: 30px; margin-bottom: 20px; }
+        .info-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; }
+        .info-title::before { content: "◆"; color: #000; font-size: 16px; }
+        .career-list li { list-style: none; margin-bottom: 8px; font-size: 15px; }
+        .pub-list li { list-style: none; margin-bottom: 15px; font-size: 14px; padding-left: 20px; position: relative; }
+        .pub-year { font-weight: bold; display: inline-block; width: 50px; vertical-align: top; }
+
+        /* Researcher */
+        .research-category { margin-bottom: 50px; }
+        .category-title { font-size: 22px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .category-title::before { content: "◆"; color: #000; font-size: 16px; }
+        .researcher-card { display: flex; gap: 30px; margin-bottom: 30px; align-items: flex-start; }
+        .res-img-box { width: 150px; height: 180px; border: 1px solid #000; flex-shrink: 0; overflow: hidden; }
+        .res-img { width: 100%; height: 100%; object-fit: cover; }
+        .res-info { flex-grow: 1; padding-top: 10px; }
+        .res-name { font-size: 20px; font-weight: 700; margin-bottom: 10px; }
+        .res-detail p { margin: 5px 0; color: #444; font-size: 15px; }
+
+        /* Alumni */
+        .alumni-list li { list-style: none; padding: 15px 0; border-bottom: 1px solid #eee; font-size: 16px; }
+
+        /* 푸터 */
+        footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
+        .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
+        .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
+        .contact-label { font-size: 18px; font-weight: 900; margin-right: 10px; }
+        .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
+        .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
+        .footer-info span { margin-right: 15px; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">
+            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="dropdown"><a href="#">Members ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="#supervisor">Supervisor</a></li>
+                        <li><a href="#researcher">Researcher</a></li>
+                        <li><a href="#alumni">Alumni</a></li>
+                    </ul>
+                </li>
+                <li><a href="research.html">Research</a></li>
+                <li><a href="publication.html">Publication</a></li>
+                <li class="dropdown"><a href="#">Facilities ▾</a>
+                    <ul class="dropdown-content">
+                        <li><a href="facilities.html#office">Office</a></li>
+                        <li><a href="facilities.html#equipment">Equipment</a></li>
+                    </ul>
+                </li>
+                <li><a href="education.html">Education</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="#">Notice</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="container">
+        
+        <section id="supervisor" class="member-section">
+            <div class="section-header">[Members/Supervisor]</div>
+            
+            <div class="supervisor-layout">
+                <div class="sup-left">
+                    <div class="prof-img-box">
+                        <img src="images/members/supervisor/Prof1.png" alt="Professor" class="prof-img">
+                    </div>
+                    <div class="prof-contact-box">
+                        <strong>Contact</strong><br><br>
+                        Number: 010-1111-1111<br>
+                        E-mail: h.kang@kentech.ac.kr
+                    </div>
+                </div>
+                
+                <div class="sup-right">
+                    <div class="prof-bio-box">
+Thank you for visiting the website of the Power Semiconductor Research Lab at the Korea Institute of Energy Technology (KENTECH).
+
+We are currently living in the era of an "Energy Revolution." The proliferation of electric vehicles (EVs), smart grids, and renewable energy systems demands more efficient and intelligent power control technologies.
+
+To meet these global demands, our lab aims to accelerate the realization of a Carbon-free future through advanced Power Semiconductor technologies that manage energy with maximum efficiency behind the scenes.
+
+Beyond merely creating high-performance semiconductors, we conduct our research with the pride that our technologies contribute to protecting the global environment and bridging the gap in energy inequality.
+
+Upholding KENTECH’s core values of "Excellence" and "Coexistence," we strive to become a "First Mover" in the global energy semiconductor sector through creative research that breaks conventional boundaries.
+
+We look forward to your continued interest and support.
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">Career</div>
+                <ul class="career-list">
+                    <li>2006 ~ 2010 Yonsei university BA</li>
+                    <li>2010 ~ 2012 Yonsei university MA</li>
+                    <li>2012 ~ 2015 Fairchild (Onsemi)</li>
+                    <li>2016 ~ 2019 Cambridge PH.D.</li>
+                    <li>2019 ~ 2019 Magnachip</li>
+                    <li>2020 ~ KENTECH Professor</li>
+                </ul>
+            </div>
+
+            <div class="info-box">
+                <div class="info-title">Publication</div>
+                <ul class="pub-list">
+                    <li><span class="pub-year">2025</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2024</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2023</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2022</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2021</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2020</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2019</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                    <li><span class="pub-year">2018</span> "On the Quasi-Saturation in State-of-the-Art Power MOSFETs," in IEEE Electron Device Letters, vol. 40, no. 5, pp. 754-756  doi: 10.1109/LED.2019.2896969</li>
+                </ul>
+            </div>
+        </section>
+
+
+        <section id="researcher" class="member-section">
+            <div class="section-header">[Members/Researcher]</div>
+
+            <div class="research-category">
+                <div class="category-title">Integrated Ph.D. Course</div>
+                
+                <div class="researcher-card">
+                    <div class="res-img-box">
+                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 1" class="res-img">
+                    </div>
+                    <div class="res-info">
+                        <div class="res-name">Name: Yeonju Lee 1</div>
+                        <div class="res-detail">
+                            <p>Email: k23indra@kentech.ac.kr</p>
+                            <p>Number: 010-1111-1111</p>
+                            <p>Duration: 2022 ~</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="researcher-card">
+                    <div class="res-img-box">
+                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 2" class="res-img">
+                    </div>
+                    <div class="res-info">
+                        <div class="res-name">Name: Yeonju Lee 2</div>
+                        <div class="res-detail">
+                            <p>Email: k23indra@kentech.ac.kr</p>
+                            <p>Number: 010-1111-1111</p>
+                            <p>Duration: 2022 ~</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="research-category">
+                <div class="category-title">Ph.D. / M.S. Course</div>
+                
+                <div class="researcher-card">
+                    <div class="res-img-box">
+                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 3" class="res-img">
+                    </div>
+                    <div class="res-info">
+                        <div class="res-name">Name: Yeonju Lee 3</div>
+                        <div class="res-detail">
+                            <p>Email: k23indra@kentech.ac.kr</p>
+                            <p>Number: 010-1111-1111</p>
+                            <p>Duration: 2022 ~</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="research-category">
+                <div class="category-title">Undergraduate Interns</div>
+                
+                <div class="researcher-card">
+                    <div class="res-img-box">
+                        <img src="images/members/researcher/LYJ.png" alt="Yeonju Lee 4" class="res-img">
+                    </div>
+                    <div class="res-info">
+                        <div class="res-name">Name: Yeonju Lee 4</div>
+                        <div class="res-detail">
+                            <p>Email: k23indra@kentech.ac.kr</p>
+                            <p>Number: 010-1111-1111</p>
+                            <p>Duration: 2022 ~</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="alumni" class="member-section">
+            <div class="section-header">[Members/Alumni]</div>
+            <div class="category-title">Alumni</div>
+            
+            <ul class="alumni-list">
+                <li>Sungjo Yoon, Master Course, 2023.03 ~ 2025.02</li>
+                <li>Sungjo Yoon, Master Course, 2023.03 ~ 2025.02</li>
+            </ul>
+        </section>
+
+    </div>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-contact">
+                <span class="contact-label">CONTACT NUMBER</span> 
+                <span>|</span> 
+                <span>TEL. +82-61-330-9650</span> <span>|</span>
+                <span>FAX. +82-61-333-9626</span>
+            </div>
+            <hr class="footer-line">
+            <div class="footer-info">
+                <span>UHPS</span> <span>|</span>
+                <span>Prof : Hyemin Kang</span> <span>|</span>
+                <span>Address : Kentech-gil 21, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
+                <br>
+                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
