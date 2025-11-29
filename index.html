@@ -29,6 +29,7 @@
             gap: 20px;
         }
 
+        /* 로고 기본 크기 45px */
         .logo-img-fixed {
             height: 45px;   
             width: auto;    
@@ -44,6 +45,7 @@
         }
         
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
+        
         nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
@@ -79,7 +81,10 @@
         }
         
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        .dropdown:hover .dropdown-content { display: block; }
+        
+        /* PC 호버 + 모바일 Active 동시 지원 */
+        .dropdown:hover .dropdown-content,
+        .dropdown.active .dropdown-content { display: block; }
 
         /* [메인 배너] */
         .main-banner {
@@ -125,17 +130,15 @@
             object-fit: contain; 
         }
 
-        /* ★ [핵심 수정] 제목 세로 중앙 정렬 ★ */
         .icon-box h3 { 
             font-size: 18px; 
             font-weight: 700; 
             margin-bottom: 15px; 
             color: #000;
-            
-            height: 60px; /* 제목 영역 높이 고정 */
-            display: flex; 
-            align-items: center; /* 세로 중앙 정렬 (이게 핵심!) */
-            justify-content: center; /* 가로 중앙 정렬 */
+            height: 60px; 
+            display: flex;
+            align-items: center; 
+            justify-content: center; 
         }
         
         .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
@@ -148,6 +151,35 @@
         .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
+
+        /* ★★★ [반응형 스타일 추가됨] ★★★ */
+        @media screen and (max-width: 1024px) {
+            header { padding: 0 30px; }
+            nav > ul { gap: 15px; }
+            nav > ul > li > a { font-size: 14px; }
+        }
+
+        @media screen and (max-width: 768px) {
+            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
+            .logo { height: auto; margin-bottom: 10px; }
+            
+            /* 모바일 로고 35px로 축소 */
+            .logo-img-fixed { height: 35px; }
+            
+            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; }
+            
+            .main-banner { height: 400px; }
+            .banner-text { width: 95%; }
+            .banner-text h2 { font-size: 36px; } 
+            .banner-text p { font-size: 16px; }
+            
+            .container, .what-we-do { padding: 50px 20px; }
+            .section-header h2 { font-size: 26px; }
+
+            .footer-contact { flex-direction: column; align-items: flex-start; gap: 10px; }
+            .footer-info span { display: block; margin-bottom: 5px; }
+            .footer-contact span:nth-child(even) { display: none; } 
+        }
     </style>
 </head>
 <body>
@@ -160,7 +192,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown"><a href="#">Members ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Members</a>
                     <ul class="dropdown-content">
                         <li><a href="members.html#supervisor">Supervisor</a></li>
                         <li><a href="members.html#researcher">Researcher</a></li>
@@ -169,7 +202,8 @@
                 </li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
-                <li class="dropdown"><a href="#">Facilities ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Facilities</a>
                     <ul class="dropdown-content">
                         <li><a href="facilities.html#office">Office</a></li>
                         <li><a href="facilities.html#equipment">Equipment</a></li>
@@ -234,6 +268,22 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parentLi = event.target.closest('.dropdown');
+            const isActive = parentLi.classList.contains('active');
+            document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            if (!isActive) parentLi.classList.add('active');
+        }
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            }
+        });
+    </script>
 
 </body>
 </html>
