@@ -6,7 +6,7 @@
     <title>KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     
-    <style>
+   <style>
         /* [기본 스타일] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
@@ -20,105 +20,47 @@
             border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
             overflow: visible; 
-            white-space: nowrap; /* 줄바꿈 방지 */
+            white-space: nowrap; 
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            height: 100px;
-            gap: 20px;
-        }
-
+        .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
+        
         /* PC 기본 로고 크기 */
         .logo-img-fixed {
             height: 45px;   
             width: auto;    
             object-fit: contain; 
             display: block;
-            transition: height 0.3s; /* 크기 변할 때 부드럽게 */
+            transition: height 0.3s; 
         }
 
-        nav > ul { 
-            display: flex; 
-            gap: 25px; 
-            height: 100%; 
-            align-items: center; 
-        }
-        
+        nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        
-        nav > ul > li > a { 
-            font-weight: 500; 
-            font-size: 16px; 
-            transition: all 0.3s; /* 크기/색상 변화 부드럽게 */
-            display: flex; align-items: center; height: 100%; 
-        }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
         /* [드롭다운 메뉴] */
         .dropdown-content { 
             display: none; 
-            position: absolute; 
-            top: 100%; 
-            left: 50%; 
-            transform: translateX(-50%); 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
             background-color: #fff; 
-            min-width: 200px; /* 최소 너비 살짝 줄임 (유연하게) */
+            min-width: 200px; 
             height: auto !important; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
-            border: 1px solid #ddd; 
-            border-top: 4px solid #004094; 
+            border: 1px solid #ddd; border-top: 4px solid #004094; 
             padding: 15px 0; 
-            z-index: 9999; 
-            border-radius: 0 0 8px 8px; 
+            z-index: 9999; border-radius: 0 0 8px 8px; 
         }
-        
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        
-        .dropdown-content a { 
-            padding: 15px 10px; /* 패딩 살짝 조정 */
-            color: #444; 
-            font-size: 15px; /* 드롭다운 글자도 살짝 줄임 */
-            font-weight: 500; 
-            width: 100%; 
-            display: block; 
-            height: auto; 
-            box-sizing: border-box;
-        }
-        
+        .dropdown-content a { padding: 15px 10px; color: #444; font-size: 15px; font-weight: 500; width: 100%; display: block; height: auto; box-sizing: border-box; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        
-        /* PC 호버 + 모바일 Active 동시 지원 */
-        .dropdown:hover .dropdown-content,
-        .dropdown.active .dropdown-content { display: block; }
+        .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
         /* [메인 배너] */
-        .main-banner {
-            width: 100%; 
-            height: 600px; 
-            position: relative; 
-            overflow: hidden;
-            display: block;
-        }
-        
-        .main-logo-img {
-            width: 100%;
-            height: 100%; 
-            object-fit: cover; 
-            object-position: center 35%; 
-        }
-        
-        .banner-text {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #fff;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.7); 
-            width: 90%;
-        }
+        .main-banner { width: 100%; height: 600px; position: relative; overflow: hidden; display: block; }
+        .main-logo-img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+        .banner-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.7); width: 90%; }
         .banner-text h2 { font-size: 60px; margin: 0; font-weight: 800; letter-spacing: -2px; }
         .banner-text p { font-size: 24px; font-weight: 400; margin-top: 10px; opacity: 0.9; }
 
@@ -130,14 +72,8 @@
 
         .icon-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
         .icon-box { display: flex; flex-direction: column; align-items: center; padding: 20px; }
-        
         .icon-img { height: 100px; width: auto; margin-bottom: 20px; object-fit: contain; }
-
-        .icon-box h3 { 
-            font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000;
-            height: 60px; display: flex; align-items: center; justify-content: center; 
-        }
-        
+        .icon-box h3 { font-size: 18px; font-weight: 700; margin-bottom: 15px; color: #000; height: 60px; display: flex; align-items: center; justify-content: center; }
         .icon-box p { font-size: 14px; color: #555; font-weight: 500; }
 
         /* [푸터] */
@@ -149,51 +85,28 @@
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
 
-        /* ★★★ [반응형 스타일: 여기가 핵심입니다!] ★★★ */
-        
-        /* 1단계: 화면이 1200px 이하로 줄어들 때 (노트북, 태블릿 가로) */
-        /* -> 여백을 줄이고 글자와 로고 크기를 살짝 줄여서 겹치지 않게 함 */
+        /* ★★★ [반응형 스타일] ★★★ */
         @media screen and (max-width: 1600px) {
-            header { 
-                padding: 0 30px; /* 좌우 여백 70px -> 30px 축소 */
-            }
+            header { padding: 0 30px; }
             .logo { gap: 15px; }
-            .logo-img-fixed { height: 30px; } /* 로고 살짝 축소 */
-            
-            nav > ul { gap: 15px; } /* 메뉴 간격 축소 */
-            nav > ul > li > a { font-size: 12px; } /* 글자 크기 축소 */
+            .logo-img-fixed { height: 30px; }
+            nav > ul { gap: 15px; }
+            nav > ul > li > a { font-size: 12px; }
         }
 
-        /* 2단계: 화면이 900px 이하로 줄어들 때 (태블릿 세로) */
-        /* -> 더 빡빡하므로 더 줄임 */
         @media screen and (max-width: 1100px) {
             header { padding: 0 15px; }
-            .logo-img-fixed { height: 25px; } /* 로고 더 축소 */
+            .logo-img-fixed { height: 25px; }
             nav > ul { gap: 10px; }
-            nav > ul > li > a { font-size: 10px; } /* 글자 더 축소 */
+            nav > ul > li > a { font-size: 10px; }
         }
 
-        /* 3단계: 화면이 768px 이하 (모바일) */
-        /* -> 아예 위아래로 배치 변경 (기존 모바일 코드 유지) */
         @media screen and (max-width: 870px) {
-            header { 
-                height: auto; 
-                flex-direction: column; 
-                padding: 20px; 
-                gap: 20px; 
-            }
+            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
             .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
-            
-            /* 모바일에서는 로고를 다시 적당히 키워도 됨 (위아래 배치니까) */
-            .logo-img-fixed { height: 25px; } 
-            
-            nav > ul { 
-                flex-wrap: wrap; 
-                justify-content: center; 
-                gap: 10px 20px; 
-                width: 100%;
-            }
-            nav > ul > li > a { font-size: 14px; } /* 모바일에서 터치하기 좋게 글자 키움 */
+            .logo-img-fixed { height: 25px; }
+            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
+            nav > ul > li > a { font-size: 14px; }
             
             .main-banner { height: 400px; }
             .banner-text { width: 95%; }
@@ -203,8 +116,18 @@
             .container, .what-we-do { padding: 50px 20px; }
             .section-header h2 { font-size: 26px; }
 
-            .footer-contact { flex-direction: column; align-items: flex-start; gap: 10px; }
-            .footer-info span { display: block; margin-bottom: 5px; }
+            /* ★ [수정됨] 푸터 모바일 폰트 축소 ★ */
+            .footer-contact { 
+                flex-direction: column; 
+                align-items: flex-start; 
+                gap: 8px; 
+                font-size: 14px; /* 16px -> 14px */
+            }
+            .footer-info span { 
+                display: block; 
+                margin-bottom: 3px; 
+                font-size: 11px; /* 13px -> 11px */
+            }
             .footer-contact span:nth-child(even) { display: none; } 
         }
     </style>
