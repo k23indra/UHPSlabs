@@ -8,27 +8,54 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [공통 스타일 - index.html과 동일] */
+        /* [공통 스타일 - Master Code 적용] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
         /* 헤더 */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 70px; 
+            height: 100px; 
+            border-bottom: 1px solid #ddd; background: #fff; 
+            position: sticky; top: 0; z-index: 1000;
+            overflow: visible; 
+            white-space: nowrap; 
+        }
+        
         .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
-        .logo-img-fixed { height: 45px; width: auto; object-fit: contain; display: block; }
+        
+        .logo-img-fixed {
+            height: 45px;   
+            width: auto;    
+            object-fit: contain; 
+            display: block;
+            transition: height 0.3s; 
+        }
+
         nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
         /* 드롭다운 */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
+        .dropdown-content { 
+            display: none; 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
+            background-color: #fff; 
+            min-width: 200px; 
+            height: auto !important; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            border: 1px solid #ddd; border-top: 4px solid #004094; 
+            padding: 15px 0; 
+            z-index: 9999; border-radius: 0 0 8px 8px; 
+        }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
+        .dropdown-content a { padding: 15px 10px; color: #444; font-size: 15px; font-weight: 500; width: 100%; display: block; height: auto; box-sizing: border-box; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
         /* [Facilities 전용 스타일] */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
@@ -38,33 +65,14 @@
         .fac-section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* ★ [수정됨] 섹션 헤더 (짧은 밑줄 적용) ★ */
+        /* 섹션 헤더 */
         .category-header { 
-            font-size: 28px; 
-            font-weight: 700; 
-            color: #000; 
-            margin-bottom: 30px; 
-            margin-top: 60px;
-            display: flex; 
-            align-items: center; 
-            gap: 10px;
-            padding-bottom: 15px; /* 선과 글자 사이 간격 */
-            position: relative; /* 가상요소 기준점 */
-            width: fit-content;
-            /* border-bottom: 2px solid #000;  <-- 기존의 긴 줄 제거 */
+            font-size: 28px; font-weight: 700; color: #000; 
+            margin-bottom: 30px; margin-top: 60px;
+            display: flex; align-items: center; gap: 10px;
+            padding-bottom: 15px; position: relative; width: fit-content;
         }
-        
-        /* 짧은 밑줄 생성 */
-        .category-header::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px; /* ★길이 고정 (파란색 부분만큼)★ */
-            height: 3px; /* 선 두께 */
-            background-color: #000;
-        }
-
+        .category-header::after { content: ""; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background-color: #000; }
         .category-header::before { content: "◆"; font-size: 20px; color: #000; }
         .fac-section > .category-header:first-child { margin-top: 0; }
 
@@ -125,6 +133,35 @@
         .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
+
+        /* ★★★ [반응형 스타일] ★★★ */
+        @media screen and (max-width: 1600px) {
+            header { padding: 0 30px; }
+            .logo { gap: 15px; }
+            .logo-img-fixed { height: 30px; }
+            nav > ul { gap: 15px; }
+            nav > ul > li > a { font-size: 12px; }
+        }
+        @media screen and (max-width: 1100px) {
+            header { padding: 0 15px; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { gap: 10px; }
+            nav > ul > li > a { font-size: 10px; }
+        }
+        @media screen and (max-width: 870px) {
+            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
+            .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
+            nav > ul > li > a { font-size: 14px; }
+            
+            .container { padding: 50px 20px; }
+
+            .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
+            .footer-contact span:nth-child(even) { display: none; }
+            .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
+            .footer-info span:nth-child(even) { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -137,7 +174,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown"><a href="#">Members ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Members</a>
                     <ul class="dropdown-content">
                         <li><a href="members.html#supervisor">Supervisor</a></li>
                         <li><a href="members.html#researcher">Researcher</a></li>
@@ -146,7 +184,8 @@
                 </li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
-                <li class="dropdown"><a href="#">Facilities ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)" style="color:#004094;">Facilities</a>
                     <ul class="dropdown-content">
                         <li><a href="#office" onclick="showTab('office')">Office</a></li>
                         <li><a href="#equipment" onclick="showTab('equipment')">Equipment</a></li>
@@ -182,7 +221,6 @@
                 </div>
             </div>
         </section>
-
 
         <section id="equipment" class="fac-section">
             
@@ -272,9 +310,9 @@
 
             <div class="category-header">Reliability Test</div>
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openModal('PCT')">
-                    <div class="thumb-box"><img src="images/facilities/Equipment/PCT_1.png" class="thumb-img"></div>
-                    <div class="thumb-title">PCT</div>
+                <div class="gallery-item" onclick="openModal('ni_equip')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/ReliabilityTester1_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">NI EQUIP</div>
                 </div>
             </div>
 
@@ -328,8 +366,7 @@
     </footer>
 
     <script>
-        // 5장씩 자동 생성 함수 (이름 옆 숫자를 초기 5로 다 지정해둠)
-        // 사진 숫자 정해지면 이름 옆 숫자 수정
+        // 5장씩 자동 생성 함수
         function generateItems(basePath, titleBase, count) {
             let items = [];
             for (let i = 1; i <= count; i++) {
@@ -413,6 +450,21 @@
         window.onclick = function(e) {
             if(e.target == document.getElementById('imageModal')) closeModal();
         }
+
+        // ★ 모바일 메뉴 토글 기능 추가 ★
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parentLi = event.target.closest('.dropdown');
+            const isActive = parentLi.classList.contains('active');
+            document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            if (!isActive) parentLi.classList.add('active');
+        }
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            }
+        });
     </script>
 
 </body>
