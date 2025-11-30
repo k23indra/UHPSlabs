@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [공통 스타일 - Master Code 유지] */
+        /* [공통 스타일 - Master Code 적용] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
@@ -21,95 +21,55 @@
             border-bottom: 1px solid #ddd; background: #fff; 
             position: sticky; top: 0; z-index: 1000;
             overflow: visible; 
+            white-space: nowrap; 
         }
         
-        .logo {
-            display: flex;
-            align-items: center;
-            height: 100px;
-            gap: 20px;
-        }
-
+        .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
+        
+        /* PC 기본 로고 크기 */
         .logo-img-fixed {
             height: 45px;   
             width: auto;    
             object-fit: contain; 
             display: block;
+            transition: height 0.3s; 
         }
 
-        /* 상단 메뉴바 */
-        nav > ul { 
-            display: flex; 
-            gap: 25px; 
-            height: 100%; 
-            align-items: center; 
-        }
-        
+        nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
         /* [드롭다운 메뉴] */
         .dropdown-content { 
             display: none; 
-            position: absolute; 
-            top: 100%; 
-            left: 50%; 
-            transform: translateX(-50%); 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
             background-color: #fff; 
-            min-width: 260px; 
+            min-width: 200px; 
             height: auto !important; 
             box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
-            border: 1px solid #ddd; 
-            border-top: 4px solid #004094; 
+            border: 1px solid #ddd; border-top: 4px solid #004094; 
             padding: 15px 0; 
-            z-index: 9999; 
-            border-radius: 0 0 8px 8px; 
+            z-index: 9999; border-radius: 0 0 8px 8px; 
         }
-        
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        
-        .dropdown-content a { 
-            padding: 15px 0; 
-            color: #444; 
-            font-size: 16px; 
-            font-weight: 500; 
-            width: 100%; 
-            display: block; 
-            height: auto; 
-        }
-        
+        .dropdown-content a { padding: 15px 10px; color: #444; font-size: 15px; font-weight: 500; width: 100%; display: block; height: auto; box-sizing: border-box; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
         /* [Gallery 페이지 전용 스타일] */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
         
-        /* 섹션(연도) 헤더 - 짧은 밑줄 스타일 적용 */
+        /* 섹션(연도) 헤더 */
         .category-header { 
-            font-size: 28px; 
-            font-weight: 700; 
-            color: #000; 
-            margin-bottom: 30px; 
-            margin-top: 60px;
+            font-size: 28px; font-weight: 700; color: #000; 
+            margin-bottom: 30px; margin-top: 60px; 
             display: flex; align-items: center; gap: 10px;
-            padding-bottom: 15px; 
-            position: relative; 
-            width: fit-content;
+            padding-bottom: 15px; position: relative; width: fit-content;
         }
-        .category-header::after {
-            content: "";
-            position: absolute;
-            left: 0;
-            bottom: 0;
-            width: 50px; /* 짧고 굵은 선 */
-            height: 3px; 
-            background-color: #000;
-        }
+        .category-header::after { content: ""; position: absolute; left: 0; bottom: 0; width: 50px; height: 3px; background-color: #000; }
         .category-header::before { content: "◆"; font-size: 20px; color: #000; }
-        
-        /* 첫 번째 섹션 상단 여백 제거 */
         .gallery-section:first-child .category-header { margin-top: 0; }
 
         /* 갤러리 그리드 */
@@ -133,37 +93,22 @@
             margin-bottom: 15px;
             border-radius: 5px;
         }
-        .thumb-img { width: 100%; height: 100%; object-fit: cover; /* 꽉 차게 */ }
+        .thumb-img { width: 100%; height: 100%; object-fit: cover; }
         .thumb-title { text-align: center; font-size: 18px; font-weight: 700; color: #000; }
         .thumb-desc { text-align: center; font-size: 14px; color: #666; margin-top: 5px; }
 
         /* 모달창 */
-        .modal {
-            display: none; position: fixed; z-index: 99999; 
-            left: 0; top: 0; width: 100%; height: 100%; 
-            background-color: rgba(0, 0, 0, 0.9); 
-            align-items: center; justify-content: center; flex-direction: column;
-        }
-        .modal-content-wrapper {
-            position: relative; max-width: 90%; max-height: 80%;
-            display: flex; align-items: center; justify-content: center;
-        }
+        .modal { display: none; position: fixed; z-index: 99999; left: 0; top: 0; width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9); align-items: center; justify-content: center; flex-direction: column; }
+        .modal-content-wrapper { position: relative; max-width: 90%; max-height: 80%; display: flex; align-items: center; justify-content: center; }
         .modal-img { max-width: 100%; max-height: 80vh; object-fit: contain; border: 2px solid #fff; }
         .modal-caption { color: #fff; font-size: 20px; margin-top: 20px; font-weight: 500; }
-        .close-btn {
-            position: absolute; top: 30px; right: 40px;
-            color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 100001;
-        }
-        .nav-btn {
-            position: absolute; top: 50%; transform: translateY(-50%);
-            color: #fff; font-size: 50px; cursor: pointer; padding: 20px;
-            user-select: none; z-index: 100001; transition: color 0.3s;
-        }
+        .close-btn { position: absolute; top: 30px; right: 40px; color: #fff; font-size: 40px; font-weight: bold; cursor: pointer; z-index: 100001; }
+        .nav-btn { position: absolute; top: 50%; transform: translateY(-50%); color: #fff; font-size: 50px; cursor: pointer; padding: 20px; user-select: none; z-index: 100001; transition: color 0.3s; }
         .nav-btn:hover { color: #004094; }
         .prev-btn { left: 50px; }
         .next-btn { right: 50px; }
 
-        /* 푸터 */
+        /* [푸터] */
         footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
         .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
@@ -171,6 +116,36 @@
         .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
+
+        /* ★★★ [반응형 스타일] ★★★ */
+        @media screen and (max-width: 1600px) {
+            header { padding: 0 30px; }
+            .logo { gap: 15px; }
+            .logo-img-fixed { height: 30px; }
+            nav > ul { gap: 15px; }
+            nav > ul > li > a { font-size: 12px; }
+        }
+        @media screen and (max-width: 1100px) {
+            header { padding: 0 15px; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { gap: 10px; }
+            nav > ul > li > a { font-size: 10px; }
+        }
+        @media screen and (max-width: 870px) {
+            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
+            .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
+            nav > ul > li > a { font-size: 14px; }
+            
+            .container { padding: 50px 20px; }
+
+            /* 푸터 모바일 */
+            .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
+            .footer-contact span:nth-child(even) { display: none; }
+            .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
+            .footer-info span:nth-child(even) { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -183,7 +158,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown"><a href="#">Members ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Members</a>
                     <ul class="dropdown-content">
                         <li><a href="members.html#supervisor">Supervisor</a></li>
                         <li><a href="members.html#researcher">Researcher</a></li>
@@ -192,7 +168,8 @@
                 </li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
-                <li class="dropdown"><a href="#">Facilities ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Facilities</a>
                     <ul class="dropdown-content">
                         <li><a href="facilities.html#office">Office</a></li>
                         <li><a href="facilities.html#equipment">Equipment</a></li>
@@ -266,7 +243,7 @@
                     <div class="thumb-box"><img src="images/gallery/2023/KIEE2023_1.png" class="thumb-img"></div>
                     <div class="thumb-title">KIEE2023</div>
                 </div>
-            </div>
+                </div>
         </section>
 
         <section class="gallery-section">
@@ -311,7 +288,7 @@
     </footer>
 
     <script>
-        // 5장씩 자동 생성 함수 (임의로 5장이라 함. 수정시 옆 5 숫자 변경 필요)
+        // 5장씩 자동 생성 함수
         function generateItems(basePath, titleBase, count) {
             let items = [];
             for (let i = 1; i <= count; i++) {
@@ -320,7 +297,7 @@
             return items;
         }
 
-        // ★ Gallery 데이터 설정 (폴더 경로: images/gallery/연도/...) ★
+        // ★ Gallery 데이터 설정 ★
         const galleryData = {
             // 2025
             'kentech_event_2025': generateItems('images/gallery/2025/KENTECHEVENT2025', 'KENTECH EVENT 2025', 5),
@@ -348,11 +325,7 @@
         let currentIndex = 0;
 
         function openModal(groupKey) {
-            // 데이터가 없어도 알림창 없이 무시하거나, 빈 배열 처리 (에러 방지)
-            if(!galleryData[groupKey]) {
-                // alert('이미지를 준비 중입니다.'); // 필요시 주석 해제
-                return;
-            }
+            if(!galleryData[groupKey]) return;
             currentGroupKey = groupKey;
             currentIndex = 0;
             updateModalContent();
@@ -376,6 +349,21 @@
         window.onclick = function(e) {
             if(e.target == document.getElementById('imageModal')) closeModal();
         }
+
+        // 모바일 메뉴 토글
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parentLi = event.target.closest('.dropdown');
+            const isActive = parentLi.classList.contains('active');
+            document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            if (!isActive) parentLi.classList.add('active');
+        }
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            }
+        });
     </script>
 
 </body>
