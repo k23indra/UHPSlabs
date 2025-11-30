@@ -137,8 +137,7 @@
             .container { padding: 50px 20px; }
             .section-header { font-size: 26px; }
 
-            /* ★ [모바일] Supervisor: float 해제하고 세로 배치 ★ */
-            .sup-left-float { float: none; width: 100%; margin-right: 0; margin-bottom: 30px; }
+
             
             /* 모바일에서는 사진을 너무 크게 보이지 않게 적당히 조절 (원하면 auto로 변경 가능) */
             .prof-img-box { width: 100%; max-width: 350px; margin: 0 auto 20px auto; } 
@@ -147,6 +146,10 @@
             .footer-contact span:nth-child(even) { display: none; }
             .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
             .footer-info span:nth-child(even) { display: none; }
+        }
+        @media screen and (max-width: 400px) {
+              /* ★ [모바일] Supervisor: float 해제하고 세로 배치 ★ */
+            .sup-left-float { float: none; width: 100%; margin-right: 0; margin-bottom: 30px; }
         }
     </style>
 </head>
