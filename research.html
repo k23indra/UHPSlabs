@@ -129,15 +129,19 @@
             
             .container { padding: 50px 20px; }
 
-            /* 모바일: 이미지 float 해제하고 세로 배치 */
-            .res-img-float, .res-img-float.large, .res-img-float.standard { 
-                float: none; width: 100%; max-width: 350px; margin: 0 auto 20px auto; 
-            }
+
 
             .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
             .footer-contact span:nth-child(even) { display: none; }
             .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
             .footer-info span:nth-child(even) { display: none; }
+        }
+
+          @media screen and (max-width: 650px) {
+            /* 모바일: 이미지 float 해제하고 세로 배치 */
+            .res-img-float, .res-img-float.large, .res-img-float.standard { 
+                float: none; width: 100%; max-width: 350px; margin: 0 auto 20px auto; 
+            }
         }
     </style>
 </head>
