@@ -8,27 +8,55 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [공통 스타일 - Master Code 유지] */
+        /* [공통 스타일 - Master Code 적용] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
-        /* 헤더 */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        /* [헤더] */
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 70px; 
+            height: 100px; 
+            border-bottom: 1px solid #ddd; background: #fff; 
+            position: sticky; top: 0; z-index: 1000;
+            overflow: visible; 
+            white-space: nowrap; 
+        }
+        
         .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
-        .logo-img-fixed { height: 45px; width: auto; object-fit: contain; display: block; }
+        
+        /* PC 기본 로고 크기 */
+        .logo-img-fixed {
+            height: 45px;   
+            width: auto;    
+            object-fit: contain; 
+            display: block;
+            transition: height 0.3s; 
+        }
+
         nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
-        /* 드롭다운 */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
+        /* [드롭다운 메뉴] */
+        .dropdown-content { 
+            display: none; 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
+            background-color: #fff; 
+            min-width: 200px; 
+            height: auto !important; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            border: 1px solid #ddd; border-top: 4px solid #004094; 
+            padding: 15px 0; 
+            z-index: 9999; border-radius: 0 0 8px 8px; 
+        }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
+        .dropdown-content a { padding: 15px 10px; color: #444; font-size: 15px; font-weight: 500; width: 100%; display: block; height: auto; box-sizing: border-box; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
         /* [Notice 페이지 전용 스타일] */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
@@ -37,7 +65,7 @@
             text-align: center; font-size: 40px; font-weight: 500; margin-bottom: 60px; 
         }
 
-        /* --- [1] 상세 보기 화면 (Detail View) --- */
+        /* 상세 보기 화면 */
         #notice-detail {
             display: none; 
             margin-bottom: 80px;
@@ -66,7 +94,7 @@
         }
         .detail-close-btn:hover { background: #555; }
 
-        /* --- [2] 목록 화면 (List View) --- */
+        /* 목록 화면 */
         .list-header-info {
             font-size: 14px; color: #666; margin-bottom: 10px;
         }
@@ -84,11 +112,11 @@
         .notice-table td.subject { text-align: left; padding-left: 20px; color: #333; cursor: pointer; transition: color 0.2s; }
         .notice-table td.subject:hover { color: #004094; font-weight: 500; text-decoration: underline; }
 
-        /* ★ [수정됨] 선택된 행 스타일 (Bold 처리) ★ */
+        /* 선택된 행 스타일 */
         .notice-table tr.selected-row td {
-            font-weight: 800; /* 굵게 */
-            color: #004094;   /* 파란색 강조 */
-            background-color: #f4f8fb; /* 아주 연한 배경색 */
+            font-weight: 800; 
+            color: #004094;   
+            background-color: #f4f8fb; 
         }
 
         /* 페이지네이션 */
@@ -97,7 +125,7 @@
         .pagination span.active { color: #000; font-weight: bold; }
         .pagination span:hover { text-decoration: underline; }
 
-        /* 푸터 */
+        /* [푸터] */
         footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
         .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
@@ -105,19 +133,57 @@
         .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
+
+        /* ★★★ [반응형 스타일] ★★★ */
+        @media screen and (max-width: 1600px) {
+            header { padding: 0 30px; }
+            .logo { gap: 15px; }
+            .logo-img-fixed { height: 30px; }
+            nav > ul { gap: 15px; }
+            nav > ul > li > a { font-size: 12px; }
+        }
+        @media screen and (max-width: 1100px) {
+            header { padding: 0 15px; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { gap: 10px; }
+            nav > ul > li > a { font-size: 10px; }
+        }
+        @media screen and (max-width: 870px) {
+            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
+            .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
+            nav > ul > li > a { font-size: 14px; }
+            
+            .container { padding: 50px 20px; }
+            
+            /* 모바일 폰트 축소 */
+            .notice-table th, .notice-table td { font-size: 13px; padding: 10px 0; }
+            .page-title { font-size: 30px; margin-bottom: 40px; }
+
+            .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
+            .footer-contact span:nth-child(even) { display: none; }
+            .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
+            .footer-info span:nth-child(even) { display: none; }
+        }
     </style>
 </head>
 <body>
 
     <header>
         <div class="logo">
-            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
-            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+            <a href="index.html">
+                <img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed">
+            </a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank">
+                <img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed">
+            </a>
         </div>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown"><a href="#">Members ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Members</a>
                     <ul class="dropdown-content">
                         <li><a href="members.html#supervisor">Supervisor</a></li>
                         <li><a href="members.html#researcher">Researcher</a></li>
@@ -126,7 +192,8 @@
                 </li>
                 <li><a href="research.html">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
-                <li class="dropdown"><a href="#">Facilities ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Facilities</a>
                     <ul class="dropdown-content">
                         <li><a href="facilities.html#office">Office</a></li>
                         <li><a href="facilities.html#equipment">Equipment</a></li>
@@ -200,7 +267,7 @@
             <div class="footer-info">
                 <span>UHPS</span> <span>|</span>
                 <span>Prof : Hyemin Kang</span> <span>|</span>
-                <span>Address : 21 KENTECH-gil, Naju-si, Jeollanam-do, 58330, Republic of Korea (ZIP: 58330)</span>
+                <span>Address : 21 KENTECH-gil, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
                 <br>
                 <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
             </div>
@@ -209,7 +276,7 @@
 
     <script>
         // ==========================================================
-        // [1] 공지사항 데이터 (수기 관리)
+        // [1] 공지사항 데이터
         // ==========================================================
         const noticeData = [
             {
@@ -264,7 +331,7 @@
         // ==========================================================
         const itemsPerPage = 6;
         let currentPage = 1;
-        let selectedId = null; // ★ 현재 선택된 글 번호 저장
+        let selectedId = null; 
 
         function renderList(page) {
             const tbody = document.getElementById('notice-list-body');
@@ -281,12 +348,9 @@
 
             currentItems.forEach(item => {
                 const tr = document.createElement('tr');
-                
-                // ★ 선택된 글이면 selected-row 클래스 추가 ★
                 if (item.id === selectedId) {
                     tr.classList.add('selected-row');
                 }
-
                 tr.innerHTML = `
                     <td>${item.id}</td>
                     <td class="subject" onclick="showDetail(${item.id})">${item.title}</td>
@@ -322,9 +386,8 @@
             const item = noticeData.find(d => d.id === id);
             if (!item) return;
 
-            // ★ 선택된 ID 저장 및 리스트 갱신 (Bold 처리) ★
             selectedId = id;
-            renderList(currentPage); // 리스트를 다시 그려서 스타일 적용
+            renderList(currentPage);
 
             document.getElementById('view-title').innerText = item.title;
             document.getElementById('view-writer').innerText = item.writer;
@@ -334,21 +397,32 @@
             const detailSection = document.getElementById('notice-detail');
             detailSection.style.display = 'block';
             
-            // 상세 화면으로 스크롤 이동
             window.scrollTo({ top: 100, behavior: 'smooth' });
         }
 
         function closeDetail() {
-            // ★ 닫을 때 선택 해제 ★
             selectedId = null;
             renderList(currentPage);
-
             document.getElementById('notice-detail').style.display = 'none';
         }
 
         // 초기 실행
         renderList(currentPage);
 
+        // ★ 모바일 메뉴 토글 스크립트 ★
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parentLi = event.target.closest('.dropdown');
+            const isActive = parentLi.classList.contains('active');
+            document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            if (!isActive) parentLi.classList.add('active');
+        }
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            }
+        });
     </script>
 
 </body>
