@@ -7,75 +7,95 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
     
     <style>
-        /* [공통 스타일 - Master Code 유지] */
+        /* [공통 스타일 - Master Code 적용] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
         /* 헤더 */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; }
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 70px; 
+            height: 100px; 
+            border-bottom: 1px solid #ddd; background: #fff; 
+            position: sticky; top: 0; z-index: 1000;
+            overflow: visible; 
+            white-space: nowrap; 
+        }
+        
         .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
-        .logo-img-fixed { height: 45px; width: auto; object-fit: contain; display: block; }
+        .logo-img-fixed { height: 45px; width: auto; object-fit: contain; display: block; transition: height 0.3s; }
+        
         nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
-        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: color 0.3s; display: flex; align-items: center; height: 100%; }
+        nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
         /* 드롭다운 */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 260px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
+        .dropdown-content { 
+            display: none; 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
+            background-color: #fff; 
+            min-width: 200px; 
+            height: auto !important; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            border: 1px solid #ddd; border-top: 4px solid #004094; 
+            padding: 15px 0; 
+            z-index: 9999; border-radius: 0 0 8px 8px; 
+        }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
-        .dropdown-content a { padding: 15px 0; color: #444; font-size: 16px; font-weight: 500; width: 100%; display: block; height: auto; }
+        .dropdown-content a { padding: 15px 10px; color: #444; font-size: 15px; font-weight: 500; width: 100%; display: block; height: auto; box-sizing: border-box; }
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
-        .dropdown:hover .dropdown-content { display: block; }
+        .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
         /* [Research 페이지 전용 스타일] */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
         
-        /* 섹션 공통 */
         .research-section { margin-bottom: 100px; }
         
-        /* 섹션 헤더 (Members와 동일한 디자인) */
+        /* 섹션 헤더 */
         .section-header { 
-            font-size: 32px; 
-            font-weight: 700; 
-            color: #000; 
-            margin-bottom: 40px; 
-            padding-bottom: 15px; 
-            position: relative;
-            width: fit-content; 
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 32px; font-weight: 700; color: #000; 
+            margin-bottom: 40px; padding-bottom: 15px; 
+            position: relative; width: fit-content; 
+            display: flex; align-items: center; gap: 10px;
         }
-        .section-header::before { content: "◆"; font-size: 24px; color: #000; } /* 다이아몬드 아이콘 추가 */
+        .section-header::before { content: "◆"; font-size: 24px; color: #000; }
         .section-header::after { content: ""; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background-color: #000; }
 
-        /* 레이아웃 박스 (이미지 + 텍스트) */
-        .res-layout { display: flex; gap: 40px; margin-bottom: 30px; align-items: flex-start; }
-        
-        /* 이미지 영역 */
-        .res-img-box { flex-shrink: 0; background-color: #fff; display: flex; align-items: flex-start; justify-content: center; }
-        
-        /* 세로로 긴 이미지 (TCAD용) */
-        .res-img-box.large { width: 350px; height: 500px; border: 1px solid #eee; } 
-        /* 일반 이미지 (Characterization용) */
-        .res-img-box.standard { width: 350px; height: 300px; border: 1px solid #eee; }
+        /* ★ [수정됨] Research 레이아웃: Float 방식 적용 ★ */
+        .research-block {
+            overflow: hidden; /* float 자식 높이 인식 */
+        }
 
-        .res-img { width: 100%; height: 100%; object-fit: contain; /* 이미지가 잘리지 않고 다 보이게 */ }
-
-        /* 텍스트 영역 */
-        .res-text-group { flex-grow: 1; }
+        /* 왼쪽 이미지 박스 (둥둥 띄우기) */
+        .res-img-float { 
+            float: left;
+            margin-right: 40px;
+            margin-bottom: 20px;
+            border: 1px solid #eee;
+            background-color: #fff;
+            display: flex; align-items: center; justify-content: center;
+        }
         
-        /* 소제목 스타일 (- Process simulation 등) */
+        /* 이미지 크기 설정 (종류별) */
+        .res-img-float.large { width: 350px; height: auto; }   /* TCAD용: 높이 자동 */
+        .res-img-float.standard { width: 350px; height: auto; } /* 일반용: 높이 자동 */
+
+        .res-img { width: 100%; height: auto; display: block; }
+
+        /* 텍스트 스타일 */
         .sub-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; margin-top: 20px; color: #000; }
-        .sub-title:first-child { margin-top: 0; } /* 첫 번째 제목은 위 여백 제거 */
+        .sub-title:first-child { margin-top: 0; } /* 맨 처음 제목은 여백 제거 */
         
-        /* 본문 텍스트 */
-        .desc-text { font-size: 16px; color: #444; line-height: 1.7; margin-bottom: 20px; text-align: justify; }
+        /* 본문 텍스트 (이미지 옆 -> 아래로 흐름) */
+        .desc-text { 
+            font-size: 16px; color: #444; line-height: 1.7; 
+            margin-bottom: 20px; text-align: justify; 
+        }
         
-        /* 하단 긴 텍스트 (이미지 아래로 흐르는 텍스트) */
-        .full-width-text { margin-top: 20px; font-size: 16px; color: #444; line-height: 1.7; text-align: justify; }
+        .full-width-text { margin-top: 20px; font-size: 16px; color: #444; line-height: 1.7; text-align: justify; clear: both; }
 
         /* 푸터 */
         footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
@@ -85,6 +105,40 @@
         .footer-line { height: 1px; background-color: #ddd; border: none; margin: 20px 0; }
         .footer-info { line-height: 1.8; color: #555; font-weight: 500; }
         .footer-info span { margin-right: 15px; }
+
+        /* ★★★ [반응형 스타일] ★★★ */
+        @media screen and (max-width: 1600px) {
+            header { padding: 0 30px; }
+            .logo { gap: 15px; }
+            .logo-img-fixed { height: 30px; }
+            nav > ul { gap: 15px; }
+            nav > ul > li > a { font-size: 12px; }
+        }
+        @media screen and (max-width: 1100px) {
+            header { padding: 0 15px; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { gap: 10px; }
+            nav > ul > li > a { font-size: 10px; }
+        }
+        @media screen and (max-width: 870px) {
+            header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
+            .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
+            .logo-img-fixed { height: 25px; }
+            nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
+            nav > ul > li > a { font-size: 14px; }
+            
+            .container { padding: 50px 20px; }
+
+            /* 모바일: 이미지 float 해제하고 세로 배치 */
+            .res-img-float, .res-img-float.large, .res-img-float.standard { 
+                float: none; width: 100%; max-width: 350px; margin: 0 auto 20px auto; 
+            }
+
+            .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
+            .footer-contact span:nth-child(even) { display: none; }
+            .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
+            .footer-info span:nth-child(even) { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -97,7 +151,8 @@
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li class="dropdown"><a href="#">Members ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Members</a>
                     <ul class="dropdown-content">
                         <li><a href="members.html#supervisor">Supervisor</a></li>
                         <li><a href="members.html#researcher">Researcher</a></li>
@@ -106,7 +161,8 @@
                 </li>
                 <li><a href="research.html" style="color:#004094;">Research</a></li>
                 <li><a href="publication.html">Publication</a></li>
-                <li class="dropdown"><a href="#">Facilities ▾</a>
+                <li class="dropdown">
+                    <a href="javascript:void(0)" onclick="toggleDropdown(event)">Facilities</a>
                     <ul class="dropdown-content">
                         <li><a href="facilities.html#office">Office</a></li>
                         <li><a href="facilities.html#equipment">Equipment</a></li>
@@ -124,31 +180,31 @@
         <section class="research-section">
             <div class="section-header">TCAD Simulation</div>
             
-            <div class="res-layout">
-                <div class="res-img-box large">
+            <div class="research-block clearfix">
+                <div class="res-img-float large">
                     <img src="images/research/Research1.png" alt="TCAD Simulation" class="res-img">
                 </div>
                 
-                <div class="res-text-group">
+                <div class="res-text-wrapper">
                     <div class="sub-title">- Process simulation</div>
-                    <p class="desc-text">
+                    <div class="desc-text">
                         We simulate actual semiconductor fabrication steps—such as ion implantation, diffusion, etching, and deposition—to generate accurate doping profiles and device structures. Key structural features, including pillar ripple formation and junction depth, are determined at this stage.
-                    </p>
+                    </div>
 
                     <div class="sub-title">- Device simulation</div>
-                    <p class="desc-text">
+                    <div class="desc-text">
                         Based on the fabricated structure, we apply external bias conditions and solve the Poisson equation together with the carrier continuity equations. This enables a physics-based analysis of I–V characteristics, electric-field distribution, and impact ionization behavior. Beyond observing simple trends, our focus is on calibrating physical models—including mobility degradation, Shockley–Read–Hall recombination, and other advanced mechanisms—to ensure close agreement with real device behavior.
-                    </p>
+                    </div>
 
                     <div class="sub-title">- Mixed mode simulation</div>
-                    <p class="desc-text">
+                    <div class="desc-text">
                         Single-device characteristics alone cannot explain the transient behavior observed during high-speed switching.
-                    </p>
+                    </div>
                 </div>
-            </div>
-            
-            <div class="full-width-text">
-                This approach enables detailed analysis of gate ringing caused by the interaction between parasitic gate inductance, parasitic source inductance, and the device's input capacitance. It also allows extraction of dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance under realistic high-dV/dt switching conditions—phenomena that conventional LCR meters cannot observe due to depletion-region modulation. Furthermore, by simultaneously monitoring circuit-level waveforms and internal carrier distributions, this method provides deep insight into failure mechanisms such as shoot-through events and avalanche behavior that occur during inductive switching.
+                
+                <div class="desc-text">
+                    This approach enables detailed analysis of gate ringing caused by the interaction between parasitic gate inductance, parasitic source inductance, and the device's input capacitance. It also allows extraction of dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance under realistic high-dV/dt switching conditions—phenomena that conventional LCR meters cannot observe due to depletion-region modulation. Furthermore, by simultaneously monitoring circuit-level waveforms and internal carrier distributions, this method provides deep insight into failure mechanisms such as shoot-through events and avalanche behavior that occur during inductive switching.
+                </div>
             </div>
         </section>
 
@@ -156,27 +212,27 @@
         <section class="research-section">
             <div class="section-header">Characterization</div>
             
-            <div class="res-layout">
-                <div class="res-img-box standard">
+            <div class="research-block clearfix" style="margin-bottom: 50px;">
+                <div class="res-img-float standard">
                     <img src="images/research/Research2.png" alt="Static Characterization" class="res-img">
                 </div>
-                <div class="res-text-group">
+                <div class="res-text-wrapper">
                     <div class="sub-title">- Static Characterization</div>
-                    <p class="desc-text">
+                    <div class="desc-text">
                         Many studies rely solely on measuring I–V curves to check breakdown voltage and on-state resistance. Our work goes further by uncovering the physical origins that fundamentally determine device efficiency. We analyze not only the intrinsic material properties of silicon and wide-bandgap semiconductors such as SiC and GaN, but also structural effects including parasitic JFET behavior and depletion-width modulation. Through this limit analysis, we identify the true lower bound of the specific on-state resistance — the true material limit that governs ultimate device performance. In addition, our research demonstrates that simply shrinking the cell pitch does not guarantee improved performance. For superjunction devices, we determine the optimal balance between charge compensation and pillar width, enabling designs that maximize the figure of merit and push the theoretical boundaries of device efficiency.
-                    </p>
+                    </div>
                 </div>
             </div>
 
-            <div class="res-layout">
-                <div class="res-img-box standard">
+            <div class="research-block clearfix">
+                <div class="res-img-float standard">
                     <img src="images/research/Research3.png" alt="Dynamic Characterization" class="res-img">
                 </div>
-                <div class="res-text-group">
+                <div class="res-text-wrapper">
                     <div class="sub-title">- Dynamic Characterization</div>
-                    <p class="desc-text">
+                    <div class="desc-text">
                         In real power-electronics systems, device failure almost always occurs during switching transients. Our studies reveal that manufacturer-provided small-signal capacitance curves do not represent actual behavior under high-dV/dt and high-di/dt switching conditions. Using our mixed-mode simulation framework and a custom five-terminal measurement method, we separate and extract dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance as they vary during real switching events — information fundamentally inaccessible to conventional LCR meters. Furthermore, we show that gate ringing and voltage overshoot are not caused solely by parasitic inductances in the circuit. These phenomena also arise.
-                    </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -197,10 +253,26 @@
                 <span>Prof : Hyemin Kang</span> <span>|</span>
                 <span>Address : 21 KENTECH-gil, Naju-si, Jeollanam-do, 58330, Republic of Korea (ZIP: 58330)</span>
                 <br>
-                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+                <span style="color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
             </div>
         </div>
     </footer>
+    
+    <script>
+        function toggleDropdown(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parentLi = event.target.closest('.dropdown');
+            const isActive = parentLi.classList.contains('active');
+            document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            if (!isActive) parentLi.classList.add('active');
+        }
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.dropdown')) {
+                document.querySelectorAll('.dropdown').forEach(el => el.classList.remove('active'));
+            }
+        });
+    </script>
 
 </body>
 </html>
