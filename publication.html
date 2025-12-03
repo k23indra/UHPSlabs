@@ -8,22 +8,50 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [공통 스타일 - Master Code 유지] */
+        /* [공통 스타일 - Master Code 적용] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
         /* [헤더] */
-        header { display: flex; justify-content: space-between; align-items: center; padding: 0 70px; height: 100px; border-bottom: 1px solid #ddd; background: #fff; position: sticky; top: 0; z-index: 1000; overflow: visible; white-space: nowrap; }
+        header { 
+            display: flex; justify-content: space-between; align-items: center; 
+            padding: 0 70px; 
+            height: 100px; 
+            border-bottom: 1px solid #ddd; background: #fff; 
+            position: sticky; top: 0; z-index: 1000; 
+            overflow: visible; 
+            white-space: nowrap; 
+        }
+        
         .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
-        .logo-img-fixed { height: 45px; width: auto; object-fit: contain; display: block; transition: height 0.3s; }
+        
+        /* PC 기본 로고 크기 */
+        .logo-img-fixed {
+            height: 45px;   
+            width: auto;    
+            object-fit: contain; 
+            display: block;
+            transition: height 0.3s; 
+        }
+
         nav > ul { display: flex; gap: 25px; height: 100%; align-items: center; }
         nav > ul > li { position: relative; height: 100%; display: flex; align-items: center; cursor: pointer; }
         nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
-        /* 드롭다운 */
-        .dropdown-content { display: none; position: absolute; top: 100%; left: 50%; transform: translateX(-50%); background-color: #fff; min-width: 200px; height: auto !important; box-shadow: 0 10px 20px rgba(0,0,0,0.15); border: 1px solid #ddd; border-top: 4px solid #004094; padding: 15px 0; z-index: 9999; border-radius: 0 0 8px 8px; }
+        /* [드롭다운 메뉴] */
+        .dropdown-content { 
+            display: none; 
+            position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
+            background-color: #fff; 
+            min-width: 200px; 
+            height: auto !important; 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15); 
+            border: 1px solid #ddd; border-top: 4px solid #004094; 
+            padding: 15px 0; 
+            z-index: 9999; border-radius: 0 0 8px 8px; 
+        }
         .dropdown-content::before { content: ""; position: absolute; top: -20px; left: 0; width: 100%; height: 20px; background: transparent; }
         .dropdown-content li { display: block; text-align: center; }
         .dropdown-content a { padding: 15px 10px; color: #444; font-size: 15px; font-weight: 500; width: 100%; display: block; height: auto; box-sizing: border-box; }
@@ -35,14 +63,14 @@
         
         .pub-section { margin-bottom: 80px; }
         
-        /* 섹션 헤더 (Poster, Thesis) */
+        /* 섹션 헤더 (Professor's / UHPS's Paper) */
         .section-header { 
             font-size: 32px; font-weight: 700; color: #000; 
             margin-bottom: 30px; display: flex; align-items: center; gap: 10px; 
         }
         .section-header::before { content: "◆"; font-size: 24px; color: #000; } 
 
-        /* 연도 헤더 (2025, 2024...) */
+        /* 연도 헤더 */
         .year-header {
             font-size: 28px; font-weight: 500; color: #000;
             margin-top: 40px; margin-bottom: 20px; padding-bottom: 10px;
@@ -56,13 +84,14 @@
         /* 논문 리스트 스타일 */
         .pub-list { list-style: none; padding: 0; margin: 0; }
         .pub-list li { 
-            font-size: 16px; /* 기본(PC) 크기 */
-            color: #333; 
-            margin-bottom: 15px; 
-            line-height: 1.6; 
-            padding-left: 5px;
-            transition: font-size 0.3s; /* 크기 변할 때 부드럽게 */
+            font-size: 16px; color: #333; margin-bottom: 15px; 
+            line-height: 1.6; padding-left: 5px;
+            word-break: break-word; /* 긴 제목 줄바꿈 */
+            transition: font-size 0.3s; 
         }
+
+        /* 저자명 강조 */
+        .author-highlight { font-weight: bold; color: #000; }
 
         /* [푸터] */
         footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
@@ -80,32 +109,25 @@
             .logo-img-fixed { height: 30px; }
             nav > ul { gap: 15px; }
             nav > ul > li > a { font-size: 12px; }
-            
-            /* 논문 글자 크기 살짝 축소 */
-            .pub-list li { font-size: 14px; }
+            .pub-list li { font-size: 15px; }
         }
-
         @media screen and (max-width: 1100px) {
             header { padding: 0 15px; }
             .logo-img-fixed { height: 25px; }
             nav > ul { gap: 10px; }
             nav > ul > li > a { font-size: 10px; }
-            
-            /* 논문 글자 크기 더 축소 */
-            .pub-list li { font-size: 12px; }
+            .pub-list li { font-size: 14px; }
         }
-
         @media screen and (max-width: 870px) {
             header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
             .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
             .logo-img-fixed { height: 25px; }
             nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
             nav > ul > li > a { font-size: 14px; }
-            
             .container { padding: 50px 20px; }
             
             /* 모바일에서 논문 글자 크기 최적화 */
-            .pub-list li { font-size: 10px; }
+            .pub-list li { font-size: 13px; }
 
             .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
             .footer-contact span:nth-child(even) { display: none; }
@@ -155,57 +177,66 @@
     <div class="container">
         
         <section class="pub-section">
-            <div class="section-header">Thesis</div>
+            <div class="section-header">Professor's Paper</div>
             
-            <div class="year-group">
-                <h3 class="year-header">2025</h3>
-                <ul class="pub-list">
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="pub-section">
-            <div class="section-header">Thesis</div>
-            
-            <div class="year-group">
-                <h3 class="year-header">2025</h3>
-                <ul class="pub-list">
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                </ul>
-            </div>
-
             <div class="year-group">
                 <h3 class="year-header">2024</h3>
                 <ul class="pub-list">
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                </ul>
-            </div>
-
-            <div class="year-group">
-                <h3 class="year-header">2023</h3>
-                <ul class="pub-list">
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Bipolar to unipolar conversion in superjunction MOSFETs during resonant switching," <i>Power Electronic Devices and Components</i>, vol. 9, 100071, Dec. 2024.</li>
                 </ul>
             </div>
 
             <div class="year-group">
                 <h3 class="year-header">2022</h3>
                 <ul class="pub-list">
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump AAAAAA BBBBBBBBB CCCCCCCCC DDDDDDD Mechanism of Around the world”</li>
-                    <li>Yeonjun Kim, 2025, KIEE, “Asymmetrical Current Hump”</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Gate Ringing in Superjunction Mosfets with a Parasitic Capacitance in the Load Inductor," <i>IEEE Transactions on Power Electronics</i>, 2022.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, N. Donato, and F. Udrea, "The Effect of the Pillar Ripple on the Reverse Recovery in Superjunction Mosfets," <i>IEEE Transactions on Electron Devices</i>, 2022.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2021</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "True origin of gate ringing in superjunction MOSFETs: Device view," <i>IEEE Transactions on Power Electronics</i>, vol. 36, no. 5, pp. 5362-5370, 2021.</li>
+                </ul>
+            </div>
+            
+            <div class="year-group">
+                <h3 class="year-header">2020</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span>, E. M. Findlay, and F. Udrea, "Mechanisms of Asymmetrical Turn-On and Turn-Off and the Origin of Dynamic CGD Hysteresis for Hard-Switching Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 6, 2020.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Investigation of dynamic Rdson in Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 4, 2020.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2019</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Theory of 3-D superjunction MOSFET," <i>IEEE Transactions on Electron Devices</i>, vol. 66, no. 12, 2019.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Analytic model of specific ON-state resistance for superjunction MOSFETs with an oxide pillar," <i>IEEE Electron Device Letters</i>, vol. 40, no. 5, 2019.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="pub-section">
+            <div class="section-header">UHPS's Paper</div>
+            
+            <div class="year-group">
+                <h3 class="year-header">2025</h3>
+                <ul class="pub-list">
+                    <li>Sangyun Song, Seunghyun Park, Dong-Seok Kim, and <span class="author-highlight">Hyemin Kang</span>, "Comparative Study of Proton and Gamma-Ray Radiation on the Threshold Voltage Shifts and the Reverse Recovery of Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, Jan. 2025.</li>
+                    <li>Yeonju Lee and <span class="author-highlight">Hyemin Kang</span>, "On the Analysis of Asymmetrical Switching of SiC MOSFETs," <i>IEEE Transactions on Power Electronics</i>, vol. 40, no. 10, Oct. 2025.</li>
+                    <li>Taehyun Jang and <span class="author-highlight">Hyemin Kang</span>, "Investigation of SiC MOSFET's current hump mechanism induced by false turn-on of the high-side body diode," <i>Power Electronic Devices and Components</i>, Dec. 2025.</li>
+                    <li>Y. Kim and <span class="author-highlight">Hyemin Kang</span>, "Chip size dependent dynamic behavior of SiC MOSFETs with edge termination," <i>Power Electronic Devices and Components</i>, Dec. 2025.</li>
+                    <li>Y. Kim, H. Park, S. Yoon, and <span class="author-highlight">Hyemin Kang</span>, "Evaluating current sensing methods for accurate characterization in small chip size SiC MOSFETs," <i>Power Electronic Devices and Components</i>, 2025.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2024</h3>
+                <ul class="pub-list">
+                    <li>Yeonju Lee and <span class="author-highlight">Hyemin Kang</span>, "Plateau Voltage and Dynamic Capacitance Effect on SiC MOSFETs' Gate Ringing," <i>IEEE Transactions on Electron Devices</i>, Dec. 2024.</li>
+                    <li>Sangyun Song, Dong-Seok Kim, and <span class="author-highlight">Hyemin Kang</span>, "Gamma Ray on Superjunction MOSFET and Gate Ringing," <i>IEEE Transactions on Electron Devices</i>, July 2024.</li>
                 </ul>
             </div>
         </section>
