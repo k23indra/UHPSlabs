@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* [공통 스타일 - Master Code 적용] */
+        /* [공통 스타일 - Master Code 유지] */
         body { margin: 0; padding: 0; font-family: 'Noto Sans KR', sans-serif; color: #333; line-height: 1.6; }
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
@@ -63,7 +63,7 @@
         
         .pub-section { margin-bottom: 80px; }
         
-        /* 섹션 헤더 (Professor's / UHPS's Paper) */
+        /* 섹션 헤더 (Poster, Thesis) */
         .section-header { 
             font-size: 32px; font-weight: 700; color: #000; 
             margin-bottom: 30px; display: flex; align-items: center; gap: 10px; 
@@ -125,8 +125,6 @@
             nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
             nav > ul > li > a { font-size: 14px; }
             .container { padding: 50px 20px; }
-            
-            /* 모바일에서 논문 글자 크기 최적화 */
             .pub-list li { font-size: 13px; }
 
             .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
@@ -177,48 +175,6 @@
     <div class="container">
         
         <section class="pub-section">
-            <div class="section-header">Professor's Paper</div>
-            
-            <div class="year-group">
-                <h3 class="year-header">2024</h3>
-                <ul class="pub-list">
-                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Bipolar to unipolar conversion in superjunction MOSFETs during resonant switching," <i>Power Electronic Devices and Components</i>, vol. 9, 100071, Dec. 2024.</li>
-                </ul>
-            </div>
-
-            <div class="year-group">
-                <h3 class="year-header">2022</h3>
-                <ul class="pub-list">
-                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Gate Ringing in Superjunction Mosfets with a Parasitic Capacitance in the Load Inductor," <i>IEEE Transactions on Power Electronics</i>, 2022.</li>
-                    <li><span class="author-highlight">Hyemin Kang</span>, N. Donato, and F. Udrea, "The Effect of the Pillar Ripple on the Reverse Recovery in Superjunction Mosfets," <i>IEEE Transactions on Electron Devices</i>, 2022.</li>
-                </ul>
-            </div>
-
-            <div class="year-group">
-                <h3 class="year-header">2021</h3>
-                <ul class="pub-list">
-                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "True origin of gate ringing in superjunction MOSFETs: Device view," <i>IEEE Transactions on Power Electronics</i>, vol. 36, no. 5, pp. 5362-5370, 2021.</li>
-                </ul>
-            </div>
-            
-            <div class="year-group">
-                <h3 class="year-header">2020</h3>
-                <ul class="pub-list">
-                    <li><span class="author-highlight">Hyemin Kang</span>, E. M. Findlay, and F. Udrea, "Mechanisms of Asymmetrical Turn-On and Turn-Off and the Origin of Dynamic CGD Hysteresis for Hard-Switching Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 6, 2020.</li>
-                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Investigation of dynamic Rdson in Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 4, 2020.</li>
-                </ul>
-            </div>
-
-            <div class="year-group">
-                <h3 class="year-header">2019</h3>
-                <ul class="pub-list">
-                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Theory of 3-D superjunction MOSFET," <i>IEEE Transactions on Electron Devices</i>, vol. 66, no. 12, 2019.</li>
-                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Analytic model of specific ON-state resistance for superjunction MOSFETs with an oxide pillar," <i>IEEE Electron Device Letters</i>, vol. 40, no. 5, 2019.</li>
-                </ul>
-            </div>
-        </section>
-
-        <section class="pub-section">
             <div class="section-header">UHPS's Paper</div>
             
             <div class="year-group">
@@ -229,6 +185,7 @@
                     <li>Taehyun Jang and <span class="author-highlight">Hyemin Kang</span>, "Investigation of SiC MOSFET's current hump mechanism induced by false turn-on of the high-side body diode," <i>Power Electronic Devices and Components</i>, Dec. 2025.</li>
                     <li>Y. Kim and <span class="author-highlight">Hyemin Kang</span>, "Chip size dependent dynamic behavior of SiC MOSFETs with edge termination," <i>Power Electronic Devices and Components</i>, Dec. 2025.</li>
                     <li>Y. Kim, H. Park, S. Yoon, and <span class="author-highlight">Hyemin Kang</span>, "Evaluating current sensing methods for accurate characterization in small chip size SiC MOSFETs," <i>Power Electronic Devices and Components</i>, 2025.</li>
+                    <li>S. Song, D. S. Kim, and <span class="author-highlight">Hyemin Kang</span>, "Comparative Analysis on To-247-3l and To-247-4l Packaged 4h-Sic Mosfets Dynamic Switching Under Gamma Ray," <i>SSRN</i>, 2025.</li>
                 </ul>
             </div>
 
@@ -237,6 +194,76 @@
                 <ul class="pub-list">
                     <li>Yeonju Lee and <span class="author-highlight">Hyemin Kang</span>, "Plateau Voltage and Dynamic Capacitance Effect on SiC MOSFETs' Gate Ringing," <i>IEEE Transactions on Electron Devices</i>, Dec. 2024.</li>
                     <li>Sangyun Song, Dong-Seok Kim, and <span class="author-highlight">Hyemin Kang</span>, "Gamma Ray on Superjunction MOSFET and Gate Ringing," <i>IEEE Transactions on Electron Devices</i>, July 2024.</li>
+                    <li>Y. J. Kim and <span class="author-highlight">Hyemin Kang</span>, "Effect of Chip Size on Reverse Recovery of SiC MOSFETs with Edge Termination," <i>Scientific Books of Abstracts</i>, vol. 8, 2024.</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="pub-section">
+            <div class="section-header">Professor's Paper</div>
+            
+            <div class="year-group">
+                <h3 class="year-header">2024</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Bipolar to unipolar conversion in superjunction MOSFETs during resonant switching," <i>Power Electronic Devices and Components</i>, vol. 9, 100071, Dec. 2024.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2023</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Gate ringing in superjunction MOSFETs with a parasitic capacitance in the load inductor," <i>Power Electronic Devices and Components</i>, vol. 4, 100029, 2023.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2022</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Gate Ringing in Superjunction Mosfets with a Parasitic Capacitance in the Load Inductor," <i>IEEE Transactions on Power Electronics</i>, 2022.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, N. Donato, and F. Udrea, "The Effect of the Pillar Ripple on the Reverse Recovery in Superjunction Mosfets," <i>IEEE Transactions on Electron Devices</i>, vol. 69, no. 1, pp. 100009, 2022.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, "IGBT Reverse Transfer Dynamic Capacitance," <i>IEEE Transactions on Electron Devices</i>, vol. 69, no. 12, pp. 6910-6916, 2022.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, "Trench split gate MOSFET’s inductive switching," <i>IEEE Transactions on Electron Devices</i>, vol. 69, no. 9, pp. 5399-5403, 2022.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2021</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "True origin of gate ringing in superjunction MOSFETs: Device view," <i>IEEE Transactions on Power Electronics</i>, vol. 36, no. 5, pp. 5362-5370, 2021.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, F. Udrea et al., "The FinFET effect in Silicon Carbide MOSFETs," <i>2021 33rd International Symposium on Power Semiconductor Devices and ICs (ISPSD)</i>, 2021.</li>
+                </ul>
+            </div>
+            
+            <div class="year-group">
+                <h3 class="year-header">2020</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span>, E. M. Findlay, and F. Udrea, "Mechanisms of Asymmetrical Turn-On and Turn-Off and the Origin of Dynamic CGD Hysteresis for Hard-Switching Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 6, 2020.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Investigation of dynamic Rdson in Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 4, 2020.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Dynamic CGD and dV/dt in Superjunction MOSFETs," <i>IEEE Transactions on Electron Devices</i>, vol. 67, no. 4, 2020.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, N. Donato, F. Udrea, "Effect of pillar ripple on static and dynamic trade-offs in superjunction MOSFETs," <i>IEEE Electron Device Letters</i>, vol. 41, no. 5, 2020.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, F. Udrea, "Current density and gate ringing in superjunction MOSFETs," <i>2020 32nd International Symposium on Power Semiconductor Devices and ICs (ISPSD)</i>, 2020.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span>, "Theory of Superjunction Devices," <i>Ph.D. Thesis, University of Cambridge</i>, 2020.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2019</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Theory of 3-D superjunction MOSFET," <i>IEEE Transactions on Electron Devices</i>, vol. 66, no. 12, 2019.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Analytic model of specific ON-state resistance for superjunction MOSFETs with an oxide pillar," <i>IEEE Electron Device Letters</i>, vol. 40, no. 5, 2019.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "On the quasi-saturation in state-of-the-art power MOSFETs," <i>IEEE Electron Device Letters</i>, vol. 40, no. 5, 2019.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Static and dynamic figures of merits (FOM) for superjunction MOSFETs," <i>2019 31st International Symposium on Power Semiconductor Devices and ICs (ISPSD)</i>, 2019.</li>
+                </ul>
+            </div>
+
+            <div class="year-group">
+                <h3 class="year-header">2018</h3>
+                <ul class="pub-list">
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "Material Limit of Power Devices—Applied to Asymmetric 2-D Superjunction MOSFET," <i>IEEE Transactions on Electron Devices</i>, vol. 65, no. 8, 2018.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "True material limit of power devices—Applied to 2-D superjunction MOSFET," <i>IEEE Transactions on Electron Devices</i>, vol. 65, no. 4, 2018.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "On the specific on-state resistance of superjunction MOSFETs with a compensated pillar," <i>IEEE Electron Device Letters</i>, vol. 39, no. 12, 2018.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and F. Udrea, "High Pillar Doping Concentration for SiC Superjunction IGBTs," <i>2018 IEEE International Conference on Silicon Carbide and Related Materials (ICSCRM)</i>, 2018.</li>
+                    <li><span class="author-highlight">Hyemin Kang</span> and S. Kim, "A New Nonisolated High-Voltage-Gain Boost Converter With Inherent Output Voltage Balancing," <i>IEEE Transactions on Industrial Electronics</i>, vol. 65, no. 4, 2018.</li>
                 </ul>
             </div>
         </section>
