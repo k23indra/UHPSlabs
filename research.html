@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research - KENTECH UHPS Lab</title>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         /* [공통 스타일 - Master Code 적용] */
@@ -12,17 +13,16 @@
         a { text-decoration: none; color: inherit; }
         ul { list-style: none; padding: 0; margin: 0; }
         
-        /* 헤더 */
+        /* [헤더] */
         header { 
             display: flex; justify-content: space-between; align-items: center; 
             padding: 0 70px; 
             height: 100px; 
             border-bottom: 1px solid #ddd; background: #fff; 
-            position: sticky; top: 0; z-index: 1000;
+            position: sticky; top: 0; z-index: 1000; 
             overflow: visible; 
             white-space: nowrap; 
         }
-        
         .logo { display: flex; align-items: center; height: 100px; gap: 20px; }
         .logo-img-fixed { height: 45px; width: auto; object-fit: contain; display: block; transition: height 0.3s; }
         
@@ -31,7 +31,7 @@
         nav > ul > li > a { font-weight: 500; font-size: 16px; transition: all 0.3s; display: flex; align-items: center; height: 100%; }
         nav > ul > li > a:hover { color: #004094; }
 
-        /* 드롭다운 */
+        /* [드롭다운 메뉴] */
         .dropdown-content { 
             display: none; 
             position: absolute; top: 100%; left: 50%; transform: translateX(-50%); 
@@ -54,50 +54,60 @@
         
         .research-section { margin-bottom: 100px; }
         
-        /* 섹션 헤더 */
+        /* 대분류 헤더 (< >) */
         .section-header { 
             font-size: 32px; font-weight: 700; color: #000; 
-            margin-bottom: 40px; padding-bottom: 15px; 
+            margin-bottom: 50px; padding-bottom: 15px; 
             position: relative; width: fit-content; 
             display: flex; align-items: center; gap: 10px;
         }
         .section-header::before { content: "◆"; font-size: 24px; color: #000; }
         .section-header::after { content: ""; position: absolute; left: 0; bottom: 0; width: 60px; height: 3px; background-color: #000; }
 
-        /* ★ [수정됨] Research 레이아웃: Float 방식 적용 ★ */
+        /* 중분류 헤더 ([ ]) */
+        .group-header {
+            font-size: 24px; font-weight: 700; color: #004094;
+            margin-top: 60px; margin-bottom: 30px;
+            border-left: 5px solid #004094;
+            padding-left: 15px;
+        }
+        .group-header:first-of-type { margin-top: 0; }
+
+        /* Research 레이아웃 (Float 방식) */
         .research-block {
             overflow: hidden; /* float 자식 높이 인식 */
+            margin-bottom: 40px;
+            border-bottom: 1px solid #eee; /* 항목 간 구분선 */
+            padding-bottom: 40px;
         }
+        .research-block:last-child { border-bottom: none; margin-bottom: 0; }
 
         /* 왼쪽 이미지 박스 (둥둥 띄우기) */
         .res-img-float { 
             float: left;
             margin-right: 40px;
             margin-bottom: 20px;
-            border: 1px solid #eee;
+            /* border: 1px solid #eee; */
             background-color: #fff;
-            display: flex; align-items: center; justify-content: center;
+            display: flex; align-items: flex-start; justify-content: center;
         }
         
-        /* 이미지 크기 설정 (종류별) */
-        .res-img-float.large { width: 350px; height: auto; }   /* TCAD용: 높이 자동 */
-        .res-img-float.standard { width: 350px; height: auto; } /* 일반용: 높이 자동 */
+        /* 이미지 크기 설정 */
+        .res-img-float.standard { width: 400px; height: auto; } 
 
-        .res-img { width: 100%; height: auto; display: block; }
+        .res-img { width: 100%; height: auto; display: block; border-radius: 5px; }
 
         /* 텍스트 스타일 */
-        .sub-title { font-size: 22px; font-weight: 700; margin-bottom: 10px; margin-top: 20px; color: #000; }
-        .sub-title:first-child { margin-top: 0; } /* 맨 처음 제목은 여백 제거 */
-        
-        /* 본문 텍스트 (이미지 옆 -> 아래로 흐름) */
+        .sub-title { font-size: 20px; font-weight: 700; margin-bottom: 15px; color: #000; }
         .desc-text { 
-            font-size: 16px; color: #444; line-height: 1.7; 
-            margin-bottom: 20px; text-align: justify; 
+            font-size: 16px; color: #444; line-height: 1.8; 
+            text-align: justify; 
         }
         
-        .full-width-text { margin-top: 20px; font-size: 16px; color: #444; line-height: 1.7; text-align: justify; clear: both; }
+        /* Float 해제 */
+        .clearfix::after { content: ""; display: block; clear: both; }
 
-        /* 푸터 */
+        /* [푸터] */
         footer { background: #fff; color: #333; padding: 60px 20px; border-top: 1px solid #eee; font-size: 14px; }
         .footer-inner { max-width: 1200px; margin: 0 auto; text-align: left; }
         .footer-contact { display: flex; gap: 30px; align-items: center; font-weight: bold; font-size: 16px; color: #000; margin-bottom: 20px; }
@@ -129,19 +139,15 @@
             
             .container { padding: 50px 20px; }
 
-
+            /* 모바일: 이미지 float 해제하고 세로 배치 */
+            .res-img-float, .res-img-float.standard { 
+                float: none; width: 100%; max-width: 100%; margin: 0 auto 20px auto; 
+            }
 
             .footer-contact { flex-direction: column; align-items: flex-start; gap: 8px; font-size: 12px; }
             .footer-contact span:nth-child(even) { display: none; }
             .footer-info span { display: block; margin-bottom: 3px; font-size: 9px; }
             .footer-info span:nth-child(even) { display: none; }
-        }
-
-          @media screen and (max-width: 650px) {
-            /* 모바일: 이미지 float 해제하고 세로 배치 */
-            .res-img-float, .res-img-float.large, .res-img-float.standard { 
-                float: none; width: 100%; max-width: 350px; margin: 0 auto 20px auto; 
-            }
         }
     </style>
 </head>
@@ -149,8 +155,12 @@
 
     <header>
         <div class="logo">
-            <a href="index.html"><img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed"></a>
-            <a href="https://www.kentech.ac.kr/main.do" target="_blank"><img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed"></a>
+            <a href="index.html">
+                <img src="images/common/UHPS_Logo.png" alt="UHPS Logo" class="logo-img-fixed">
+            </a>
+            <a href="https://www.kentech.ac.kr/main.do" target="_blank">
+                <img src="images/common/KENTECH_Logo.png" alt="KENTECH Logo" class="logo-img-fixed">
+            </a>
         </div>
         <nav>
             <ul>
@@ -182,61 +192,133 @@
     <div class="container">
         
         <section class="research-section">
-            <div class="section-header">TCAD Simulation</div>
+            <div class="section-header">Advanced Power Device Design</div>
+            
+            <div class="group-header">Innovative Device Architecture</div>
             
             <div class="research-block clearfix">
-                <div class="res-img-float large">
-                    <img src="images/research/Research1.png" alt="TCAD Simulation" class="res-img">
-                </div>
-                
+                <div class="res-img-float standard"><img src="images/research/Research1.png" alt="Structural Optimization" class="res-img"></div>
                 <div class="res-text-wrapper">
-                    <div class="sub-title">- Process simulation</div>
-                    <div class="desc-text">
-                        We simulate actual semiconductor fabrication steps—such as ion implantation, diffusion, etching, and deposition—to generate accurate doping profiles and device structures. Key structural features, including pillar ripple formation and junction depth, are determined at this stage.
-                    </div>
-
-                    <div class="sub-title">- Device simulation</div>
-                    <div class="desc-text">
-                        Based on the fabricated structure, we apply external bias conditions and solve the Poisson equation together with the carrier continuity equations. This enables a physics-based analysis of I–V characteristics, electric-field distribution, and impact ionization behavior. Beyond observing simple trends, our focus is on calibrating physical models—including mobility degradation, Shockley–Read–Hall recombination, and other advanced mechanisms—to ensure close agreement with real device behavior.
-                    </div>
-
-                    <div class="sub-title">- Mixed mode simulation</div>
-                    <div class="desc-text">
-                        Single-device characteristics alone cannot explain the transient behavior observed during high-speed switching.
-                    </div>
+                    <div class="sub-title">- Structural Optimization for Next-Generation Devices</div>
+                    <div class="desc-text">We explore novel device architectures designed to overcome the inherent trade-offs of conventional structures. By introducing advanced structural concepts—such as optimizing pillar geometries and incorporating dielectric materials—we minimize parasitic effects and maximize the performance figure of merit, achieving a superior balance between breakdown voltage and on-state resistance.</div>
                 </div>
-                
-                <div class="desc-text">
-                    This approach enables detailed analysis of gate ringing caused by the interaction between parasitic gate inductance, parasitic source inductance, and the device's input capacitance. It also allows extraction of dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance under realistic high-dV/dt switching conditions—phenomena that conventional LCR meters cannot observe due to depletion-region modulation. Furthermore, by simultaneously monitoring circuit-level waveforms and internal carrier distributions, this method provides deep insight into failure mechanisms such as shoot-through events and avalanche behavior that occur during inductive switching.
+            </div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research2.png" alt="Multi-Dimensional" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- Multi-Dimensional Architecture Design</div>
+                    <div class="desc-text">Moving beyond traditional planar and 2D limitations, we investigate device architectures across multiple dimensions. By analyzing electric field distributions in 3D space, we design structures that enhance the depletion region and allow for higher doping concentrations, thereby significantly reducing on-state resistance.</div>
+                </div>
+            </div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research3.png" alt="Process Variation" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- Impact of Process Variation</div>
+                    <div class="desc-text">We analyze how manufacturing realities, such as Pillar Ripple (doping fluctuation), affect device performance. Our work quantifies the trade-offs between static efficiency ($R_{sp}$) and dynamic stability (Gate Ringing, $E_{off}$), offering practical design guidelines to balance performance with ruggedness.</div>
+                </div>
+            </div>
+
+
+            <div class="group-header">Physics-Based Modeling & Simulation</div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research4.png" alt="Process Simulation" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- Process Simulation</div>
+                    <div class="desc-text">We simulate actual semiconductor fabrication steps—such as ion implantation, diffusion, etching, and deposition—to generate accurate doping profiles and device structures. Key structural features, including pillar ripple formation and junction depth, are determined at this stage.</div>
+                </div>
+            </div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research5.png" alt="Device Simulation" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- Device Simulation</div>
+                    <div class="desc-text">Based on the fabricated structure, we apply external bias conditions and solve the Poisson equation together with the carrier continuity equations. This enables a physics-based analysis of I–V characteristics, electric-field distribution, and impact ionization behavior. Beyond observing simple trends, our focus is on calibrating physical models—including mobility degradation, Shockley–Read–Hall recombination, and other advanced mechanisms—to ensure close agreement with real device behavior.</div>
+                </div>
+            </div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research6.png" alt="Mixed Mode Simulation" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- Mixed Mode Simulation</div>
+                    <div class="desc-text">Single-device characteristics alone cannot explain the transient behavior observed during high-speed switching. This approach enables detailed analysis of gate ringing caused by the interaction between parasitic gate inductance, parasitic source inductance, and the device's input capacitance. It also allows extraction of dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance under realistic high-dV/dt switching conditions.</div>
+                </div>
+            </div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research7.png" alt="SPICE Modeling" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- SPICE Modeling & Application</div>
+                    <div class="desc-text">We bridge the gap between physical device characteristics and circuit-level performance using LTspice and PSpice. By developing precise compact models that reflect both static and dynamic behaviors—including non-linear capacitance and temperature dependencies—we enable accurate system-level simulations. By coupling device physics with circuit elements, we analyze gate ringing caused by parasitic inductances and input capacitance interactions.</div>
+                </div>
+            </div>
+
+
+            <div class="group-header">Theoretical Limit & FOM Analysis</div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research8.png" alt="True Material Limit" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- True Material Limit</div>
+                    <div class="desc-text">We challenge conventional wisdom by identifying the "True Material Limit" of power devices. Unlike ideal models that suggest indefinite scaling, our analytical approach incorporates the parasitic JFET effect and depletion-width modulation to determine the fundamental lower bound of specific on-state resistance for Si and SiC.</div>
+                </div>
+            </div>
+
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research9.png" alt="New FOM" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="sub-title">- New Figure of Merit (FOM)</div>
+                    <div class="desc-text">We establish new Figures of Merit that accurately reflect the potential of superjunction devices. By deriving the optimum cell pitch and doping concentration as a function of material properties (Bandgap, Critical Electric Field), we provide a rigorous theoretical framework for next-generation device design.</div>
                 </div>
             </div>
         </section>
 
 
         <section class="research-section">
-            <div class="section-header">Characterization</div>
-            
-            <div class="research-block clearfix" style="margin-bottom: 50px;">
-                <div class="res-img-float standard">
-                    <img src="images/research/Research2.png" alt="Static Characterization" class="res-img">
-                </div>
+            <div class="section-header">Comprehensive Device Characterization</div>
+            <div class="group-header">- Static & Thermal Characterization</div>
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research10.png" alt="Static & Thermal" class="res-img"></div>
                 <div class="res-text-wrapper">
-                    <div class="sub-title">- Static Characterization</div>
-                    <div class="desc-text">
-                        Many studies rely solely on measuring I–V curves to check breakdown voltage and on-state resistance. Our work goes further by uncovering the physical origins that fundamentally determine device efficiency. We analyze not only the intrinsic material properties of silicon and wide-bandgap semiconductors such as SiC and GaN, but also structural effects including parasitic JFET behavior and depletion-width modulation. Through this limit analysis, we identify the true lower bound of the specific on-state resistance — the true material limit that governs ultimate device performance. In addition, our research demonstrates that simply shrinking the cell pitch does not guarantee improved performance. For superjunction devices, we determine the optimal balance between charge compensation and pillar width, enabling designs that maximize the figure of merit and push the theoretical boundaries of device efficiency.
-                    </div>
+                      <div class="desc-text">We perform comprehensive static analysis using high-power curve tracers and probe stations capable of handling ultra-high voltages and currents. Beyond standard I-V measurements (Breakdown Voltage, On-resistance, Leakage), we characterize device behavior across extreme temperature ranges—from cryogenic to elevated temperatures—to ensure thermal stability and reliability in harsh operating environments.</div>
                 </div>
             </div>
 
+            <div class="group-header">- Dynamic & Switching Characterization</div>
             <div class="research-block clearfix">
-                <div class="res-img-float standard">
-                    <img src="images/research/Research3.png" alt="Dynamic Characterization" class="res-img">
-                </div>
+                <div class="res-img-float standard"><img src="images/research/Research11.png" alt="Dynamic & Switching" class="res-img"></div>
                 <div class="res-text-wrapper">
-                    <div class="sub-title">- Dynamic Characterization</div>
-                    <div class="desc-text">
-                        In real power-electronics systems, device failure almost always occurs during switching transients. Our studies reveal that manufacturer-provided small-signal capacitance curves do not represent actual behavior under high-dV/dt and high-di/dt switching conditions. Using our mixed-mode simulation framework and a custom five-terminal measurement method, we separate and extract dynamic gate-to-drain capacitance and dynamic drain-to-source capacitance as they vary during real switching events — information fundamentally inaccessible to conventional LCR meters. Furthermore, we show that gate ringing and voltage overshoot are not caused solely by parasitic inductances in the circuit. These phenomena also arise.
-                    </div>
+                    <div class="desc-text">Conventional small-signal capacitance measurements often fail to predict real-world switching behavior. We specialize in extracting and analyzing non-linear parasitic capacitances (Ciss, Coss, Crss) under high-voltage bias conditions. Also, we evaluate transient performance through advanced Double Pulse Testing (DPT) with optimized low-inductance board designs.</div>
+                </div>
+            </div>
+
+            <div class="group-header">- Ruggedness Characterization</div>            
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research12.png" alt="Ruggedness" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="desc-text">To ensure device reliability under fault conditions, we push devices to their physical limits to define the Safe Operating Area (SOA). We conduct destructive and non-destructive tests, including Short-Circuit (SC) capability, Unclamped Inductive Switching (UIS) for avalanche robustness, and Surge Current (IFSM) tests, verifying that devices can withstand extreme electrical stresses in real-world applications.</div>
+                </div>
+            </div>
+        </section>
+
+
+        <section class="research-section">
+            <div class="section-header">Module, System & Reliability</div>
+            <div class="group-header">- Reliability Physics & Robustness</div>  
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research13.png" alt="Reliability" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="desc-text">We conduct rigorous reliability assessments based on automotive-grade standards such as AEC-Q101 and AQG-324. Our research focuses on accelerated lifetime testing (ALT), including High-Temperature Reverse/Gate Bias (HTRB/HTGB), High-Humidity High-Temperature Reverse Bias (H3TRB), and Power Cycling tests, to predict long-term device stability under thermal and electrical stress.</div>
+                </div>
+            </div>
+
+            <div class="group-header">- Failure Analysis & System Integration</div>  
+            <div class="research-block clearfix">
+                <div class="res-img-float standard"><img src="images/research/Research14.png" alt="Failure Analysis" class="res-img"></div>
+                <div class="res-text-wrapper">
+                    <div class="desc-text">We employ a multi-faceted approach to failure analysis to identify root causes of device degradation. This includes non-destructive techniques like Scanning Acoustic Microscopy (SAT) for delamination detection and Photoemission Microscopy (EMMI) for leakage path localization, as well as destructive physical analysis (DPA) methods like decapsulation and cross-sectioning.</div>
                 </div>
             </div>
         </section>
@@ -255,9 +337,9 @@
             <div class="footer-info">
                 <span>UHPS</span> <span>|</span>
                 <span>Prof : Hyemin Kang</span> <span>|</span>
-                <span>Address : 21 KENTECH-gil, Naju-si, Jeollanam-do, 58330, Republic of Korea (ZIP: 58330)</span>
+                <span>Address : 21 KENTECH-gil, Naju-si, Jeollanam-Do, Republic of Korea (ZIP: 58330)</span>
                 <br>
-                <span style="color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
+                <span style="font-size: 13px; color: #999; margin-top: 10px; display: block;">COPYRIGHTⓒ UHPS All rights reserved.</span>
             </div>
         </div>
     </footer>
