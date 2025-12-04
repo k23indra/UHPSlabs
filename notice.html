@@ -241,7 +241,7 @@
         // ==========================================================
         const noticeData = [
             {
-                id: 2,
+                id: 3,
                 title: "대학원생 모집",
                 writer: "교수님",
                 date: "2025-12-31",
@@ -272,7 +272,21 @@
 
 - 컨택 방법
 1) H.KANG@kentech.ac.kr 강혜민 교수에게 문의`
+
             },
+            {
+                id: 2,
+                title: "장비 예약 문의 안내사항",
+                writer: "관리자",
+                date: "2025-12-31",
+                content: `-장비예약 관련 안내사항
+
+                아래 메일로 장비 예약 관련 문의 부탁드립니다. 
+                k23indra@kentech.ac.kr
+                
+                감사합니다.`
+            },
+
             {
                 id: 1,
                 title: "UHPS 홈페이지 테스트 중",
@@ -368,8 +382,20 @@
             document.getElementById('notice-detail').style.display = 'none';
         }
 
-        // 초기 실행
-        renderList(currentPage);
+        // 초기 실행 (URL 파라미터 확인 기능 추가)
+        window.addEventListener('load', () => {
+            // 주소창에 ?id= 숫자 확인
+            const urlParams = new URLSearchParams(window.location.search);
+            const idParam = urlParams.get('id');
+            
+            if (idParam) {
+                // id가 있으면 해당 글을 바로 염
+                showDetail(parseInt(idParam));
+            } else {
+                // 없으면 그냥 목록 보여줌
+                renderList(currentPage);
+            }
+        });
 
         // ★ 모바일 메뉴 토글 스크립트 ★
         function toggleDropdown(event) {
