@@ -52,7 +52,10 @@
         /* [Research 페이지 전용 스타일] */
         .container { max-width: 1200px; margin: 0 auto; padding: 80px 20px; min-height: 600px; }
         
-        .research-section { margin-bottom: 100px; }
+        .research-section { 
+           margin-bottom: 100px; 
+            scroll-margin-top: 120px;  /* ★ 핵심: 헤더 높이(100px) + 여유공간(20px) 만큼 띄우고 멈춤 ★ */
+        }
         
         /* 대분류 헤더 (< >) */
         .section-header { 
@@ -191,7 +194,7 @@
 
     <div class="container">
         
-        <section class="research-section">
+        <section id="device-design" class="research-section">
             <div class="section-header">Advanced Power Device Design</div>
             
             <div class="group-header">Innovative Device Architecture</div>
@@ -276,7 +279,7 @@
         </section>
 
 
-        <section class="research-section">
+        <section id="characterization" class="research-section">
             <div class="section-header">Comprehensive Device Characterization</div>
             <div class="group-header">- Static & Thermal Characterization</div>
             <div class="research-block clearfix">
@@ -304,7 +307,7 @@
         </section>
 
 
-        <section class="research-section">
+        <section id="reliability" class="research-section">
             <div class="section-header">Module, System & Reliability</div>
             <div class="group-header">- Reliability Physics & Robustness</div>  
             <div class="research-block clearfix">
