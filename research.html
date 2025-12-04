@@ -134,6 +134,7 @@
             nav > ul > li > a { font-size: 10px; }
         }
         @media screen and (max-width: 870px) {
+            /* ... (헤더/네비게이션 관련 코드는 그대로 유지) ... */
             header { height: auto; flex-direction: column; padding: 20px; gap: 20px; }
             .logo { height: auto; margin-bottom: 10px; width: 100%; justify-content: center; }
             .logo-img-fixed { height: 25px; }
@@ -141,6 +142,35 @@
             nav > ul > li > a { font-size: 14px; }
             
             .container { padding: 50px 20px; }
+
+            /* ★ [추가됨] 모바일 폰트 크기 대폭 축소 ★ */
+            
+            /* 대분류 (Advanced Power Device Design 등) */
+            .section-header { 
+                font-size: 18px; /* 32px -> 22px로 축소 */
+                margin-bottom: 30px;
+            }
+            .section-header::before { font-size: 18px; } /* 다이아몬드 아이콘도 축소 */
+            
+            /* 중분류 (Innovative Device Architecture 등) */
+            .group-header {
+                font-size: 15px; /* 24px -> 18px로 축소 */
+                margin-top: 40px; 
+                margin-bottom: 20px;
+                border-left-width: 4px; /* 왼쪽 선 두께도 살짝 얇게 */
+            }
+            
+            /* 소분류 제목 (- Structural Optimization...) */
+            .sub-title {
+                font-size: 12px; /* 20px -> 16px로 축소 */
+                margin-bottom: 10px;
+            }
+            
+            /* 본문 설명 글 */
+            .desc-text {
+                font-size: 10px; /* 16px -> 14px로 축소 (가독성 마지노선) */
+                line-height: 1.6; /* 줄 간격 살짝 좁힘 */
+            }
 
             /* 모바일: 이미지 float 해제하고 세로 배치 */
             .res-img-float, .res-img-float.standard { 
