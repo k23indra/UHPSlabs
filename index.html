@@ -173,6 +173,7 @@
                 flex-direction: column; /* 세로로 */
                 gap: 25px;
                 width: 100%;
+                height: 160px;
                 padding: 0px 30px;
             }
 
@@ -180,14 +181,14 @@
             flex: 1; 
             background-color: #fff; 
             color: #000;
-            font-size: 12px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 600;
             display: flex;
             align-items: center; 
             justify-content: center; 
             }
             
-            
+                       
             .container, .what-we-do { padding: 50px 20px; }
             .section-header h2 { font-size: 26px; }
 
@@ -200,7 +201,155 @@
     </style>
 </head>
 <body>
+    <style> 
+        /*위 <body>아래의 style부터 아래 ~</script>이 경고 팝업. */
+        /* 팝업 배경 (어둡게 처리) */
+        #maintenance-popup-overlay {
+            display: none; /* ★ 평소에는 none, 공지 시 flex 로 변경 ★ */
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
 
+        /* 팝업창 본체 */
+        .popup-box {
+            background: #fff;
+            width: 90%; max-width: 600px; /* PC 1/2 느낌, 모바일 최적화 */
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            text-align: center;
+            padding: 40px 30px;
+            position: relative;
+        }
+
+        /* 사이렌 아이콘 (FontAwesome 사용) */
+        .popup-icon {
+            font-size: 50px;
+            color: #ff4d4d; /* 붉은색 */
+            margin-bottom: 20px;
+            animation: blink 2s infinite; /* 깜빡임 효과 */
+        }
+        @keyframes blink { 50% { opacity: 0.6; } }
+
+        /* 타이틀 */
+        .popup-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #333;
+            line-height: 1.3;
+            margin-bottom: 30px;
+        }
+        .popup-title span { color: #d32f2f; } /* 빨간색 강조 */
+
+        /* 정보 테이블 박스 */
+        .popup-info-box {
+            border: 2px solid #eee;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: left;
+            background-color: #f9f9f9;
+        }
+        .info-row {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+        .info-row:last-child { margin-bottom: 0; }
+        
+        .info-label {
+            width: 80px;
+            font-weight: 700;
+            color: #fff;
+            background-color: #2c3e50; /* 남색 라벨 배경 */
+            padding: 5px 10px;
+            border-radius: 5px;
+            text-align: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .info-content {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            color: #333;
+            word-break: keep-all;
+        }
+
+        /* 하단 담당자 안내 */
+        .popup-footer-text {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+        /* 닫기 버튼 */
+        .popup-close-btn {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 12px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .popup-close-btn:hover { background-color: #555; }
+
+        /* 모바일 대응 */
+        @media screen and (max-width: 500px) {
+            .popup-box { padding: 30px 20px; width: 90%; }
+            .popup-title { font-size: 22px; }
+            .info-row { flex-direction: column; gap: 5px; }
+            .info-label { width: fit-content; }
+        }
+    </style>
+
+    <div id="maintenance-popup-overlay">
+        <div class="popup-box">
+            <div class="popup-icon"><i class="fas fa-exclamation-triangle"></i></div> <div class="popup-title">
+                홈페이지<br>
+                <span>업데이트 중</span>
+            </div>
+
+            <div class="popup-info-box">
+                <div class="info-row">
+                    <div class="info-label">중단일시</div>
+                    <div class="info-content">2025. 11. 01. ~ 2025. 12. 31.</div> </div>
+                <div class="info-row">
+                    <div class="info-label">중단사유</div>
+                    <div class="info-content">서버 안정화 및 콘텐츠 업데이트</div> </div>
+            </div>
+
+            <div class="popup-footer-text">
+                ※ 진행 상황에 따라 시간은 변동될 수 있습니다.<br>
+                담당자: k23indra@kentech.ac.kr
+            </div>
+
+            <button class="popup-close-btn" onclick="closePopup()">닫기</button>
+        </div>
+    </div>
+
+    <script>
+        function closePopup() {
+            document.getElementById('maintenance-popup-overlay').style.display = 'none';
+        }
+        
+        // ★ [사용법] 팝업 띄우려면 아래 주석을 해제하세요 ★
+        document.getElementById('maintenance-popup-overlay').style.display = 'flex';
+        /*위 <body>아래부터 여기 ~<script>이 경고 팝업. 윗줄(flex)줄을 주석처리하면 팝업창 사라짐 */
+    </script>
+    
     <header>
         <div class="logo">
             <a href="index.html">
@@ -247,7 +396,7 @@
         </div>
     </section>
 
-    <!-- ★ [수정됨] 바로가기 배너 박스 섹션 ★ -->
+    <!-- ★  바로가기 배너 박스 섹션 ★ -->
     <section class="quick-link-section">
         <div class="quick-link-container">
             <!-- 1. Graduate Admission (ID=2) -->
