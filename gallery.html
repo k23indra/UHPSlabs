@@ -95,6 +95,7 @@
         }
         .thumb-img { width: 100%; height: 100%; object-fit: cover; }
         .thumb-title { text-align: center; font-size: 18px; font-weight: 700; color: #000; }
+        .thumb-title2 { text-align: center; font-size: 18px; font-weight: 700; color: #e01c1c; }
         .thumb-desc { text-align: center; font-size: 14px; color: #666; margin-top: 5px; }
 
         /* 모달창 */
@@ -185,11 +186,43 @@
     <div class="container">
         
         <section class="gallery-section">
-            <div class="category-header">2026</div>
+            <div class="category-header">Award</div>
+
             <div class="gallery-grid">
-                <div class="gallery-item" onclick="openModal('Winter2026')">
-                    <div class="thumb-box"><img src="images/gallery/2026/Winter2026_1.png" class="thumb-img"></div>
-                    <div class="thumb-title">2026 Winter</div>
+                <div class="gallery-item" onclick="openModal('2025MOBIS')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2025MOBIS_1.png" class="thumb-img"></div>
+                    <div class="thumb-title2">제1회 모비스 전동화 우수논문 대회</div>
+                    <div class="thumb-title2">[*경(장태현)축*]</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2025KIEE')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2025KIEE_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2025 KIEE</div>
+                    <div class="thumb-title">(김연준)</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2025ICSCRM')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2025ICSCRM_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2025 ICSCRM</div>
+                    <div class="thumb-title">(박현용)</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2025KOES')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2025KOES_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2025 한국LED광전자학회</div>
+                    <div class="thumb-title">(이연주,송상윤)</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2024KIEE')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2024KIEE_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2024 KIEE</div>
+                    <div class="thumb-title">(장태현)</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2024KIEEME')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2024KIEEME_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2024 KIEEME</div>
+                    <div class="thumb-title">(김연준)</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2023KIEEME')">
+                    <div class="thumb-box"><img src="images/gallery/Awardness/2023KIEEME_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2023 KIEEME</div>
+                    <div class="thumb-title">(이연주)</div>
                 </div>
             </div>
         </section>
@@ -199,7 +232,7 @@
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openModal('Fall2025')">
                     <div class="thumb-box"><img src="images/gallery/2025/Fall2025_1.png" class="thumb-img"></div>
-                    <div class="thumb-title">2025 Fall</div>
+                    <div class="thumb-title">2025 Outing</div>
                 </div>
                 <div class="gallery-item" onclick="openModal('All2025')">
                     <div class="thumb-box"><img src="images/gallery/2025/All2025_1.png" class="thumb-img"></div>
@@ -211,10 +244,15 @@
                 </div>
             </div>
         </section>
+        
 
         <section class="gallery-section">
             <div class="category-header">2024</div>
             <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('Fall2024')">
+                    <div class="thumb-box"><img src="images/gallery/2024/Fall2024_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2024 H2</div>
+                </div>
                 <div class="gallery-item" onclick="openModal('Spring2024')">
                     <div class="thumb-box"><img src="images/gallery/2024/Spring2024_1.png" class="thumb-img"></div>
                     <div class="thumb-title">2024 Spring</div>
@@ -228,6 +266,10 @@
                 <div class="gallery-item" onclick="openModal('Summer2023')">
                     <div class="thumb-box"><img src="images/gallery/2023/Summer2023_1.png" class="thumb-img"></div>
                     <div class="thumb-title">2023 Summer</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('2Summer2023')">
+                    <div class="thumb-box"><img src="images/gallery/2023/2Summer2023_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">2023 KIEEME</div>
                 </div>
             </div>
         </section>
@@ -285,15 +327,24 @@
 
         // ★ Gallery 데이터 설정 ★
         const galleryData = {
-            //2026
-            'Winter2026': generateItems('images/gallery/2026/Winter2026', '2026 Winter-', 2),
+            //Awardness
+            '2025MOBIS': generateItems('images/gallery/Awardness/2025MOBIS', '2025 MOBIS-', 2),
+            '2025KIEE': generateItems('images/gallery/Awardness/2025KIEE', '2025 KIEE-', 2),
+            '2025ICSCRM': generateItems('images/gallery/Awardness/2025ICSCRM', '2025 ICSCRM-', 2),
+            '2025KOES': generateItems('images/gallery/Awardness/2025KOES', '2025 KOES-', 2),
+            '2024KIEE': generateItems('images/gallery/Awardness/2024KIEE', '2024 KIEE-', 2), 
+            '2024KIEEME': generateItems('images/gallery/Awardness/2024KIEEME', '2024 KIEEME-', 2),   
+            '2023KIEEME': generateItems('images/gallery/Awardness/2023KIEEME', '2023 KIEEME-', 2),   
+
             // 2025
-            'Fall2025': generateItems('images/gallery/2025/Fall2025', '2025 Fall-', 3),
+            'Fall2025': generateItems('images/gallery/2025/Fall2025', '2025 Fall-', 2),
             'All2025': generateItems('images/gallery/2025/All2025', '2025 UHPS-', 3),
             'Winter2025': generateItems('images/gallery/2025/Winter2025', 'Graduation Ceremony-', 2),
             // 2024
+            'Fall2024': generateItems('images/gallery/2024/Fall2024', '2024 H2-', 6),            
             'Spring2024': generateItems('images/gallery/2024/Spring2024', '2024 Spring-', 4),
             // 2023
+            '2Summer2023': generateItems('images/gallery/2023/2Summer2023', '2023 KIEEME-', 1),
             'Summer2023': generateItems('images/gallery/2023/Summer2023', '2023 Summer-', 6),
             // 2022
             'Winter2022': generateItems('images/gallery/2022/Winter2022', '2022 Year-end-', 3)
