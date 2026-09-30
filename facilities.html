@@ -372,6 +372,11 @@
                     <div class="thumb-title">Citopress-5</div>
                     <div class="thumb-title">Hot Mounting</div>
                 </div>
+                <div class="gallery-item" onclick="openModal('SAT')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/SAT_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">SAT</div>
+                    <div class="thumb-title">Scanning Acoustic Tomography</div>
+                </div>
 
                 
             </div>
@@ -468,7 +473,7 @@
             </div>
 
 
-            <div class="category-header">Reliability Test</div>
+            <div class="category-header">Reliability Test - Electrical</div>
             <div class="gallery-grid">
                 <div class="gallery-item" onclick="openModal('PCT')">
                     <div class="thumb-box"><img src="images/facilities/Equipment/PCT_1.png" class="thumb-img"></div>
@@ -502,6 +507,26 @@
                     <div class="thumb-box"><img src="images/facilities/Equipment/IOL_1.png" class="thumb-img"></div>
                     <div class="thumb-title">IOL</div>
                 </div>                           
+            </div>
+
+            <div class="category-header">Reliability Test - Environmental</div>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openModal('AirHAST')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/AirHAST_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">HAST</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('ThermalShock')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/ThermalShockTester_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Thermal Shock Tester</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('ConstTemp')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/ConstTempTester_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Const Temp Tester</div>
+                </div>
+                <div class="gallery-item" onclick="openModal('ConstHumidityTemp')">
+                    <div class="thumb-box"><img src="images/facilities/Equipment/ConstHumidityTempTester_1.png" class="thumb-img"></div>
+                    <div class="thumb-title">Const Temp & Humidity Tester</div>
+                </div>
             </div>
 
             <div class="category-header">Software</div>
@@ -609,7 +634,8 @@
             'UM22': generateItems('images/facilities/Equipment/UM22', 'UM22', 2),
             'Secotom60': generateItems('images/facilities/Equipment/Secotom60', 'Secotom60', 2),
             'Labosystem': generateItems('images/facilities/Equipment/Labosystem', 'Labosystem', 2),
-            'Citopress5': generateItems('images/facilities/Equipment/Citopress5', 'Citopress5', 2),                                    
+            'Citopress5': generateItems('images/facilities/Equipment/Citopress5', 'Citopress5', 2), 
+            'SAT': generateItems('images/facilities/Equipment/SAT', 'SAT', 2),                                   
             // --- Thermal Analysis ---
             'FLIRE76': generateItems('images/facilities/Equipment/FLIRE76', 'FLIR-E76', 2),
             'PID': generateItems('images/facilities/Equipment/PID', 'Temperature Controller', 2),
@@ -633,7 +659,7 @@
             'IFSMS': generateItems('images/facilities/Equipment/IFSMS', 'IFSM Short Pulse Test Platform', 2),
             'IFSML': generateItems('images/facilities/Equipment/IFSML', 'IFSM Long Pulse Test Platform', 2),
             'MT': generateItems('images/facilities/Equipment/MT', 'Module Switching Test Platform', 2),
-            // --- Reliability Test ---
+            // --- Reliability Test - Electrical ---
             'PCT': generateItems('images/facilities/Equipment/PCT', 'PCT', 2),
             'HTRB': generateItems('images/facilities/Equipment/HTRB', 'HTRB', 2),
             'HTGB': generateItems('images/facilities/Equipment/HTGB', 'HTGB', 2),
@@ -641,7 +667,12 @@
             'DH3TRB': generateItems('images/facilities/Equipment/DH3TRB', 'DH3TRB', 2),
             'DRB': generateItems('images/facilities/Equipment/DRB', 'DRB', 2),
             'DGS': generateItems('images/facilities/Equipment/DGS', 'DGS', 2),
-            'IOL': generateItems('images/facilities/Equipment/IOL', 'IOL', 2),         
+            'IOL': generateItems('images/facilities/Equipment/IOL', 'IOL', 2),       
+            // --- Reliability Test - Environmental ---
+            'AirHAST': generateItems('images/facilities/Equipment/AirHAST', 'HAST', 2),
+            'ThermalShock': generateItems('images/facilities/Equipment/ThermalShockTester', 'Thermal Shock Tester', 2),
+            'ConstTemp': generateItems('images/facilities/Equipment/ConstTempTester', 'Constant Temp. Tester', 2),
+            'ConstHumidityTemp': generateItems('images/facilities/Equipment/ConstHumidityTempTester', 'Constant Temp. & Humidity Tester', 2),  
             // --- Software ---
             'tcad': generateItems('images/facilities/Equipment/TCAD', 'TCAD', 2),
             'pspice': generateItems('images/facilities/Equipment/PSPICE', 'PSPICE', 2),
