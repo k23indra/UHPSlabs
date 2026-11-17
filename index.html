@@ -51,7 +51,7 @@
         .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
         /* [메인 배너] 왼쪽 소개 패널 + 오른쪽 사진 슬라이드 */
-        .main-banner { display: flex; height: 600px; background: #00306c; position: relative; }
+        .main-banner { display: flex; height: clamp(600px, 34vw, 780px); background: #00306c; position: relative; }
         .banner-text { width: 38%; color: #fff; padding: 0 60px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; position: relative; z-index: 1; }
         .banner-text::before { content: ""; position: absolute; inset: 0; background: url('images/main/Main_Body1.png') center / cover no-repeat; opacity: 0.18; z-index: -1; } /* 캠퍼스 사진 배경 (흐리게) */
         .banner-kicker { font-size: 14px; letter-spacing: 4px; opacity: 0.7; font-weight: 500; }
@@ -64,9 +64,9 @@
         /* [메인 슬라이드] 천천히 겹쳐 바뀌면서 옆으로 흐름 */
         .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
         .hero-slide.active { opacity: 1; z-index: 1; }
-        .hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.08) translateX(2%); }
+        .hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.04) translateX(1.5%); }
         .hero-slide.active img { animation: drift 8s linear forwards; }
-        @keyframes drift { from { transform: scale(1.08) translateX(2%); } to { transform: scale(1.08) translateX(-2%); } }
+        @keyframes drift { from { transform: scale(1.04) translateX(1.5%); } to { transform: scale(1.04) translateX(-1.5%); } }
 
         /* [슬라이드 넘기기] 사진 왼쪽/오른쪽 절반 클릭. 화살표는 마우스 올릴 때만 표시 */
         .zone { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 3; background: none; border: none; cursor: pointer; color: #fff; font-size: 22px; opacity: 0; transition: opacity 0.3s; padding: 0 28px; }
@@ -343,6 +343,7 @@
 
     <!-- 메인 배너 -->
     <!-- 사진 교체: images/main/slide/Main_Slide1~8.jpg 덮어쓰기 (번호 = 나오는 순서). 장수 변경 시 hero-slide 줄 추가/삭제 -->
+    <!-- object-position: center N% = 화면이 넓어 위아래가 잘릴 때 보여줄 세로 위치 (0% 맨 위, 50% 가운데, 100% 맨 아래). 얼굴이 잘리면 숫자를 줄이세요 -->
     <section class="main-banner">
         <div class="banner-text">
             <span class="banner-kicker">KENTECH</span>
@@ -352,14 +353,14 @@
             <p class="banner-desc">From device physics to modules and systems &mdash; we design, characterize and ensure the reliability of next-generation power semiconductors.</p>
         </div>
         <div class="banner-media">
-            <div class="hero-slide active"><img src="images/main/slide/Main_Slide1.jpg" alt="UHPS Lab 1"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide2.jpg" alt="UHPS Lab 2"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide3.jpg" alt="UHPS Lab 3"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide4.jpg" alt="UHPS Lab 4"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide5.jpg" alt="UHPS Lab 5"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide6.jpg" alt="UHPS Lab 6"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide7.jpg" alt="UHPS Lab 7"></div>
-            <div class="hero-slide"><img src="images/main/slide/Main_Slide8.jpg" alt="UHPS Lab 8"></div>
+            <div class="hero-slide active"><img src="images/main/slide/Main_Slide1.jpg" alt="UHPS Lab 1" style="object-position: center 40%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide2.jpg" alt="UHPS Lab 2" style="object-position: center 40%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide3.jpg" alt="UHPS Lab 3" style="object-position: center 35%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide4.jpg" alt="UHPS Lab 4" style="object-position: center 20%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide5.jpg" alt="UHPS Lab 5" style="object-position: center 5%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide6.jpg" alt="UHPS Lab 6" style="object-position: center 30%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide7.jpg" alt="UHPS Lab 7" style="object-position: center 35%;"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide8.jpg" alt="UHPS Lab 8" style="object-position: center 20%;"></div>
             <button class="zone zone-prev" aria-label="이전 사진"><i class="fas fa-chevron-left"></i></button>
             <button class="zone zone-next" aria-label="다음 사진"><i class="fas fa-chevron-right"></i></button>
         </div>
