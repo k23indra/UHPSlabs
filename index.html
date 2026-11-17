@@ -50,73 +50,40 @@
         .dropdown-content a:hover { background-color: #f4f8fb; color: #004094; font-weight: bold; }
         .dropdown:hover .dropdown-content, .dropdown.active .dropdown-content { display: block; }
 
-        /* [메인 배너] */
-        .main-banner { width: 100%; height: 600px; position: relative; overflow: hidden; display: block; }
-        .main-logo-img { width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
-        .banner-text { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; color: #fff; text-shadow: 0 2px 10px rgba(0,0,0,0.7); width: 90%; }
-        .banner-text h2 { font-size: 60px; margin: 0; font-weight: 800; letter-spacing: -2px; }
-        .banner-text p { font-size: 24px; font-weight: 400; margin-top: 10px; opacity: 0.9; }
+        /* [메인 배너] 왼쪽 소개 패널 + 오른쪽 사진 슬라이드 */
+        .main-banner { display: flex; height: 600px; background: #00306c; position: relative; }
+        .banner-text { width: 38%; color: #fff; padding: 0 60px; display: flex; flex-direction: column; justify-content: center; box-sizing: border-box; position: relative; z-index: 1; }
+        .banner-text::before { content: ""; position: absolute; inset: 0; background: url('images/main/Main_Body1.png') center / cover no-repeat; opacity: 0.18; z-index: -1; } /* 캠퍼스 사진 배경 (흐리게) */
+        .banner-kicker { font-size: 14px; letter-spacing: 4px; opacity: 0.7; font-weight: 500; }
+        .banner-text h2 { font-size: 72px; margin: 5px 0 0; font-weight: 800; letter-spacing: -2px; line-height: 1.1; }
+        .banner-text p { font-size: 20px; margin: 10px 0 0; opacity: 0.9; }
+        .banner-line { width: 60px; height: 3px; background: #6fa8ff; margin: 30px 0; }
+        .banner-text .banner-desc { font-size: 15px; opacity: 0.75; line-height: 1.7; margin: 0; }
+        .banner-media { width: 62%; position: relative; overflow: hidden; background: #001a3d; }
 
-        /* ★ [수정됨] 바로가기 배너 박스 스타일 ★ */
-        .quick-link-section {
-            background-color: #fff;
-            padding: 40px 20px 0 20px;
-            display: flex;
-            justify-content: center;
-        }
-        .quick-link-container {
-            display: flex;
-            gap: 30px;
-            width: 100%;
-            max-width: 900px;
-        }
-        .link-box {
-            flex: 1;
-            height: 60px;
-            display: flex;
-            text-decoration: none;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            transition: transform 0.2s, box-shadow 0.2s;
-            border: 1px solid #ddd; 
-        }
-        .link-box:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
-        }
-        
-        /* 왼쪽 아이콘 박스 (공통) */
-        .link-icon-box {
-            width: 80px; 
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
+        /* [메인 슬라이드] 천천히 겹쳐 바뀌면서 옆으로 흐름 */
+        .hero-slide { position: absolute; inset: 0; opacity: 0; transition: opacity 1.6s ease; }
+        .hero-slide.active { opacity: 1; z-index: 1; }
+        .hero-slide img { width: 100%; height: 100%; object-fit: cover; display: block; transform: scale(1.08) translateX(2%); }
+        .hero-slide.active img { animation: drift 8s linear forwards; }
+        @keyframes drift { from { transform: scale(1.08) translateX(2%); } to { transform: scale(1.08) translateX(-2%); } }
 
-        /* ★ 색상 분리 ★ */
-        .link-icon-box.blue { background-color: #00306c; } /* 파란색 */
-        .link-icon-box.red { background-color: #2c68ba; }  /* 빨간색 */
-        
-        /* ★ 화살표 (CSS 정삼각형) ★ */
-        .triangle-arrow {
-            width: 0; 
-            height: 0; 
-            border-top: 8px solid transparent;
-            border-bottom: 8px solid transparent;
-            border-left: 16px solid #fff; /* 흰색 삼각형 */
-        }
-        
-        /* 오른쪽 텍스트 */
-        .link-text {
-            flex: 1; 
-            background-color: #fff; 
-            color: #000;
-            font-size: 18px;
-            font-weight: 700;
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-        }
+        /* [슬라이드 넘기기] 사진 왼쪽/오른쪽 절반 클릭. 화살표는 마우스 올릴 때만 표시 */
+        .zone { position: absolute; top: 0; bottom: 0; width: 50%; z-index: 3; background: none; border: none; cursor: pointer; color: #fff; font-size: 22px; opacity: 0; transition: opacity 0.3s; padding: 0 28px; }
+        .zone-prev { left: 0; text-align: left; } .zone-next { right: 0; text-align: right; }
+        .zone i { text-shadow: 0 1px 6px rgba(0,0,0,0.5); }
+        .banner-media:hover .zone { opacity: 0.55; }
+        .zone:hover { opacity: 0.95 !important; }
 
+        /* [바로가기 버튼] 라인형 */
+        .quick-link-section { background-color: #fff; padding: 40px 20px 0 20px; display: flex; justify-content: center; }
+        .quick-link-container { display: flex; gap: 30px; width: 100%; max-width: 900px; }
+        .link-box { flex: 1; display: flex; align-items: center; gap: 16px; height: 60px; padding: 0 24px; border: 1px solid #00306c; border-radius: 4px; color: #00306c; font-size: 17px; font-weight: 700; transition: background 0.25s, color 0.25s; }
+        .link-box span { flex: 1; }
+        .link-icon { font-size: 20px; width: 24px; text-align: center; }
+        .link-go { font-size: 14px; transition: transform 0.25s; }
+        .link-box:hover { background: #00306c; color: #fff; }
+        .link-box:hover .link-go { transform: translateX(4px); }
 
         /* [What we do 섹션] */
         .what-we-do { padding: 80px 20px; max-width: 1200px; margin: 0 auto; text-align: center; }
@@ -163,32 +130,20 @@
             nav > ul { flex-wrap: wrap; justify-content: center; gap: 10px 20px; width: 100%; }
             nav > ul > li > a { font-size: 14px; }
             
-            .main-banner { height: 400px; }
-            .banner-text { width: 95%; }
-            .banner-text h2 { font-size: 36px; } 
+            /* 메인 배너 모바일: 사진 위, 소개 아래 */
+            .main-banner { flex-direction: column-reverse; height: auto; }
+            .banner-text, .banner-media { width: 100%; }
+            .banner-media { height: 280px; }
+            .banner-text { padding: 35px 25px; }
+            .banner-text h2 { font-size: 44px; }
             .banner-text p { font-size: 16px; }
-            
-            /* ★ [수정됨] 모바일 배너 박스 세로 배치 및 크기 증가 ★ */
-            .quick-link-container {
-                flex-direction: column; /* 세로로 */
-                gap: 25px;
-                width: 100%;
-                height: 160px;
-                padding: 0px 30px;
-            }
+            .banner-line { margin: 18px 0; }
+            .zone i { display: none; }
 
-            .link-text {
-            flex: 1; 
-            background-color: #fff; 
-            color: #000;
-            font-size: 15px;
-            font-weight: 600;
-            display: flex;
-            align-items: center; 
-            justify-content: center; 
-            }
-            
-                       
+            /* 바로가기 모바일: 세로 배치 */
+            .quick-link-container { flex-direction: column; gap: 14px; }
+            .link-box { font-size: 15px; }
+
             .container, .what-we-do { padding: 50px 20px; }
             .section-header h2 { font-size: 26px; }
 
@@ -387,34 +342,36 @@
     </header>
 
     <!-- 메인 배너 -->
+    <!-- 사진 교체: images/main/slide/Main_Slide1~8.jpg 덮어쓰기 (번호 = 나오는 순서). 장수 변경 시 hero-slide 줄 추가/삭제 -->
     <section class="main-banner">
-        <img src="images/main/Main_Body1.png" alt="Main Banner" class="main-logo-img">
         <div class="banner-text">
+            <span class="banner-kicker">KENTECH</span>
             <h2>UHPS</h2>
             <p>Ultra-High Power Semiconductor Lab</p>
+            <div class="banner-line"></div>
+            <p class="banner-desc">From device physics to modules and systems &mdash; we design, characterize and ensure the reliability of next-generation power semiconductors.</p>
+        </div>
+        <div class="banner-media">
+            <div class="hero-slide active"><img src="images/main/slide/Main_Slide1.jpg" alt="UHPS Lab 1"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide2.jpg" alt="UHPS Lab 2"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide3.jpg" alt="UHPS Lab 3"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide4.jpg" alt="UHPS Lab 4"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide5.jpg" alt="UHPS Lab 5"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide6.jpg" alt="UHPS Lab 6"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide7.jpg" alt="UHPS Lab 7"></div>
+            <div class="hero-slide"><img src="images/main/slide/Main_Slide8.jpg" alt="UHPS Lab 8"></div>
+            <button class="zone zone-prev" aria-label="이전 사진"><i class="fas fa-chevron-left"></i></button>
+            <button class="zone zone-next" aria-label="다음 사진"><i class="fas fa-chevron-right"></i></button>
         </div>
     </section>
 
     <!-- ★  바로가기 배너 박스 섹션 ★ -->
     <section class="quick-link-section">
         <div class="quick-link-container">
-            <!-- 1. Graduate Admission (ID=2) -->
-            <!-- Blue Box -->
-            <a href="notice.html?id=3" class="link-box">
-                <div class="link-icon-box blue">
-                    <div class="triangle-arrow"></div>
-                </div>
-                <div class="link-text">Graduate Admission</div>
-            </a>
-
-            <!-- 2. Equipments Reservation (ID=X, 일단 Notice로) -->
-            <!-- Red Box -->
-            <a href="notice.html?id=2" class="link-box">
-                <div class="link-icon-box red">
-                    <div class="triangle-arrow"></div>
-                </div>
-                <div class="link-text">Equipments Reservation</div>
-            </a>
+            <!-- 1. Graduate Admission -->
+            <a href="notice.html?id=3" class="link-box"><i class="fas fa-user-graduate link-icon"></i><span>Graduate Admission</span><i class="fas fa-arrow-right link-go"></i></a>
+            <!-- 2. Equipments Reservation -->
+            <a href="notice.html?id=2" class="link-box"><i class="fas fa-microscope link-icon"></i><span>Equipments Reservation</span><i class="fas fa-arrow-right link-go"></i></a>
         </div>
     </section>
 
@@ -469,6 +426,30 @@
             </div>
         </div>
     </footer>
+
+    <script>
+        /* [메인 슬라이드] 6초마다 다음 사진. 사진 좌/우 클릭, 모바일 스와이프 */
+        (function () {
+            const slides = document.querySelectorAll('.hero-slide');
+            const total = slides.length;
+            let cur = 0, timer;
+            function go(n) {
+                slides[cur].classList.remove('active');
+                cur = (n + total) % total;
+                const img = slides[cur].querySelector('img');
+                img.style.animation = 'none'; void img.offsetWidth; img.style.animation = '';
+                slides[cur].classList.add('active');
+            }
+            function start() { clearInterval(timer); timer = setInterval(() => go(cur + 1), 6000); }
+            document.querySelector('.zone-prev').addEventListener('click', () => { go(cur - 1); start(); });
+            document.querySelector('.zone-next').addEventListener('click', () => { go(cur + 1); start(); });
+            const media = document.querySelector('.banner-media');
+            let sx = null;
+            media.addEventListener('touchstart', e => { sx = e.touches[0].clientX; }, { passive: true });
+            media.addEventListener('touchend', e => { if (sx === null) return; const dx = e.changedTouches[0].clientX - sx; if (Math.abs(dx) > 40) { go(cur + (dx < 0 ? 1 : -1)); start(); } sx = null; });
+            start();
+        })();
+    </script>
 
     <script>
         function toggleDropdown(event) {
